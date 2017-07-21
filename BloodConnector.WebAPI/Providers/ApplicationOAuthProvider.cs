@@ -28,7 +28,7 @@ namespace BloodConnector.WebAPI.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            User user = await userManager.FindAsync(context.UserName, context.Password);
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
             if (user == null)
             {
