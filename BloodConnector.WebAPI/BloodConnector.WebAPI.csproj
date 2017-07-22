@@ -225,6 +225,14 @@
     <Compile Include="Migrations\201707212256049_InitialState.Designer.cs">
       <DependentUpon>201707212256049_InitialState.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707220716167_AddColumnTest.cs" />
+    <Compile Include="Migrations\201707220716167_AddColumnTest.Designer.cs">
+      <DependentUpon>201707220716167_AddColumnTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707221003069_RemoveTestColumn.cs" />
+    <Compile Include="Migrations\201707221003069_RemoveTestColumn.Designer.cs">
+      <DependentUpon>201707221003069_RemoveTestColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -314,6 +322,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201707212256049_InitialState.resx">
       <DependentUpon>201707212256049_InitialState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707220716167_AddColumnTest.resx">
+      <DependentUpon>201707220716167_AddColumnTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707221003069_RemoveTestColumn.resx">
+      <DependentUpon>201707221003069_RemoveTestColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
