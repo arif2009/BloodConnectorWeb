@@ -1,5 +1,10 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using BloodConnector.WebAPI.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -8,6 +13,21 @@ namespace BloodConnector.WebAPI.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class User : IdentityUser
     {
+
+        public long UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string NikeName { get; set; }
+        public int BloodGroupId { get; set; }
+        public string AlternativeContactNo { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string Address { get; set; }
+        public string PostCode { get; set; }
+        public string City { get; set; }
+        public int CountryId { get; set; }
+        [DisplayName("[[[Gender]]]")]
+        public GenderType? Gender { get; set; }
+        public string PersonalIdentityNum { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
