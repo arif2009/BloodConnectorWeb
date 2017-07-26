@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -19,12 +21,14 @@ namespace BloodConnector.WebAPI.Models
         public string LastName { get; set; }
         public string NikeName { get; set; }
         public int BloodGroupId { get; set; }
+        public BloodGroup BloodGroup { get; set; }
         public string AlternativeContactNo { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Address { get; set; }
         public string PostCode { get; set; }
         public string City { get; set; }
         public int CountryId { get; set; }
+        public Country Country { get; set; }
         [DisplayName("[[[Gender]]]")]
         public GenderType? Gender { get; set; }
         public string PersonalIdentityNum { get; set; }
@@ -57,6 +61,8 @@ namespace BloodConnector.WebAPI.Models
             modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("ID");
             modelBuilder.Entity<User>().Property(p => p.UserId).HasUniqueConstraint("IX_UserId");
             modelBuilder.Entity<User>().Property(p => p.UserId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<User>().HasRequired(p => p.Country).WithMany(p => p.Users);
+            modelBuilder.Entity<User>().HasRequired(p => p.BloodGroup).WithMany(p => p.Users);
 
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
