@@ -52,7 +52,12 @@ namespace BloodConnector.WebAPI.Models
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("UserId");
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("ID");
+            modelBuilder.Entity<User>().Property(p => p.UserId).HasUniqueConstraint("IX_UserId");
+            modelBuilder.Entity<User>().Property(p => p.UserId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim").Property(p => p.Id).HasColumnName("UserClaimId");

@@ -3,7 +3,7 @@ namespace BloodConnector.WebAPI.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialState : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -34,7 +34,20 @@ namespace BloodConnector.WebAPI.Migrations
                 "dbo.User",
                 c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128),
+                        ID = c.String(nullable: false, maxLength: 128),
+                        UserId = c.Long(nullable: false, identity: true),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        NikeName = c.String(),
+                        BloodGroupId = c.Int(nullable: false),
+                        AlternativeContactNo = c.String(),
+                        DateOfBirth = c.DateTime(nullable: false),
+                        Address = c.String(),
+                        PostCode = c.String(),
+                        City = c.String(),
+                        CountryId = c.Int(nullable: false),
+                        Gender = c.Int(),
+                        PersonalIdentityNum = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -46,8 +59,10 @@ namespace BloodConnector.WebAPI.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.UserId)
+                .PrimaryKey(t => t.ID)
+                .Index(t => t.UserId, unique: true)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
@@ -86,6 +101,7 @@ namespace BloodConnector.WebAPI.Migrations
             DropIndex("dbo.UserLogin", new[] { "UserId" });
             DropIndex("dbo.UserClaim", new[] { "UserId" });
             DropIndex("dbo.User", "UserNameIndex");
+            DropIndex("dbo.User", new[] { "UserId" });
             DropIndex("dbo.UserRole", new[] { "RoleId" });
             DropIndex("dbo.UserRole", new[] { "UserId" });
             DropIndex("dbo.Role", "RoleNameIndex");
