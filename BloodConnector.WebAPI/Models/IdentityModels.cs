@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BloodConnector.WebAPI.Utilities;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -32,6 +34,7 @@ namespace BloodConnector.WebAPI.Models
         [DisplayName("[[[Gender]]]")]
         public GenderType? Gender { get; set; }
         public string PersonalIdentityNum { get; set; }
+        public IList<Attachment> Attachments { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -63,6 +66,11 @@ namespace BloodConnector.WebAPI.Models
             modelBuilder.Entity<User>().Property(p => p.UserId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             modelBuilder.Entity<User>().HasRequired(p => p.Country).WithMany(p => p.Users);
             modelBuilder.Entity<User>().HasRequired(p => p.BloodGroup).WithMany(p => p.Users);
+
+            modelBuilder.Entity<BloodTransaction>().HasOptional(p => p.Donor).WithMany();
+            modelBuilder.Entity<BloodTransaction>().HasOptional(p => p.Receiver).WithMany();
+
+            modelBuilder.Entity<Attachment>().HasRequired(p => p.User).WithMany(p => p.Attachments);
 
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");

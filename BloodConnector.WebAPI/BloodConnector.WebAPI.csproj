@@ -221,6 +221,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707271001213_AddedBloodTable.cs" />
+    <Compile Include="Migrations\201707271001213_AddedBloodTable.Designer.cs">
+      <DependentUpon>201707271001213_AddedBloodTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707271031308_Added BloodTransaction.cs" />
+    <Compile Include="Migrations\201707271031308_Added BloodTransaction.Designer.cs">
+      <DependentUpon>201707271031308_Added BloodTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707271048580_Update Relation.cs" />
+    <Compile Include="Migrations\201707271048580_Update Relation.Designer.cs">
+      <DependentUpon>201707271048580_Update Relation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707271107064_UpdateRule.cs" />
+    <Compile Include="Migrations\201707271107064_UpdateRule.Designer.cs">
+      <DependentUpon>201707271107064_UpdateRule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707271117386_AddAttachment.cs" />
+    <Compile Include="Migrations\201707271117386_AddAttachment.Designer.cs">
+      <DependentUpon>201707271117386_AddAttachment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -319,6 +339,23 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707271001213_AddedBloodTable.resx">
+      <DependentUpon>201707271001213_AddedBloodTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707271031308_Added BloodTransaction.resx">
+      <DependentUpon>201707271031308_Added BloodTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707271048580_Update Relation.resx">
+      <DependentUpon>201707271048580_Update Relation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707271107064_UpdateRule.resx">
+      <DependentUpon>201707271107064_UpdateRule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707271117386_AddAttachment.resx">
+      <DependentUpon>201707271117386_AddAttachment.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
