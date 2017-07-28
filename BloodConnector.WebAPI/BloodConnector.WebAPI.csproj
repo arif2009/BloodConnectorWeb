@@ -221,17 +221,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201707280959180_InitialMigration.cs" />
-    <Compile Include="Migrations\201707280959180_InitialMigration.Designer.cs">
-      <DependentUpon>201707280959180_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707281005183_CountryId.cs" />
-    <Compile Include="Migrations\201707281005183_CountryId.Designer.cs">
-      <DependentUpon>201707281005183_CountryId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707281044487_UpdateTableConfig.cs" />
-    <Compile Include="Migrations\201707281044487_UpdateTableConfig.Designer.cs">
-      <DependentUpon>201707281044487_UpdateTableConfig.cs</DependentUpon>
+    <Compile Include="Migrations\201707281322189_Initial.cs" />
+    <Compile Include="Migrations\201707281322189_Initial.Designer.cs">
+      <DependentUpon>201707281322189_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -333,14 +325,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707280959180_InitialMigration.resx">
-      <DependentUpon>201707280959180_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707281005183_CountryId.resx">
-      <DependentUpon>201707281005183_CountryId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707281044487_UpdateTableConfig.resx">
-      <DependentUpon>201707281044487_UpdateTableConfig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201707281322189_Initial.resx">
+      <DependentUpon>201707281322189_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

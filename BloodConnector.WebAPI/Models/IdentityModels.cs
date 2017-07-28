@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -54,6 +55,11 @@ namespace BloodConnector.WebAPI.Models
             return new ApplicationDbContext();
         }
 
+        public DbSet<Country> Country { get; set; }
+        public DbSet<BloodGroup> BloodGroup { get; set; }
+        public DbSet<Attachment> Attachment { get; set; }
+        public DbSet<BloodTransaction> BloodTransaction { get; set; }
+
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -76,11 +82,14 @@ namespace BloodConnector.WebAPI.Models
             userConfig.HasRequired(p => p.Country).WithMany(p => p.Users);
 
             var countryConfig = modelBuilder.Entity<Country>();
+            countryConfig.Property(p => p.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             countryConfig.Property(p => p.Name).HasMaxLength(128);
             countryConfig.Property(p => p.TowLetterCode).HasMaxLength(32);
             countryConfig.Property(p => p.PhonePrefix).HasMaxLength(64);
 
-            modelBuilder.Entity<BloodGroup>().Property(p => p.Symbole).HasMaxLength(64);
+            var bloodGroupConfig = modelBuilder.Entity<BloodGroup>();
+            bloodGroupConfig.Property(p => p.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            bloodGroupConfig.Property(p => p.Symbole).HasMaxLength(64);
 
             var bloodTransConfig = modelBuilder.Entity<BloodTransaction>();
             bloodTransConfig.HasOptional(p => p.Donor).WithMany();
