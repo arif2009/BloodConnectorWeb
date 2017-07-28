@@ -7,13 +7,13 @@ namespace BloodConnector.WebAPI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddedBloodTransaction : IMigrationMetadata
+    public sealed partial class InitialMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedBloodTransaction));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707271031308_Added BloodTransaction"; }
+            get { return "201707280959180_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

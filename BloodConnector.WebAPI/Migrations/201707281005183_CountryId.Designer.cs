@@ -7,13 +7,13 @@ namespace BloodConnector.WebAPI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UpdateRelation : IMigrationMetadata
+    public sealed partial class CountryId : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateRelation));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CountryId));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707271048580_Update Relation"; }
+            get { return "201707281005183_CountryId"; }
         }
         
         string IMigrationMetadata.Source

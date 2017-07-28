@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BloodConnector.WebAPI.Utilities;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -31,8 +28,9 @@ namespace BloodConnector.WebAPI.Models
         public string City { get; set; }
         public int CountryId { get; set; }
         public Country Country { get; set; }
-        [DisplayName("[[[Gender]]]")]
+        [DisplayName("Gender")]
         public GenderType? Gender { get; set; }
+        public Religion? Religion { get; set; }
         public string PersonalIdentityNum { get; set; }
         public IList<Attachment> Attachments { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
@@ -61,16 +59,39 @@ namespace BloodConnector.WebAPI.Models
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            modelBuilder.Entity<User>().ToTable("User").Property(p => p.Id).HasColumnName("ID");
-            modelBuilder.Entity<User>().Property(p => p.UserId).HasUniqueConstraint("IX_UserId");
-            modelBuilder.Entity<User>().Property(p => p.UserId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            modelBuilder.Entity<User>().HasRequired(p => p.Country).WithMany(p => p.Users);
-            modelBuilder.Entity<User>().HasRequired(p => p.BloodGroup).WithMany(p => p.Users);
+            var userConfig = modelBuilder.Entity<User>();
+            userConfig.ToTable("User").Property(p => p.Id).HasColumnName("ID");
+            userConfig.Property(p => p.FirstName).HasMaxLength(256);
+            userConfig.Property(p => p.LastName).HasMaxLength(256);
+            userConfig.Property(p => p.NikeName).HasMaxLength(256);
+            userConfig.Property(p => p.AlternativeContactNo).HasMaxLength(128);
+            userConfig.Property(p => p.PostCode).HasMaxLength(128);
+            userConfig.Property(p => p.City).HasMaxLength(128);
+            userConfig.Property(p => p.PersonalIdentityNum).HasMaxLength(128);
+            userConfig.Property(p => p.Email).HasMaxLength(512);
+            userConfig.Property(p => p.UserName).HasMaxLength(256);
+            userConfig.Property(p => p.UserId).HasUniqueConstraint("UX_UserId");
+            userConfig.Property(p => p.UserId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            userConfig.HasRequired(p => p.BloodGroup).WithMany(p => p.Users);
+            userConfig.HasRequired(p => p.Country).WithMany(p => p.Users);
 
-            modelBuilder.Entity<BloodTransaction>().HasOptional(p => p.Donor).WithMany();
-            modelBuilder.Entity<BloodTransaction>().HasOptional(p => p.Receiver).WithMany();
+            var countryConfig = modelBuilder.Entity<Country>();
+            countryConfig.Property(p => p.Name).HasMaxLength(128);
+            countryConfig.Property(p => p.TowLetterCode).HasMaxLength(32);
+            countryConfig.Property(p => p.PhonePrefix).HasMaxLength(64);
 
-            modelBuilder.Entity<Attachment>().HasRequired(p => p.User).WithMany(p => p.Attachments);
+            modelBuilder.Entity<BloodGroup>().Property(p => p.Symbole).HasMaxLength(64);
+
+            var bloodTransConfig = modelBuilder.Entity<BloodTransaction>();
+            bloodTransConfig.HasOptional(p => p.Donor).WithMany();
+            bloodTransConfig.HasOptional(p => p.Receiver).WithMany();
+
+            var attachConfig = modelBuilder.Entity<Attachment>();
+            attachConfig.Property(p => p.FileguId).HasMaxLength(256);
+            attachConfig.Property(p => p.Type).HasMaxLength(128);
+            attachConfig.Property(p => p.ContentType).HasMaxLength(128);
+            attachConfig.Property(p => p.FileName).HasMaxLength(256);
+            attachConfig.HasRequired(p => p.User).WithMany(p => p.Attachments);
 
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
