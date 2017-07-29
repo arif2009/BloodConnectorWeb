@@ -13,7 +13,7 @@ namespace BloodConnector.WebAPI.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201707290944547_InitialMigration"; }
+            get { return "201707291648178_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

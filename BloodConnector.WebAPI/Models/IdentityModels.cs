@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using BloodConnector.WebAPI.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace BloodConnector.WebAPI.Models
 {
@@ -20,14 +21,17 @@ namespace BloodConnector.WebAPI.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NikeName { get; set; }
+        [Required]
+        [Display(Name = "BloodGroup")]
         public int BloodGroupId { get; set; }
         public BloodGroup BloodGroup { get; set; }
         public string AlternativeContactNo { get; set; }
+        [Required]
         public DateTime DateOfBirth { get; set; }
         public string Address { get; set; }
         public string PostCode { get; set; }
         public string City { get; set; }
-        public int CountryId { get; set; }
+        public int? CountryId { get; set; }
         public Country Country { get; set; }
         [DisplayName("Gender")]
         public GenderType? Gender { get; set; }
@@ -79,7 +83,7 @@ namespace BloodConnector.WebAPI.Models
             userConfig.Property(p => p.UserId).HasUniqueConstraint("UX_UserId");
             userConfig.Property(p => p.UserId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             userConfig.HasRequired(p => p.BloodGroup).WithMany(p => p.Users);
-            userConfig.HasRequired(p => p.Country).WithMany(p => p.Users);
+            userConfig.HasOptional(p => p.Country).WithMany(p => p.Users);
 
             var countryConfig = modelBuilder.Entity<Country>();
             countryConfig.Property(p => p.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);

@@ -39,7 +39,7 @@ namespace BloodConnector.WebAPI.Migrations
                         Address = c.String(),
                         PostCode = c.String(maxLength: 128),
                         City = c.String(maxLength: 128),
-                        CountryId = c.Int(nullable: false),
+                        CountryId = c.Int(),
                         Gender = c.Int(),
                         Religion = c.Int(),
                         PersonalIdentityNum = c.String(maxLength: 128),
@@ -58,7 +58,7 @@ namespace BloodConnector.WebAPI.Migrations
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.BloodGroup", t => t.BloodGroupId, cascadeDelete: true)
-                .ForeignKey("dbo.Country", t => t.CountryId, cascadeDelete: true)
+                .ForeignKey("dbo.Country", t => t.CountryId)
                 .Index(t => t.UserId, unique: true, name: "UX_UserId")
                 .Index(t => t.BloodGroupId)
                 .Index(t => t.CountryId)
