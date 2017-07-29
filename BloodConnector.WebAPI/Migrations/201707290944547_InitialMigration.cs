@@ -3,7 +3,7 @@ namespace BloodConnector.WebAPI.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -94,7 +94,7 @@ namespace BloodConnector.WebAPI.Migrations
                         ID = c.Int(nullable: false),
                         Name = c.String(maxLength: 128),
                         TowLetterCode = c.String(maxLength: 32),
-                        PhonePrefix = c.String(maxLength: 64),
+                        PhonePrefix = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             

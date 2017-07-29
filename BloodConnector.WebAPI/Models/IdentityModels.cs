@@ -85,7 +85,6 @@ namespace BloodConnector.WebAPI.Models
             countryConfig.Property(p => p.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             countryConfig.Property(p => p.Name).HasMaxLength(128);
             countryConfig.Property(p => p.TowLetterCode).HasMaxLength(32);
-            countryConfig.Property(p => p.PhonePrefix).HasMaxLength(64);
 
             var bloodGroupConfig = modelBuilder.Entity<BloodGroup>();
             bloodGroupConfig.Property(p => p.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
