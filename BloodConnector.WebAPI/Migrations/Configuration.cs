@@ -1,4 +1,5 @@
 ﻿using BloodConnector.WebAPI.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BloodConnector.WebAPI.Migrations
 {
@@ -16,6 +17,12 @@ namespace BloodConnector.WebAPI.Migrations
             //  This method will be called after migrating to the latest version.
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+            context.Roles.AddOrUpdate(
+                new IdentityRole { Id = "1", Name = "SuperAdmin"},
+                new IdentityRole { Id = "2", Name = "Admin" },
+                new IdentityRole { Id = "3", Name = "User" }
+             );
 
             context.BloodGroup.AddOrUpdate(
                 new BloodGroup { ID = 1, Symbole = "O−" },

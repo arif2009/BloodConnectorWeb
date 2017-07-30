@@ -26,16 +26,20 @@ namespace BloodConnector.WebAPI.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private readonly ApplicationRoleManager _roleManager;
 
         public AccountController()
         {
         }
 
         public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
+            ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
+            _roleManager = roleManager;
+
         }
 
         public ApplicationUserManager UserManager
@@ -329,12 +333,21 @@ namespace BloodConnector.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new User() { UserName = model.Email, Email = model.Email };
+            var user = new User()
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                BloodGroupId = model.BloodGroupId
+            };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
+                var role = await _roleManager.FindByIdAsync(model.RoleId);
+
+                await UserManager.AddToRoleAsync(user.Id, role.Name);
+
                 return GetErrorResult(result);
             }
 

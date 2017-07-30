@@ -40,6 +40,19 @@ namespace BloodConnector.WebAPI.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Blood Group")]
+        [Range(1, 8, ErrorMessage = "The {0} field is required.")]
+        public int BloodGroupId { get; set; }
+
+        [Required]
+        [Display(Name = "Contact Number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Role")]
+        public string RoleId { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

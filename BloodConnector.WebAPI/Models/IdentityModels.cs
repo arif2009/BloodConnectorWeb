@@ -26,8 +26,7 @@ namespace BloodConnector.WebAPI.Models
         public int BloodGroupId { get; set; }
         public BloodGroup BloodGroup { get; set; }
         public string AlternativeContactNo { get; set; }
-        [Required]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string Address { get; set; }
         public string PostCode { get; set; }
         public string City { get; set; }
