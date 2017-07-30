@@ -2,7 +2,7 @@
 
 namespace BloodConnector.WebAPI.Models
 {
-    public class BloodGroup
+    public class BloodGroup : BaseEntity
     {
         public int ID { get; set; }
         public string Symbole { get; set; }
