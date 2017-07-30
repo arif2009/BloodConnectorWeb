@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('signupController', ['$location', '$timeout', 'authService', function ($location, $timeout, authService) {
+app.controller('signupController', ['$location', '$timeout', 'authService', 'dataService', function ($location, $timeout, authService, dataService) {
     var vm = this;
     vm.savedSuccessfully = false;
     vm.message = "";
@@ -7,8 +7,11 @@ app.controller('signupController', ['$location', '$timeout', 'authService', func
     vm.registration = {
         email: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        bloodGrups:[]
     };
+
+    vm.registration.bloodGrups = dataService.getBloodGroup();
 
     vm.signUp = function () {
 

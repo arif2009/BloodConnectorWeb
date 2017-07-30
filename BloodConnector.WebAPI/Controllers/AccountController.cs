@@ -328,6 +328,9 @@ namespace BloodConnector.WebAPI.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            model.BloodGroupId = 1;
+            model.PhoneNumber = "+88012458";
+            model.RoleId = "1";
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -342,16 +345,17 @@ namespace BloodConnector.WebAPI.Controllers
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
             {
                 var role = await _roleManager.FindByIdAsync(model.RoleId);
 
                 await UserManager.AddToRoleAsync(user.Id, role.Name);
 
-                return GetErrorResult(result);
+                return Ok();
             }
 
-            return Ok();
+            return GetErrorResult(result);
+            
         }
 
         // POST api/Account/RegisterExternal

@@ -38,6 +38,7 @@ namespace BloodConnector.WebAPI
                 "~/app/services/authInterceptorService.js",
                 "~/app/services/authService.js",
                 "~/app/services/ordersService.js",
+                "~/app/services/dataService.js",
                 // controllers
                 "~/app/controllers/indexController.js",
                 "~/app/controllers/homeController.js",

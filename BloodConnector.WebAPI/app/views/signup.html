@@ -1,6 +1,30 @@
-﻿<form class="form-login" role="form" data-ng-controller="signupController as vm">
+﻿<form class="form-login" role="form" novalidate name="signupForm" data-ng-controller="signupController as vm">
     <h2 class="form-login-heading">Sign up</h2>
-    <input type="text" class="form-control" placeholder="Email" data-ng-model="vm.registration.email" required autofocus>
+    <div class="form-group"
+         ng-class="{'has-error':signupForm.txtEmail.$invalid &&
+                                    signupForm.txtEmail.$dirty}">
+
+        <input class="form-control" id="txtEmail" name="txtEmail" type="email"
+               placeholder="Your Email"
+               ng-model="vm.registration.email"
+               required
+               autofocus/>
+
+        <span class="help-block has-error">
+            <span ng-show="signupForm.txtEmail.$error.email">
+                Not valid email!
+            </span>
+        </span>
+    </div>
+    <div class="form-group"
+         ng-class="{'has-error':signupForm.txtPhone.$invalid &&
+                                    signupForm.txtPhone.$dirty}">
+
+        <input class="form-control" id="txtPhone" name="txtPhone" type="text"
+               placeholder="+880XXXXXXXXXX"
+               ng-model="vm.registration.email"
+               required />
+    </div>
     <input type="password" class="form-control" placeholder="Password" data-ng-model="vm.registration.password" required>
     <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="vm.registration.confirmPassword" required>
     <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="vm.signUp()">Submit</button>
