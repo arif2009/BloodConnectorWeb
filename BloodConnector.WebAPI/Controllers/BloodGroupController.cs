@@ -1,10 +1,5 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Cors;
+﻿using System.Web.Http;
 using BloodConnector.WebAPI.Interface;
-using BloodConnector.WebAPI.Models;
-using BloodConnector.WebAPI.Repository;
 
 namespace BloodConnector.WebAPI.Controllers
 {

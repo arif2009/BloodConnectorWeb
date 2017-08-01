@@ -3,15 +3,19 @@ app.controller('signupController', ['$location', '$timeout', 'authService', 'dat
     var vm = this;
     vm.savedSuccessfully = false;
     vm.message = "";
-
+    vm.bloodGrups = [];
     vm.registration = {
         email: "",
         password: "",
         confirmPassword: "",
-        bloodGrups:[]
+        bloodGrupId: ""
     };
 
-    vm.registration.bloodGrups = dataService.getBloodGroup();
+    vm.$onInit = function () {
+        dataService.getBloodGroup.then(function(result) {
+            vm.bloodGrups = result.data;
+        });
+    };
 
     vm.signUp = function () {
 

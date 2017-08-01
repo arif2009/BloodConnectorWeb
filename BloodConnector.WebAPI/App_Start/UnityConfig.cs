@@ -2,7 +2,6 @@ using System;
 using BloodConnector.WebAPI.Interface;
 using BloodConnector.WebAPI.Repository;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
 
 namespace BloodConnector.WebAPI.App_Start
 {
