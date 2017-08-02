@@ -6,6 +6,7 @@ app.controller('signupController', ['$location', '$timeout', 'authService', 'dat
     vm.bloodGrups = [];
     vm.registration = {
         email: "",
+        phoneNumber: "",
         password: "",
         confirmPassword: "",
         bloodGrupId: ""
