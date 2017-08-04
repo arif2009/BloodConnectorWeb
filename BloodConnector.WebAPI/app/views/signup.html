@@ -5,7 +5,7 @@
                                     signupForm.txtEmail.$dirty}">
 
         <input class="form-control" id="txtEmail" name="txtEmail" type="email"
-               placeholder="Your Email (Required)"
+               placeholder="Your Email"
                ng-model="vm.registration.email"
                required
                autofocus/>
@@ -24,7 +24,7 @@
                                     signupForm.txtPhone.$dirty}">
 
         <input class="form-control" id="txtPhone" name="txtPhone" type="text"
-               placeholder="+880XXXXXXXXXX (Required)"
+               placeholder="+880XXXXXXXXXX"
                ng-model="vm.registration.phoneNumber"
                required/>
 
@@ -36,7 +36,7 @@
     </div>
     <div class="form-group" ng-class="{'has-error':signupForm.drpBloodGroup.$invalid && signupForm.drpBloodGroup.$dirty}">
         <select class="form-control" id="drpBloodGroup" name="drpBloodGroup" ng-model="vm.registration.bloodGrupId" required>
-            <option value="" disabled>Select Blood Group (Required)</option>
+            <option value="" disabled>Select Blood Group</option>
             <option ng-repeat="bloodGrup in vm.bloodGrups" value="{{bloodGrup.id}}">{{bloodGrup.symbole}}</option>
         </select>
         <span class="help-block has-error" ng-if="signupForm.drpBloodGroup.$dirty">
@@ -45,8 +45,25 @@
             </span>
         </span>
     </div>
-    <input type="password" class="form-control" placeholder="Password" data-ng-model="vm.registration.password" required>
-    <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="vm.registration.confirmPassword" required>
+    <div class="form-group" ng-class="{'has-error':signupForm.password.$invalid && signupForm.password.$dirty}">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" data-ng-model="vm.registration.password" required>
+        <span class="help-block has-error" ng-if="signupForm.password.$dirty">
+            <span ng-show="signupForm.password.$error.required">
+                Required!
+            </span>
+        </span>
+    </div>
+    <div class="form-group" ng-class="{'has-error':signupForm.confirmPassword.$invalid && signupForm.confirmPassword.$dirty}">
+        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm Password" data-ng-model="vm.registration.confirmPassword" compare-to="vm.registration.password" required>
+        <span class="help-block has-error" ng-if="signupForm.confirmPassword.$dirty">
+            <span ng-show="signupForm.confirmPassword.$error.required">
+                Required!
+            </span>
+            <span ng-show="signupForm.confirmPassword.$error.compareTo && !signupForm.confirmPassword.$error.required">
+                Confirm password doesn't match with password!
+            </span>
+        </span>
+    </div>
     <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="vm.signUp()" ng-disabled="signupForm.$invalid">Submit</button>
     <div data-ng-hide="vm.message == ''" data-ng-class="(vm.savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
         {{vm.message}}
