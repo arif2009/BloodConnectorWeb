@@ -1,6 +1,10 @@
 using System;
+using BloodConnector.WebAPI.Controllers;
 using BloodConnector.WebAPI.Interface;
+using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Repository;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Practices.Unity;
 
 namespace BloodConnector.WebAPI.App_Start
@@ -40,6 +44,7 @@ namespace BloodConnector.WebAPI.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType(typeof(IRepository<>), typeof(BaseRepository<>));
             container.RegisterType<IBloodGroupRepository, BloodGroupRepository>();
+            container.RegisterType<AccountController>(new InjectionConstructor());
         }
     }
 }
