@@ -33,8 +33,8 @@ namespace BloodConnector.WebAPI.Models
         public int? CountryId { get; set; }
         public Country Country { get; set; }
         [DisplayName("Gender")]
-        public GenderType? Gender { get; set; }
-        public Religion? Religion { get; set; }
+        public Enums.GenderType? Gender { get; set; }
+        public Enums.Religion? Religion { get; set; }
         public string PersonalIdentityNum { get; set; }
         public IList<Attachment> Attachments { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
@@ -63,7 +63,7 @@ namespace BloodConnector.WebAPI.Models
         public DbSet<Attachment> Attachment { get; set; }
         public DbSet<BloodTransaction> BloodTransaction { get; set; }
 
-        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

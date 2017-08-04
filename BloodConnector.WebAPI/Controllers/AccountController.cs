@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -16,6 +15,7 @@ using Microsoft.Owin.Security.OAuth;
 using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Providers;
 using BloodConnector.WebAPI.Results;
+using Microsoft.Practices.Unity;
 
 namespace BloodConnector.WebAPI.Controllers
 {
@@ -328,6 +328,8 @@ namespace BloodConnector.WebAPI.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            //model.RoleId = Enums.Role["User"];
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -35,9 +35,9 @@
         </span>
     </div>
     <div class="form-group" ng-class="{'has-error':signupForm.drpBloodGroup.$invalid && signupForm.drpBloodGroup.$dirty}">
-        <select class="form-control" id="drpBloodGroup" name="drpBloodGroup" ng-model="vm.registration.bloodGrupId" required>
+        <select class="form-control" id="drpBloodGroup" name="drpBloodGroup" ng-model="vm.registration.bloodGroupId" required>
             <option value="" disabled>Select Blood Group</option>
-            <option ng-repeat="bloodGrup in vm.bloodGrups" value="{{bloodGrup.id}}">{{bloodGrup.symbole}}</option>
+            <option ng-repeat="bloodGroup in vm.bloodGroups" value="{{bloodGroup.id}}">{{bloodGroup.symbole}}</option>
         </select>
         <span class="help-block has-error" ng-if="signupForm.drpBloodGroup.$dirty">
             <span ng-show="signupForm.drpBloodGroup.$error.required">

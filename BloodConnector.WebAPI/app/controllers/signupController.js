@@ -7,14 +7,14 @@ app.controller('signupController', ['$location', '$timeout', 'authService', 'dat
     vm.registration = {
         email: "",
         phoneNumber: "",
-        bloodGrupId: "",
+        bloodGroupId: "",
         password: "",
         confirmPassword: ""
     };
 
     vm.$onInit = function () {
         dataService.getBloodGroup.then(function(result) {
-            vm.bloodGrups = result.data;
+            vm.bloodGroups = result.data;
         });
     };
 

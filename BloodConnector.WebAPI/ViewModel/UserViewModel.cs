@@ -11,8 +11,8 @@ namespace BloodConnector.WebAPI.ViewModel
             {
                 switch (Gender)
                 {
-                    case GenderType.Female: return "Female";
-                    case GenderType.Male: return "Male";
+                    case Enums.GenderType.Female: return "Female";
+                    case Enums.GenderType.Male: return "Male";
                     default: return "N/A";
                 }
 
@@ -25,11 +25,11 @@ namespace BloodConnector.WebAPI.ViewModel
             {
                 switch (Religion)
                 {
-                    case Utilities.Religion.Islam : return "Islam";
-                    case Utilities.Religion.Christianity: return "Christianity";
-                    case Utilities.Religion.Hinduism: return "Hinduism";
-                    case Utilities.Religion.Buddhism: return "Buddhism";
-                    case Utilities.Religion.Other: return "Other";
+                    case Enums.Religion.Islam : return "Islam";
+                    case Enums.Religion.Christianity: return "Christianity";
+                    case Enums.Religion.Hinduism: return "Hinduism";
+                    case Enums.Religion.Buddhism: return "Buddhism";
+                    case Enums.Religion.Other: return "Other";
                     default: return "N/A";
                 }
 

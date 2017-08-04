@@ -11,8 +11,8 @@ namespace BloodConnector.WebAPI.ViewModel
             {
                 switch (Gender)
                 {
-                    case GenderType.Female: return "[[[Female]]]";
-                    case GenderType.Male: return "[[[Male]]]";
+                    case Enums.GenderType.Female: return "[[[Female]]]";
+                    case Enums.GenderType.Male: return "[[[Male]]]";
                     default: return "[[[N/A]]]";
                 }
 
