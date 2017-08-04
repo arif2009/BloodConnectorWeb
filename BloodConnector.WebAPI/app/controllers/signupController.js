@@ -7,9 +7,9 @@ app.controller('signupController', ['$location', '$timeout', 'authService', 'dat
     vm.registration = {
         email: "",
         phoneNumber: "",
+        bloodGrupId: "",
         password: "",
-        confirmPassword: "",
-        bloodGrupId: ""
+        confirmPassword: ""
     };
 
     vm.$onInit = function () {

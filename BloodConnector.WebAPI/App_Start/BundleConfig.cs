@@ -44,9 +44,10 @@ namespace BloodConnector.WebAPI
                 "~/app/controllers/homeController.js",
                 "~/app/controllers/loginController.js",
                 "~/app/controllers/signupController.js",
-                "~/app/controllers/ordersController.js"
+                "~/app/controllers/ordersController.js",
                 // custom filters
                 // custom directives
+                "~/app/directives/commonDirectives.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

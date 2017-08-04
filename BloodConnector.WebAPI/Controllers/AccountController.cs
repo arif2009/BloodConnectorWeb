@@ -328,9 +328,6 @@ namespace BloodConnector.WebAPI.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            model.BloodGroupId = 1;
-            model.PhoneNumber = "+88012458";
-            model.RoleId = "1";
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
