@@ -1,6 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations;
+using BloodConnector.WebAPI.Utilities;
 
 namespace BloodConnector.WebAPI.Models
 {
@@ -36,7 +35,7 @@ namespace BloodConnector.WebAPI.Models
     {
         [Required]
         [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
@@ -46,11 +45,12 @@ namespace BloodConnector.WebAPI.Models
 
         [Required]
         [Display(Name = "Contact Number")]
+        [RegularExpression(@"^([0-9\(\)\/\+ \-]{1,15})$", ErrorMessage = "Not a valid Contact Number.")]
         public string PhoneNumber { get; set; }
 
         [Required]
         [Display(Name = "Role")]
-        public string RoleId { get; set; }
+        public string RoleId { get; set; } = Enums.Role["User"];
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
