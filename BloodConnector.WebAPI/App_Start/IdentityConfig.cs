@@ -29,8 +29,8 @@ namespace BloodConnector.WebAPI
             {
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = false,
-                RequireDigit = false,
-                RequireLowercase = false,
+                RequireDigit = true,
+                RequireLowercase = true,
                 RequireUppercase = false,
             };
             var dataProtectionProvider = options.DataProtectionProvider;
