@@ -3,7 +3,7 @@ namespace BloodConnector.WebAPI.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class InitialResetColumnNameAlso : DbMigration
     {
         public override void Up()
         {
@@ -21,21 +21,21 @@ namespace BloodConnector.WebAPI.Migrations
                         LastUpdatedOn = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.User",
+                "dbo.AspNetUsers",
                 c => new
                     {
-                        ID = c.String(nullable: false, maxLength: 128),
+                        Id = c.String(nullable: false, maxLength: 128),
                         UserId = c.Long(nullable: false, identity: true),
                         FirstName = c.String(maxLength: 256),
                         LastName = c.String(maxLength: 256),
                         NikeName = c.String(maxLength: 256),
                         BloodGroupId = c.Int(nullable: false),
                         AlternativeContactNo = c.String(maxLength: 128),
-                        DateOfBirth = c.DateTime(nullable: false),
+                        DateOfBirth = c.DateTime(),
                         Address = c.String(),
                         PostCode = c.String(maxLength: 128),
                         City = c.String(maxLength: 128),
@@ -56,7 +56,7 @@ namespace BloodConnector.WebAPI.Migrations
                         UserName = c.String(nullable: false, maxLength: 256),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.ID)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.BloodGroup", t => t.BloodGroupId, cascadeDelete: true)
                 .ForeignKey("dbo.Country", t => t.CountryId)
                 .Index(t => t.UserId, unique: true, name: "UX_UserId")
@@ -75,16 +75,16 @@ namespace BloodConnector.WebAPI.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.UserClaim",
+                "dbo.AspNetUserClaims",
                 c => new
                     {
-                        UserClaimId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         UserId = c.String(nullable: false, maxLength: 128),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
                     })
-                .PrimaryKey(t => t.UserClaimId)
-                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -99,7 +99,7 @@ namespace BloodConnector.WebAPI.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.UserLogin",
+                "dbo.AspNetUserLogins",
                 c => new
                     {
                         LoginProvider = c.String(nullable: false, maxLength: 128),
@@ -107,19 +107,19 @@ namespace BloodConnector.WebAPI.Migrations
                         UserId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.UserRole",
+                "dbo.AspNetUserRoles",
                 c => new
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.Role", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
             
@@ -134,54 +134,54 @@ namespace BloodConnector.WebAPI.Migrations
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.User", t => t.DonorId)
-                .ForeignKey("dbo.User", t => t.ReceiverId)
+                .ForeignKey("dbo.AspNetUsers", t => t.DonorId)
+                .ForeignKey("dbo.AspNetUsers", t => t.ReceiverId)
                 .Index(t => t.DonorId)
                 .Index(t => t.ReceiverId);
             
             CreateTable(
-                "dbo.Role",
+                "dbo.AspNetRoles",
                 c => new
                     {
-                        RoleId = c.String(nullable: false, maxLength: 128),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false, maxLength: 256),
                     })
-                .PrimaryKey(t => t.RoleId)
+                .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.UserRole", "RoleId", "dbo.Role");
-            DropForeignKey("dbo.BloodTransaction", "ReceiverId", "dbo.User");
-            DropForeignKey("dbo.BloodTransaction", "DonorId", "dbo.User");
-            DropForeignKey("dbo.Attachment", "UserId", "dbo.User");
-            DropForeignKey("dbo.UserRole", "UserId", "dbo.User");
-            DropForeignKey("dbo.UserLogin", "UserId", "dbo.User");
-            DropForeignKey("dbo.User", "CountryId", "dbo.Country");
-            DropForeignKey("dbo.UserClaim", "UserId", "dbo.User");
-            DropForeignKey("dbo.User", "BloodGroupId", "dbo.BloodGroup");
-            DropIndex("dbo.Role", "RoleNameIndex");
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.BloodTransaction", "ReceiverId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.BloodTransaction", "DonorId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Attachment", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUsers", "CountryId", "dbo.Country");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUsers", "BloodGroupId", "dbo.BloodGroup");
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.BloodTransaction", new[] { "ReceiverId" });
             DropIndex("dbo.BloodTransaction", new[] { "DonorId" });
-            DropIndex("dbo.UserRole", new[] { "RoleId" });
-            DropIndex("dbo.UserRole", new[] { "UserId" });
-            DropIndex("dbo.UserLogin", new[] { "UserId" });
-            DropIndex("dbo.UserClaim", new[] { "UserId" });
-            DropIndex("dbo.User", "UserNameIndex");
-            DropIndex("dbo.User", new[] { "CountryId" });
-            DropIndex("dbo.User", new[] { "BloodGroupId" });
-            DropIndex("dbo.User", "UX_UserId");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.AspNetUsers", new[] { "CountryId" });
+            DropIndex("dbo.AspNetUsers", new[] { "BloodGroupId" });
+            DropIndex("dbo.AspNetUsers", "UX_UserId");
             DropIndex("dbo.Attachment", new[] { "UserId" });
-            DropTable("dbo.Role");
+            DropTable("dbo.AspNetRoles");
             DropTable("dbo.BloodTransaction");
-            DropTable("dbo.UserRole");
-            DropTable("dbo.UserLogin");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.Country");
-            DropTable("dbo.UserClaim");
+            DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.BloodGroup");
-            DropTable("dbo.User");
+            DropTable("dbo.AspNetUsers");
             DropTable("dbo.Attachment");
         }
     }

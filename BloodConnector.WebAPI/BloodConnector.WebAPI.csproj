@@ -253,13 +253,9 @@
     <Compile Include="Interface\IBloodGroupRepository.cs" />
     <Compile Include="Interface\IObjectWithState.cs" />
     <Compile Include="Interface\IRepository.cs" />
-    <Compile Include="Migrations\201707291648178_InitialMigration.cs" />
-    <Compile Include="Migrations\201707291648178_InitialMigration.Designer.cs">
-      <DependentUpon>201707291648178_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707291904031_SetNullavleDOB.cs" />
-    <Compile Include="Migrations\201707291904031_SetNullavleDOB.Designer.cs">
-      <DependentUpon>201707291904031_SetNullavleDOB.cs</DependentUpon>
+    <Compile Include="Migrations\201708061505274_Initial-ResetColumnNameAlso.cs" />
+    <Compile Include="Migrations\201708061505274_Initial-ResetColumnNameAlso.Designer.cs">
+      <DependentUpon>201708061505274_Initial-ResetColumnNameAlso.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -401,11 +397,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707291648178_InitialMigration.resx">
-      <DependentUpon>201707291648178_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707291904031_SetNullavleDOB.resx">
-      <DependentUpon>201707291904031_SetNullavleDOB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708061505274_Initial-ResetColumnNameAlso.resx">
+      <DependentUpon>201708061505274_Initial-ResetColumnNameAlso.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

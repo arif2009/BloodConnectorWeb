@@ -7,13 +7,13 @@ namespace BloodConnector.WebAPI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialMigration : IMigrationMetadata
+    public sealed partial class InitialResetColumnNameAlso : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialResetColumnNameAlso));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707291648178_InitialMigration"; }
+            get { return "201708061505274_Initial-ResetColumnNameAlso"; }
         }
         
         string IMigrationMetadata.Source

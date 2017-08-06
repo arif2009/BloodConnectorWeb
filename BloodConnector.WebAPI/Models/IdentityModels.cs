@@ -69,7 +69,7 @@ namespace BloodConnector.WebAPI.Models
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             var userConfig = modelBuilder.Entity<User>();
-            userConfig.ToTable("User").Property(p => p.Id).HasColumnName("ID");
+            userConfig.Property(p => p.Id);
             userConfig.Property(p => p.FirstName).HasMaxLength(256);
             userConfig.Property(p => p.LastName).HasMaxLength(256);
             userConfig.Property(p => p.NikeName).HasMaxLength(256);
@@ -104,10 +104,10 @@ namespace BloodConnector.WebAPI.Models
             attachConfig.Property(p => p.FileName).HasMaxLength(256);
             attachConfig.HasRequired(p => p.User).WithMany(p => p.Attachments);
 
-            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRole");
-            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
-            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaim").Property(p => p.Id).HasColumnName("UserClaimId");
-            modelBuilder.Entity<IdentityRole>().ToTable("Role").Property(p => p.Id).HasColumnName("RoleId");
+            modelBuilder.Entity<IdentityUserRole>();
+            modelBuilder.Entity<IdentityUserLogin>();
+            modelBuilder.Entity<IdentityUserClaim>();
+            modelBuilder.Entity<IdentityRole>();
         }
     }
 }
