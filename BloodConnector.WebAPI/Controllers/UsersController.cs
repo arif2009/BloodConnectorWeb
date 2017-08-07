@@ -6,12 +6,11 @@ using System.Web.Http.Cors;
 namespace BloodConnector.WebAPI.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/order")]
+    [RoutePrefix("api/users")]
     //[EnableCors("http://localhost:14717,http://localhost:2102", "*", "*")]
-    public class OrdersController : ApiController
+    public class UsersController : ApiController
     {
         // GET api/orders
-        [AllowAnonymous]
         public IHttpActionResult Get()
         {
             //return new string[] { "value1", "value2" };

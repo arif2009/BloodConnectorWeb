@@ -248,7 +248,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BloodGroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -290,16 +290,16 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexController.js" />
     <Content Include="app\controllers\loginController.js" />
-    <Content Include="app\controllers\ordersController.js" />
+    <Content Include="app\controllers\usersController.js" />
     <Content Include="app\controllers\signupController.js" />
     <Content Include="app\directives\commonDirectives.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\dataService.js" />
-    <Content Include="app\services\ordersService.js" />
+    <Content Include="app\services\usersService.js" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\login.html" />
-    <Content Include="app\views\orders.html" />
+    <Content Include="app\views\users.html" />
     <Content Include="app\views\signup.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />

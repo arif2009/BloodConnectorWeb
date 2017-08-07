@@ -1,5 +1,5 @@
 ﻿
-<div class="row" data-ng-controller="ordersController as vm">
+<div class="row" data-ng-controller="usersController as vm">
     <div class="col-md-2">
         &nbsp;
     </div>
@@ -14,18 +14,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-ng-repeat="order in vm.orders">
+                <tr data-ng-repeat="user in vm.users">
                     <td>
-                        {{ order.orderID }}
+                        {{ user.orderID }}
                     </td>
                     <td>
-                        {{ order.customerName }}
+                        {{ user.customerName }}
                     </td>
                     <td>
-                        {{ order.shipperCity }}
+                        {{ user.shipperCity }}
                     </td>
                     <td>
-                       <input type="checkbox" data-ng-model="order.isShipped" disabled="disabled">
+                       <input type="checkbox" data-ng-model="user.isShipped" disabled="disabled">
                     </td>
                 </tr>
             </tbody>

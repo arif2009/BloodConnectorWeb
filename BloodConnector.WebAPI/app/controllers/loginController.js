@@ -14,7 +14,7 @@ app.controller('loginController', ['$location', 'authService', 'ngAuthSettings',
 
         authService.login(vm.loginData).then(function (response) {
 
-            $location.path('/orders');
+            $location.path('/users');
 
         },
          function (err) {
