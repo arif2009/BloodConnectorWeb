@@ -2,7 +2,7 @@
 app.controller('signupController', ['$location', '$timeout', 'authService', 'dataService', function ($location, $timeout, authService, dataService) {
     var vm = this;
     vm.savedSuccessfully = false;
-    vm.message = "";
+    vm.messages = [];
     vm.bloodGrups = [];
     vm.registration = {
         email: "",
@@ -23,7 +23,7 @@ app.controller('signupController', ['$location', '$timeout', 'authService', 'dat
         authService.saveRegistration(vm.registration).then(function (response) {
 
             vm.savedSuccessfully = true;
-            vm.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
+            vm.messages = ["User has been registered successfully, you will be redicted to login page in 2 seconds."];
             startTimer();
 
         },
@@ -34,7 +34,7 @@ app.controller('signupController', ['$location', '$timeout', 'authService', 'dat
                      errors.push(response.data.modelState[key][i]);
                  }
              }
-             vm.message = "Failed to register user due to:" + errors.join(' ');
+             vm.messages = errors.reverse();
          });
     };
 

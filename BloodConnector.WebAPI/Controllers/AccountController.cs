@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -15,19 +18,20 @@ using Microsoft.Owin.Security.OAuth;
 using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Providers;
 using BloodConnector.WebAPI.Results;
+using BloodConnector.WebAPI.Utilities;
 using Microsoft.Practices.Unity;
 
 namespace BloodConnector.WebAPI.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
-    [EnableCors("http://localhost:14717,http://localhost:2102", "*", "*")]
+    //[EnableCors("http://localhost:14717,http://localhost:2102", "*", "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
-        private readonly ApplicationRoleManager _roleManager;
-
+        private ApplicationRoleManager _roleManager;
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
         public AccountController()
         {
         }
@@ -38,7 +42,7 @@ namespace BloodConnector.WebAPI.Controllers
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
-            _roleManager = roleManager;
+            RoleManager = roleManager;
 
         }
 
@@ -54,7 +58,11 @@ namespace BloodConnector.WebAPI.Controllers
             }
         }
 
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+        public ApplicationRoleManager RoleManager
+        {
+            get { return _roleManager ?? new ApplicationRoleManager(new RoleStore<IdentityRole>()); }
+            private set { _roleManager = value; } 
+        }
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -328,33 +336,44 @@ namespace BloodConnector.WebAPI.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            //model.RoleId = Enums.Role["User"];
-
-            if (!ModelState.IsValid)
+            try
             {
+                if (await this.EmailAlreadyExist(model.Email))
+                {
+                    ModelState.AddModelError("Email", "Email already in use!");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var user = new User()
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    BloodGroupId = model.BloodGroupId
+                };
+
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, Enums.Role.FirstOrDefault(x => x.Value == "3").Key);
+
+                    return Ok();
+                }
+
+                return GetErrorResult(result);
+            }
+            catch (Exception ex)
+            {
+                ModelState.Clear();
+                //ModelState.AddModelError("Exception", ex.Message);
+                ModelState.AddModelError("Network","Network problem !");
                 return BadRequest(ModelState);
             }
-
-            var user = new User()
-            {
-                UserName = model.Email,
-                Email = model.Email,
-                BloodGroupId = model.BloodGroupId
-            };
-
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
-            {
-                var role = await _roleManager.FindByIdAsync(model.RoleId);
-
-                await UserManager.AddToRoleAsync(user.Id, role.Name);
-
-                return Ok();
-            }
-
-            return GetErrorResult(result);
-            
         }
 
         // POST api/Account/RegisterExternal
@@ -504,6 +523,12 @@ namespace BloodConnector.WebAPI.Controllers
                 _random.GetBytes(data);
                 return HttpServerUtility.UrlTokenEncode(data);
             }
+        }
+
+        private async Task<bool> EmailAlreadyExist(string email)
+        {
+            var result = await UserManager.FindByEmailAsync(email);
+            return result != null;
         }
 
         #endregion
