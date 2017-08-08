@@ -160,8 +160,8 @@ app.controller('usersController', ['usersService', '$filter', function (usersSer
         }
     };
 
-    vm.setPage = function () {
-        vm.currentPage = this.n;
+    vm.setPage = function (n) {
+        vm.currentPage = n;
     };
 
     // functions have been describe process the data for display

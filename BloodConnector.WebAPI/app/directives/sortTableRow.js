@@ -10,17 +10,15 @@ var customSort = function () {
         template:
             ' <a ng-click="sort_by(order)" style="color: #555555;">' +
                 '    <span ng-transclude></span>' +
-                '    <i ng-class="selectedCls(order)"></i>' +
+                '    <i class="fa" ng-class="selectedCls(order)" aria-hidden="true"></i>' +
                 '</a>',
         link: function (scope) {
             
             // change sorting order
             scope.sort_by = function (newSortingOrder) {
-                var sort = scope.sort;
+                var sort = scope.$parent.vm.sort;
                 console.log("scope.sort_by");
-                console.log(sort);
-                console.log(newSortingOrder);
-                if (sort.sortingOrder == newSortingOrder) {
+                if (sort.sortingOrder === newSortingOrder) {
                     sort.reverse = !sort.reverse;
                 }
 
@@ -29,12 +27,11 @@ var customSort = function () {
 
 
             scope.selectedCls = function (column) {
-                console.log("scope.selectedCls");
-                console.log(scope);
-                if (column == scope.sort.sortingOrder) {
-                    return ('icon-chevron-' + ((scope.sort.reverse) ? 'down' : 'up'));
+                var sort = scope.$parent.vm.sort;
+                if (column === sort.sortingOrder) {
+                    return ('fa-chevron-' + ((sort.reverse) ? 'down' : 'up'));
                 } else {
-                    return 'icon-sort';
+                    return 'fa-sort';
                 }
             };
         } // end link
