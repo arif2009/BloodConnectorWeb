@@ -28,11 +28,7 @@ var customSort = function () {
 
             scope.selectedCls = function (column) {
                 var sort = scope.$parent.vm.sort;
-                if (column === sort.sortingOrder) {
-                    return ('fa-chevron-' + ((sort.reverse) ? 'down' : 'up'));
-                } else {
-                    return 'fa-sort';
-                }
+                return column === sort.sortingOrder ? 'fa-chevron-' + ((sort.reverse) ? 'down' : 'up') : 'fa-sort';
             };
         } // end link
     }
