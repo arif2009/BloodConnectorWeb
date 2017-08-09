@@ -22,7 +22,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li data-ng-hide="!vm.authentication.isAuth"><a href="#!">Welcome {{vm.authentication.userName}}</a></li>
+                    <li data-ng-hide="!vm.authentication.isAuth"><a href="#!">Welcome <span data-bind="vm.authentication.userName"></span></a></li>
                     <li data-ng-hide="!vm.authentication.isAuth"><a href="#!users">My Orders</a></li>
                     <li data-ng-hide="!vm.authentication.isAuth"><a href="" data-ng-click="vm.logOut()">Logout</a></li>
                     <li data-ng-hide="vm.authentication.isAuth"> <a href="#!login">Login</a></li>

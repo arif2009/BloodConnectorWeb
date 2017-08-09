@@ -1,32 +1,35 @@
 ﻿<div style="height: 100px;">&nbsp;</div>
 <div class="row" data-ng-controller="usersController as vm">
-    <label>Any: <input ng-model="search.$"></label> <br>
-    <table class="table table-striped table-condensed table-hover">
+    <input type="text" ng-model="vm.searchText.name" />
+    <table class="table table-striped">
         <thead>
-        <tr>
-            <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
-            <th class="name" custom-sort order="'name'" sort="sort">Name&nbsp;</th>
-            <th class="description" custom-sort order="'description'" sort="sort">Description&nbsp;</th>
-            <th class="field3" custom-sort order="'field3'" sort="sort">Field 3&nbsp;</th>
-            <th class="field4" custom-sort order="'field4'" sort="sort">Field 4&nbsp;</th>
-            <th class="field5" custom-sort order="'field5'" sort="sort">Field 5&nbsp;</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
         </thead>
+        <tbody>
+            <tr ng-repeat="item in vm.items | filter: vm.searchText | offset: vm.currentPage*vm.itemsPerPage | limitTo: vm.itemsPerPage">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+            </tr>
+        </tbody>
         <tfoot>
-        <td colspan="6">
+        <td colspan="3">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    <li ng-class="{disabled: vm.currentPage == 0}">
-                        <a href="javascript:void(0);" aria-label="Previous" ng-click="vm.prevPage()">
+                    <li ng-class="vm.prevPageDisabled()">
+                        <a href="javascript:void(0);" ng-click="vm.prevPage()" aria-label="Previous">
                             <span aria-hidden="true">&laquo; Prev</span>
                         </a>
                     </li>
-                    <li ng-repeat="n in vm.range(vm.pagedItems.length, vm.currentPage, vm.currentPage + vm.gap)"
-                        ng-class="{active: n == vm.currentPage}"
-                        ng-click="vm.setPage(n)">
-                        <a href="javascript:void(0);" ng-bind="n + 1">1</a>
+                    <li ng-repeat="n in vm.pages" ng-class="{active: n == vm.currentPage}" ng-click="vm.setPage(n)">
+                        <a href="javascript:void(0);">{{n+1}}</a>
+
                     </li>
-                    <li ng-class="{disabled: (vm.currentPage) == vm.pagedItems.length - 1}">
+                    <li ng-class="vm.nextPageDisabled()">
                         <a href="javascript:void(0);" aria-label="Next" ng-click="vm.nextPage()">
                             <span aria-hidden="true">Next &raquo;</span>
                         </a>
@@ -35,15 +38,5 @@
             </nav>
         </td>
         </tfoot>
-        <tbody>
-        <tr ng-repeat="item in vm.pagedItems[vm.currentPage] | orderBy:vm.sort.sortingOrder:vm.sort.reverse">
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.description}}</td>
-            <td>{{item.field3}}</td>
-            <td>{{item.field4}}</td>
-            <td>{{item.field5}}</td>
-        </tr>
-        </tbody>
     </table>
 </div>
