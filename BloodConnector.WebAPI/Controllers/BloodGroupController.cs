@@ -19,8 +19,7 @@ namespace BloodConnector.WebAPI.Controllers
         [AllowAnonymous]
         public IHttpActionResult Get()
         {
-            var sdf = _bloodGroupRepository.FindAll();
-            return Ok(sdf);
+            return Ok(_bloodGroupRepository.FindAll());
         } 
     }
 }

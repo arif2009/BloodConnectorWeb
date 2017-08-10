@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Cors;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace BloodConnector.WebAPI.Controllers
 {
@@ -10,19 +12,18 @@ namespace BloodConnector.WebAPI.Controllers
     //[EnableCors("http://localhost:14717,http://localhost:2102", "*", "*")]
     public class UsersController : ApiController
     {
+        private readonly ApplicationUserManager _userManager;
+
+        public UsersController(ApplicationUserManager userManager)
+        {
+            _userManager = userManager;
+        }
+
         // GET api/orders
         public IHttpActionResult Get()
         {
-            //return new string[] { "value1", "value2" };
-
-            //ClaimsPrincipal principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
-
-            //var Name = ClaimsPrincipal.Current.Identity.Name;
-            //var Name1 = User.Identity.Name;
-
-            //var userName = principal.Claims.Where(c => c.Type == "sub").Single().Value;
-
-            return Ok(Order.CreateOrders());
+            var asd = _userManager.Users;
+            return Ok(asd);
         }
 
         #region Helpers

@@ -5,25 +5,17 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
 
     /*vm.users = [];
 
-    usersService.getUsers().then(function (results) {
-
-        vm.users = results.data;
-
-    }, function (error) {
-        //alert(error.data.message);
-    });*/
+    ;*/
 
     vm.itemsPerPage = 5;
     vm.currentPage = 0;
     vm.items = [];
 
-    for (var i = 0; i < 50; i++) {
-        vm.items.push({
-            id: i,
-            name: "name " + i,
-            description: "description " + i
+    vm.$onInit = function() {
+        usersService.getUsers().then(function(results) {
+            vm.items = results.data;
         });
-    }
+    };
 
     vm.pageCount = function () {
         var pages = $filter('filter')(vm.items, vm.searchText);
