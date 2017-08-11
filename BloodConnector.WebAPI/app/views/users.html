@@ -4,16 +4,16 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Blood Group</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in vm.items | filter: vm.searchText | offset: vm.currentPage*vm.itemsPerPage | limitTo: vm.itemsPerPage">
-                <td>{{item.id}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.description}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.phoneNumber}}</td>
+                <td>{{item.bloodGroupSymbole}}</td>
             </tr>
         </tbody>
         <tfoot>

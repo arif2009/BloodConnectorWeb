@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using BloodConnector.WebAPI.Services;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace BloodConnector.WebAPI.Controllers
@@ -12,45 +14,17 @@ namespace BloodConnector.WebAPI.Controllers
     //[EnableCors("http://localhost:14717,http://localhost:2102", "*", "*")]
     public class UsersController : ApiController
     {
-        private readonly ApplicationUserManager _userManager;
+        private readonly UserServices _userServices;
 
-        public UsersController(ApplicationUserManager userManager)
+        public UsersController(UserServices userManager)
         {
-            _userManager = userManager;
+            _userServices = userManager;
         }
 
         // GET api/orders
         public IHttpActionResult Get()
         {
-            var asd = _userManager.Users;
-            return Ok(asd);
+            return Ok(_userServices.GetUsers());
         }
-
-        #region Helpers
-
-        public class Order
-        {
-            public int OrderID { get; set; }
-            public string CustomerName { get; set; }
-            public string ShipperCity { get; set; }
-            public Boolean IsShipped { get; set; }
-
-
-            public static List<Order> CreateOrders()
-            {
-                List<Order> OrderList = new List<Order>
-            {
-                new Order {OrderID = 10248, CustomerName = "Taiseer Joudeh", ShipperCity = "Amman", IsShipped = true },
-                new Order {OrderID = 10249, CustomerName = "Ahmad Hasan", ShipperCity = "Dubai", IsShipped = false},
-                new Order {OrderID = 10250,CustomerName = "Tamer Yaser", ShipperCity = "Jeddah", IsShipped = false },
-                new Order {OrderID = 10251,CustomerName = "Lina Majed", ShipperCity = "Abu Dhabi", IsShipped = false},
-                new Order {OrderID = 10252,CustomerName = "Yasmeen Rami", ShipperCity = "Kuwait", IsShipped = true}
-            };
-
-                return OrderList;
-            }
-        }
-
-        #endregion
-    }
+   }
 }
