@@ -261,6 +261,10 @@
     <Compile Include="Interface\IBloodGroupRepository.cs" />
     <Compile Include="Interface\IObjectWithState.cs" />
     <Compile Include="Interface\IRepository.cs" />
+    <Compile Include="Migrations\201708120753080_InitialMigration.cs" />
+    <Compile Include="Migrations\201708120753080_InitialMigration.Designer.cs">
+      <DependentUpon>201708120753080_InitialMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -397,6 +401,11 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708120753080_InitialMigration.resx">
+      <DependentUpon>201708120753080_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
