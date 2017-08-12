@@ -29,10 +29,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BloodConnector.Web", "Blood
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodConnector.MvcWeb", "BloodConnector.MvcWeb\BloodConnector.MvcWeb.csproj", "{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodConnector.MvcWeb.Tests", "BloodConnector.MvcWeb.Tests\BloodConnector.MvcWeb.Tests.csproj", "{5874E469-0874-414B-8AFA-8033CA57DAFC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,14 +47,6 @@ Global
 		{7732B375-4ED5-499A-AE99-882747E792CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7732B375-4ED5-499A-AE99-882747E792CB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{7732B375-4ED5-499A-AE99-882747E792CB}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5874E469-0874-414B-8AFA-8033CA57DAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5874E469-0874-414B-8AFA-8033CA57DAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5874E469-0874-414B-8AFA-8033CA57DAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5874E469-0874-414B-8AFA-8033CA57DAFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
