@@ -12,8 +12,8 @@
         <tbody>
             <tr ng-repeat="item in vm.items | filter: vm.searchText | offset: vm.currentPage*vm.itemsPerPage | limitTo: vm.itemsPerPage">
                 <td>{{item.email}}</td>
-                <td>{{item.phoneNumber}}</td>
-                <td>{{item.bloodGroupSymbole}}</td>
+                <td>{{item.contactNumber}}</td>
+                <td>{{item.bloodGroup}}</td>
             </tr>
         </tbody>
         <tfoot>

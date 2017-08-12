@@ -65,6 +65,7 @@ namespace BloodConnector.WebAPI.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //Database.SetInitializer<ApplicationDbContext>(null);
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 

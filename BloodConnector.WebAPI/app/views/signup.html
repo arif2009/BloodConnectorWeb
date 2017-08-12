@@ -1,9 +1,14 @@
 ﻿<form class="form-login" role="form" novalidate name="signupForm" data-ng-controller="signupController as vm">
     <div data-ng-hide="!vm.messages.length" data-ng-class="(vm.savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
-        <span>Failed to register user due to:<br/></span>
-        <ul>
-            <li ng-repeat="message in vm.messages">{{message}}</li>
-        </ul>
+        <div ng-hide="vm.savedSuccessfully">
+            <span>Failed to register user due to:<br /></span>
+            <ul>
+                <li ng-repeat="message in vm.messages">{{message}}</li>
+            </ul>
+        </div>
+        <div ng-show="vm.savedSuccessfully">
+            {{vm.messages[0]}}    
+        </div>
     </div>
     <h2 class="form-login-heading">Sign up</h2>
     <div class="form-group" ng-class="{'has-error':signupForm.txtEmail.$invalid && signupForm.txtEmail.$dirty}">
