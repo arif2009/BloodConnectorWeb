@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using AutoMapper;
+using AutoMapper.Configuration;
+using BloodConnector.WebAPI.Interface;
 using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Utilities;
 

@@ -3,10 +3,6 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
 
     var vm = this;
 
-    /*vm.users = [];
-
-    ;*/
-
     vm.itemsPerPage = 5;
     vm.currentPage = 0;
     vm.items = [];
