@@ -33,6 +33,18 @@ namespace BloodConnector.WebAPI.Models
 
     public class RegisterBindingModel
     {
+        [StringLength(10, ErrorMessage = "{0} too long.")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [StringLength(10, ErrorMessage = "{0} too long.")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [StringLength(10, ErrorMessage = "{0} too long.")]
+        [Display(Name = "Display Name")]
+        public string NikeName { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]

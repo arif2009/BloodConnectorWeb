@@ -25,13 +25,13 @@ namespace BloodConnector.WebAPI.Migrations
              );
 
             context.BloodGroup.AddOrUpdate(
-                new BloodGroup { ID = 1, Symbole = "O−" },
+                new BloodGroup { ID = 1, Symbole = "O-" },
                 new BloodGroup { ID = 2, Symbole = "O+" },
-                new BloodGroup { ID = 3, Symbole = "A−" },
+                new BloodGroup { ID = 3, Symbole = "A-" },
                 new BloodGroup { ID = 4, Symbole = "A+" },
-                new BloodGroup { ID = 5, Symbole = "B−" },
+                new BloodGroup { ID = 5, Symbole = "B-" },
                 new BloodGroup { ID = 6, Symbole = "B+" },
-                new BloodGroup { ID = 7, Symbole = "AB−" },
+                new BloodGroup { ID = 7, Symbole = "AB-" },
                 new BloodGroup { ID = 8, Symbole = "AB+" }
             );
 

@@ -5,6 +5,9 @@ app.controller('signupController', ['$location', '$timeout', 'authService', 'dat
     vm.messages = [];
     vm.bloodGrups = [];
     vm.registration = {
+        firstName: "",
+        lastName: "",
+        nikeName: "",
         email: "",
         phoneNumber: "",
         bloodGroupId: "",
@@ -34,7 +37,7 @@ app.controller('signupController', ['$location', '$timeout', 'authService', 'dat
                      errors.push(response.data.modelState[key][i]);
                  }
              }
-             vm.messages = errors.reverse();
+             vm.messages = errors;
          });
     };
 

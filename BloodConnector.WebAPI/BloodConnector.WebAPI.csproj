@@ -262,6 +262,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\ContextHelper.cs" />
+    <Compile Include="Helper\ProjectHelper.cs" />
     <Compile Include="Helper\StateHelper.cs" />
     <Compile Include="Interface\IBloodGroupRepository.cs" />
     <Compile Include="Interface\IObjectWithState.cs" />

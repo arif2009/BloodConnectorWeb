@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using BloodConnector.WebAPI.Services;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace BloodConnector.WebAPI.Controllers
 {

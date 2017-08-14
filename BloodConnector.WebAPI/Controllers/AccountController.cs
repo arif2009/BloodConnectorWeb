@@ -350,6 +350,9 @@ namespace BloodConnector.WebAPI.Controllers
 
                 var user = new User()
                 {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    NikeName = model.NikeName,
                     UserName = model.Email,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,

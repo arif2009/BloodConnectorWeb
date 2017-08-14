@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AutoMapper;
 using AutoMapper.Configuration;
+using BloodConnector.WebAPI.Helper;
 using BloodConnector.WebAPI.Interface;
 using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Utilities;
@@ -13,16 +14,7 @@ namespace BloodConnector.WebAPI.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NikeName { get; set; }
-
-        public string Name
-        {
-            get
-            {
-                var fullName = $"{FirstName} {LastName}".Trim();
-
-                return string.IsNullOrEmpty(NikeName) ? (string.IsNullOrEmpty(fullName) ? Email : fullName) : NikeName;
-            }
-        }
+        public string Name => ProjectHelper.GetUserName(FirstName, LastName, NikeName, Email);
         public string UserName { get; set; }
         public string Email { get; set; }
         public string BloodGroup { get; set; }

@@ -10,6 +10,7 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
     vm.$onInit = function() {
         usersService.getUsers().then(function(results) {
             vm.items = results.data;
+            vm.pages = vm.range();
         });
     };
 
@@ -41,7 +42,7 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
     };
     vm.pages = vm.range();
 
-    $scope.$watch('vm.searchText.name', function (v) {
+    $scope.$watch('vm.searchText', function (v) {
         vm.currentPage = 0;
         vm.pages = vm.range();
     });

@@ -83,18 +83,6 @@ footer {
   padding: 10px;
 }
 
-input[type="text"] {
-  margin-bottom: 0px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-input[type="password"] {
-  margin-bottom: 20px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
 .colorgraph {
   height: 7px;
   border-top: 0;
@@ -338,7 +326,19 @@ div.user-menu div.user-menu-content:not(.active){
 .transparent-border{
     border-color: transparent!important;
 }
-
+.m0 {
+    margin: 0 !important;
+}
+.mb10 {
+    margin-bottom: 10px !important;
+}
+.p0 {
+    padding: 0 !important;
+}
+.search input {
+    font-family: 'FontAwesome';
+    padding: 6px 12px !important;
+}
 /* -- media query for user profile image -- */
 @media (max-width: 767px) {
     .user-image {
