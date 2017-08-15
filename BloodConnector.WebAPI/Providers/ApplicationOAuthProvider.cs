@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
@@ -28,11 +29,17 @@ namespace BloodConnector.WebAPI.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            User user = await userManager.FindAsync(context.UserName, context.Password);
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            if (string.IsNullOrEmpty(context.UserName) || string.IsNullOrEmpty(context.Password))
+            {
+                context.SetError("invalid_grant", "The e-mail or password can't be empty.");
+                return;
+            }
+
+            User user = await userManager.FindAsync(context.UserName, context.Password);
             if (user == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                context.SetError("invalid_grant", "The e-mail or password is incorrect.");
                 return;
             }
 
@@ -87,7 +94,7 @@ namespace BloodConnector.WebAPI.Providers
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "userName", "userName" }
             };
             return new AuthenticationProperties(data);
         }
