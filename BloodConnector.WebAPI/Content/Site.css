@@ -25,47 +25,9 @@ footer {
     margin: 20px 0;
 }
 
-.form-login {
-    max-width: 330px;
-    padding: 0px 15px 5px 15px;
-    margin: 0 auto;
-}
-
-    .form-login .form-login-heading {
-        margin-bottom: 10px;
-    }
-
-    .form-login .form-control {
-        position: relative;
-        height: auto;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        padding: 10px;
-        font-size: 16px;
-    }
-
-        .form-login .form-control:focus {
-            z-index: 2;
-        }
-
-    .form-login input[type="password"] {
-        margin-top:5px;
-        margin-bottom: 5px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-	
-	
-	/* login form*/
-	.wrapper {    
-	margin-top: 80px;
-	margin-bottom: 20px;
-}
-
 .form-signin {
   max-width: 420px;
-  padding: 30px 38px 66px;
+  padding: 30px 38px 30px;
   margin: 0 auto;
   background-color: #eee;
   border: 3px dotted rgba(0,0,0,0.1);  
