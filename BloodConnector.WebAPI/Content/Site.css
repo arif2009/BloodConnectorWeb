@@ -297,6 +297,9 @@ div.user-menu div.user-menu-content:not(.active){
 .p0 {
     padding: 0 !important;
 }
+.to-upper-case {
+    text-transform: uppercase;
+}
 .search input {
     font-family: 'FontAwesome';
     padding: 6px 12px !important;
@@ -310,6 +313,23 @@ div.user-menu div.user-menu-content:not(.active){
     -ms-user-select: none;
     user-select: none;
 }
+
+/*START : Customize navbar*/
+.navbar-custom {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.navbar-custom .navbar-nav>li>a {
+    color: #dec9c9;
+}
+.navbar-custom .navbar-brand {
+    color: #dec9c9;
+}
+.selected-menu {
+    color: #ffffff!important;
+}
+/*START : Customize navbar*/
 
 /* -- media query for user profile image -- */
 @media (max-width: 767px) {
