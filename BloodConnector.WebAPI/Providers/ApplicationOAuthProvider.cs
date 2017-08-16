@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using BloodConnector.WebAPI.Helper;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -48,7 +49,7 @@ namespace BloodConnector.WebAPI.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
+            AuthenticationProperties properties = CreateProperties(user);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -90,11 +91,11 @@ namespace BloodConnector.WebAPI.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(User user)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", "userName" }
+                { "userName", ProjectHelper.GetUserName(user.FirstName, user.LastName, user.NikeName, user.Email) }
             };
             return new AuthenticationProperties(data);
         }
