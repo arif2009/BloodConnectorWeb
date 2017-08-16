@@ -29,24 +29,19 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _login = function (loginData) {
 
-        var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
-
-        if (loginData.useRefreshTokens) {
-            data = data + "&client_id=" + ngAuthSettings.clientId;
-        }
+        var data = "grant_type=password&username=" + loginData.email + "&password=" + loginData.password;
 
         var deferred = $q.defer();
 
         var onUserComplete = function (response) {
-
-            if (loginData.useRefreshTokens) {
-                localStorageService.set('authorizationData', { token: response.data.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
-            } else {
-                localStorageService.set('authorizationData', { token: response.data.access_token, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
-            }
+            localStorageService.set('authorizationData', {
+                token: response.data.access_token,
+                userName: response.data.userName,
+                refreshToken: "",
+                useRefreshTokens: false
+            });
             _authentication.isAuth = true;
-            _authentication.userName = loginData.userName;
-            _authentication.useRefreshTokens = loginData.useRefreshTokens;
+            _authentication.userName = response.data.userName,
             _authentication.token = response.data.access_token;
 
             deferred.resolve(response);
