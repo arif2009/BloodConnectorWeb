@@ -262,6 +262,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\ContextHelper.cs" />
+    <Compile Include="Helper\Extentions.cs" />
     <Compile Include="Helper\ProjectHelper.cs" />
     <Compile Include="Helper\StateHelper.cs" />
     <Compile Include="Interface\IBloodGroupRepository.cs" />
@@ -292,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controllers\forgotController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexController.js" />
     <Content Include="app\controllers\loginController.js" />
@@ -304,6 +306,7 @@
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\dataService.js" />
     <Content Include="app\services\usersService.js" />
+    <Content Include="app\views\forgot.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\login.html" />
     <Content Include="app\views\users.html" />
