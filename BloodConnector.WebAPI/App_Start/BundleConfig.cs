@@ -45,6 +45,7 @@ namespace BloodConnector.WebAPI
                 "~/app/controllers/loginController.js",
                 "~/app/controllers/signupController.js",
                 "~/app/controllers/usersController.js",
+                "~/app/controllers/forgotController.js",
                 // custom filters
                 "~/app/filter/commonFilters.js",
                 // custom directives
