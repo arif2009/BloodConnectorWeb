@@ -31,7 +31,7 @@ namespace BloodConnector.WebAPI
                         "~/Scripts/angular-local-storage.min.js",
                         "~/Scripts/loading-bar.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angularScripts").Include(
+            var angularScripts = new ScriptBundle("~/bundles/angularScripts").Include(
                 // main app script
                 "~/app/app.js",
                 // services
@@ -51,13 +51,22 @@ namespace BloodConnector.WebAPI
                 // custom directives
                 "~/app/directives/commonDirectives.js",
                 "~/app/directives/sortTableRow.js"
-                ));
+                );
+            bundles.Add(angularScripts);
+
+            angularScripts.Transforms.Clear();
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/loading-bar.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/site.css"));
+
+            // Set EnableOptimizations to false for debugging. For more information,
+            // visit http://go.microsoft.com/fwlink/?LinkId=301862
+            #if !DEBUG
+               BundleTable.EnableOptimizations = true;
+            #endif
         }
     }
 }
