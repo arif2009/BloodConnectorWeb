@@ -79,6 +79,21 @@ namespace BloodConnector.WebAPI.Models
         public string Email { get; set; }
     }
 
+    public class ResetPasswordViewModel
+    {
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        public string Code { get; set; }
+
+        public bool StartImport { get; set; }
+    }
+
     public class RemoveLoginBindingModel
     {
         [Required]

@@ -35,6 +35,7 @@ namespace BloodConnector.WebAPI.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
+        private  _signInManager;
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
         public AccountController()
         {
@@ -68,7 +69,7 @@ namespace BloodConnector.WebAPI.Controllers
             private set { _roleManager = value; } 
         }
 
-        public virtual async Task<ServiceResult<RegisterExternalBindingModel>> ForgotPassword(RegisterExternalBindingModel model, string callbackUrl)
+        private async Task<ServiceResult<RegisterExternalBindingModel>> ForgotPassword(RegisterExternalBindingModel model, string callbackUrl)
         {
             Contract.Assert(!string.IsNullOrEmpty(callbackUrl), "The 'callbackUrl' cannot be null or empty");
 
@@ -90,6 +91,65 @@ namespace BloodConnector.WebAPI.Controllers
             await _userManager.SendEmailAsync(user.Id, subject, body);
 
             return SuccessResult<RegisterExternalBindingModel>(model);
+        }
+        private async Task<ServiceResult<ResetPasswordViewModel>> ResetsPassword(ResetPasswordViewModel model)
+        {
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                return FailedResult<ResetPasswordViewModel>(model, x => x.Email, "Email was not found]");
+            }
+
+            var resetResult = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            if (!resetResult.Succeeded)
+            {
+                return FailedResult<ResetPasswordViewModel>(model, GetErrors(resetResult));
+            }
+
+            //If the user has not confirmed an email, check it as confirmed now
+            if (!user.EmailConfirmed)
+            {
+                user.EmailConfirmed = true;
+                var result = await UserManager.UpdateAsync(user);
+            }
+
+            await _signInManager.SignInAsync(user, false, false);
+            return SuccessResult<ResetPasswordViewModel>(model);
+        }
+
+        [HttpPost]
+        [Route("resetpassword")]
+        public async Task<IHttpActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            var result = await this.ResetsPassword(model);
+            if (!result.Success)
+            {
+                MapErrorsToModelState(result.ErrorMessages);
+                return BadRequest(ModelState);
+            }
+
+            var candidate = await Db.Candidate.FirstAsync(c => c.Email == model.Email);
+            if (candidate.HasRecruiterCv && candidate.RecruiterCvImportedOn == null)
+            {
+                model.StartImport = true;
+            }
+
+
+            // Call recruiter API to confirm email
+            using (var client = _restClientFactory.GetRecruiterClient())
+            {
+                // check email first. if user does not exists, then confirm_email can not be sent
+                var queryparams = $"?api-version={RecruiterApiVersion}";
+                var resource = $"api/candidate/confirm_email{queryparams}";
+
+                var confirmResponse = await client.PostAsJsonAsync(resource, model.Email);
+                if (!confirmResponse.IsSuccessStatusCode)
+                {
+                    return await HandleApiError(confirmResponse);
+                }
+            }
+
+            return Ok(model);
         }
 
         // POST api/Account/Logout
@@ -153,11 +213,11 @@ namespace BloodConnector.WebAPI.Controllers
         public async Task<IHttpActionResult> PasswordRecoveryByEmail(RegisterExternalBindingModel model)
         {
             var urlTemplate = Url.Link("Account", new { controller = "Account", action = "ResetPassword" });
-            var result = await _accountService.ForgotPassword(model, urlTemplate);
+            var result = await this.ForgotPassword(model, urlTemplate);
 
             if (result.Success)
             {
-                return Ok<PasswordRecoveryByEmailViewModel>(model);
+                return Ok<RegisterExternalBindingModel>(model);
             }
             else
             {
@@ -483,6 +543,28 @@ namespace BloodConnector.WebAPI.Controllers
         }
 
         #region Helpers
+
+        protected ServiceResult<TViewModel> FailedResult<TViewModel>(TViewModel model, List<KeyValuePair<string, string>> errorMessages)
+        {
+            var result = new ServiceResult<TViewModel>
+            {
+                Model = model,
+                ErrorMessages = errorMessages
+            };
+
+            return result;
+        }
+
+        private List<KeyValuePair<string, string>> GetErrors(IdentityResult result)
+        {
+            var errorMessages = new List<KeyValuePair<string, string>>();
+            foreach (var error in result.Errors)
+            {
+                errorMessages.Add(new KeyValuePair<string, string>(string.Empty, error));
+            }
+
+            return errorMessages;
+        }
         private string GetResetBody(string callbackUrl)
         {
             var body = "Please reset your password by clicking <a href =\"" + callbackUrl + "\">here</a>";
