@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
+using BloodConnector.WebAPI.Helper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -20,6 +23,7 @@ using BloodConnector.WebAPI.Providers;
 using BloodConnector.WebAPI.Results;
 using BloodConnector.WebAPI.Utilities;
 using Microsoft.Practices.Unity;
+using BloodConnector.WebAPI.ServiceResult;
 
 namespace BloodConnector.WebAPI.Controllers
 {
@@ -64,6 +68,117 @@ namespace BloodConnector.WebAPI.Controllers
             private set { _roleManager = value; } 
         }
 
+        public virtual async Task<ServiceResult<RegisterExternalBindingModel>> ForgotPassword(RegisterExternalBindingModel model, string callbackUrl)
+        {
+            Contract.Assert(!string.IsNullOrEmpty(callbackUrl), "The 'callbackUrl' cannot be null or empty");
+
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                return FailedResult<RegisterExternalBindingModel>(model, m => m.Email, "[[[Invalid user]]]");
+            }
+
+            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+            // Send an email with this link
+            string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            string queryString = string.Format("?code={0}&Email={1}", HttpUtility.UrlEncode(code), HttpUtility.UrlEncode(user.Email));
+
+            var url = callbackUrl + queryString;
+
+            var subject = "Reset your Webcruiter password";
+            var body = GetResetBody(url);
+            await _userManager.SendEmailAsync(user.Id, subject, body);
+
+            return SuccessResult<RegisterExternalBindingModel>(model);
+        }
+
+        // POST api/Account/Logout
+        [Route("Logout")]
+        public IHttpActionResult Logout()
+        {
+            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            return Ok();
+        }
+
+        // POST api/Account/Register
+        [AllowAnonymous]
+        [Route("Register")]
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        {
+            try
+            {
+                if (await this.EmailAlreadyExist(model.Email))
+                {
+                    ModelState.AddModelError("Email", "Email already in use!");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var user = new User()
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    NikeName = model.NikeName,
+                    UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    BloodGroupId = model.BloodGroupId
+                };
+
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, Enums.Role.FirstOrDefault(x => x.Value == "3").Key);
+
+                    return Ok();
+                }
+
+                return GetErrorResult(result);
+            }
+            catch (Exception ex)
+            {
+                ModelState.Clear();
+                //ModelState.AddModelError("Exception", ex.Message);
+                ModelState.AddModelError("Network", "Network problem !");
+                return BadRequest(ModelState);
+            }
+        }
+
+        [HttpPost]
+        [Route("passwordrecoverybyemail")]
+        public async Task<IHttpActionResult> PasswordRecoveryByEmail(RegisterExternalBindingModel model)
+        {
+            var urlTemplate = Url.Link("Account", new { controller = "Account", action = "ResetPassword" });
+            var result = await _accountService.ForgotPassword(model, urlTemplate);
+
+            if (result.Success)
+            {
+                return Ok<PasswordRecoveryByEmailViewModel>(model);
+            }
+            else
+            {
+                // try to import 
+                string confirmationUrl = Url.Link("Account", new { controller = "Account", action = "ConfirmEmail" });
+                var importedResult = await TryImportUserFromRecruiter(model.Email, confirmationUrl, true);
+
+                // check for not found
+                if (!importedResult.Imported)
+                {
+                    ModelState.AddModelError("Email", "[[[Email was not found]]]");
+                    return UnprocessableEntity(ModelState);
+                }
+                else
+                {
+                    var result2 = await _accountService.ForgotPassword(model, urlTemplate);
+                    return Ok(model);
+                }
+            }
+        }
+
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
@@ -77,14 +192,6 @@ namespace BloodConnector.WebAPI.Controllers
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
-        }
-
-        // POST api/Account/Logout
-        [Route("Logout")]
-        public IHttpActionResult Logout()
-        {
-            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            return Ok();
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
@@ -331,54 +438,6 @@ namespace BloodConnector.WebAPI.Controllers
             return logins;
         }
 
-        // POST api/Account/Register
-        [AllowAnonymous]
-        [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
-        {
-            try
-            {
-                if (await this.EmailAlreadyExist(model.Email))
-                {
-                    ModelState.AddModelError("Email", "Email already in use!");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                var user = new User()
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    NikeName = model.NikeName,
-                    UserName = model.Email,
-                    Email = model.Email,
-                    PhoneNumber = model.PhoneNumber,
-                    BloodGroupId = model.BloodGroupId
-                };
-
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    await UserManager.AddToRoleAsync(user.Id, Enums.Role.FirstOrDefault(x => x.Value == "3").Key);
-
-                    return Ok();
-                }
-
-                return GetErrorResult(result);
-            }
-            catch (Exception ex)
-            {
-                ModelState.Clear();
-                //ModelState.AddModelError("Exception", ex.Message);
-                ModelState.AddModelError("Network","Network problem !");
-                return BadRequest(ModelState);
-            }
-        }
-
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -424,6 +483,40 @@ namespace BloodConnector.WebAPI.Controllers
         }
 
         #region Helpers
+        private string GetResetBody(string callbackUrl)
+        {
+            var body = "Please reset your password by clicking <a href =\"" + callbackUrl + "\">here</a>";
+            body += "<br/>";
+            body += "<br/>";
+            body += "If the link does not work, paste this into your browser. ";
+            body += "<br/>";
+            body += callbackUrl;
+
+            return body;
+        }
+
+        protected ServiceResult<TViewModel> SuccessResult<TViewModel>(TViewModel model)
+        {
+            return new ServiceResult<TViewModel>
+            {
+                Model = model,
+                ErrorMessages = new List<KeyValuePair<string, string>>()
+            };
+        }
+
+        protected ServiceResult<TViewModel> FailedResult<TViewModel>(TViewModel model, Expression<Func<TViewModel, object>> properyRef, string errorMessage)
+        {
+            string propertyName = ProjectHelper.GetName<TViewModel>(properyRef);
+            var result = new ServiceResult<TViewModel>
+            {
+                Model = model,
+                ErrorMessages = new List<KeyValuePair<string, string>>()
+            };
+
+            result.ErrorMessages.Add(new KeyValuePair<string, string>(string.Format("model.{0}", propertyName), errorMessage));
+
+            return result;
+        }
 
         private IAuthenticationManager Authentication
         {
