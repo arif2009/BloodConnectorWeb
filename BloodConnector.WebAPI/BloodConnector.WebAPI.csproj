@@ -258,6 +258,7 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DTOs\UserDto.cs" />
+    <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -287,6 +288,7 @@
     <Compile Include="Repository\BloodGroupRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="ServiceResult\ServiceResult.cs" />
+    <Compile Include="Services\SmtpEmailService.cs" />
     <Compile Include="Services\UserServices.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Enums.cs" />
@@ -298,10 +300,12 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexController.js" />
     <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\controllers\sentmailController.js" />
     <Content Include="app\controllers\usersController.js" />
     <Content Include="app\controllers\signupController.js" />
     <Content Include="app\directives\commonDirectives.js" />
     <Content Include="app\directives\sortTableRow.js" />
+    <Content Include="app\factory\utilsFactory.js" />
     <Content Include="app\filter\commonFilters.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
@@ -310,6 +314,7 @@
     <Content Include="app\views\forgot.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\login.html" />
+    <Content Include="app\views\sentmail.html" />
     <Content Include="app\views\users.html" />
     <Content Include="app\views\signup.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />

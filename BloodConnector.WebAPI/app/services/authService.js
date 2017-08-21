@@ -70,6 +70,12 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     };
 
+    var _forgot = function(forgotData) {
+        return $http.post(serviceBase + 'api/Account/passwordrecoverybyemail', forgotData).then(function (results) {
+            return results;
+        });
+    };
+
     var _fillAuthData = function () {
 
         var authData = localStorageService.get('authorizationData');
@@ -159,6 +165,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     authServiceFactory.saveRegistration = _saveRegistration;
     authServiceFactory.login = _login;
     authServiceFactory.logOut = _logOut;
+    authServiceFactory.forgot = _forgot;
     authServiceFactory.fillAuthData = _fillAuthData;
     authServiceFactory.authentication = _authentication;
     authServiceFactory.refreshToken = _refreshToken;

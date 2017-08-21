@@ -3,6 +3,7 @@ using BloodConnector.WebAPI.Controllers;
 using BloodConnector.WebAPI.Interface;
 using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Repository;
+using BloodConnector.WebAPI.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -46,6 +47,7 @@ namespace BloodConnector.WebAPI.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType(typeof(IRepository<>), typeof(BaseRepository<>));
             container.RegisterType<IBloodGroupRepository, BloodGroupRepository>();
+            container.RegisterType<IIdentityMessageService, SmtpEmailService>();
             container.RegisterType<IUserStore<User>, UserStore<User>>(new InjectionConstructor(typeof(ApplicationDbContext)));
             //container.RegisterType<ApplicationUserManager>();
             container.RegisterType<AccountController>(new InjectionConstructor());

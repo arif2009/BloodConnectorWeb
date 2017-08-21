@@ -2,10 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using BloodConnector.WebAPI.DTOs;
-using BloodConnector.WebAPI.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BloodConnector.WebAPI.Services
 {
@@ -19,7 +16,7 @@ namespace BloodConnector.WebAPI.Services
 
         public IList<UserDto> GetUsers()
         {
-            var users = _userManager.Users.Include(x => x.BloodGroup);
+            var users = _userManager.Users.Include(x => x.BloodGroup).OrderByDescending(y=>y.UserId);
             var userList = Mapper.Map<IEnumerable<UserDto>>(users).ToList();
             return userList;
         }

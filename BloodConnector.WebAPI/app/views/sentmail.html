@@ -1,0 +1,17 @@
+﻿<section data-ng-controller="sentmailController as vm">
+    <h2>Email sent</h2>
+    <hr />
+    <p>
+        We are trying to send a password recovery email to email address
+        <strong ng-bind="vm.email"></strong>
+        <br />
+        Please follow the instruction in the email to reset your password
+    </p>
+    <p>
+        If you do not receive an email from us there are two reasons
+    </p>
+    <ul>
+        <li>Your email client or email provider is blocking the password recovery email. Please check your spam filter/folder</li>
+        <li>You do not have an email registered in our database. <a href="#!signup">Please register a new profile</a></li>
+    </ul>
+</section>

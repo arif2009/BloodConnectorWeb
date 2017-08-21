@@ -18,6 +18,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/forgot.html"
     });
 
+    $routeProvider.when("/sentmail", {
+        controller: "sentmailController",
+        templateUrl: "/app/views/sentmail.html"
+    });
+
     $routeProvider.when("/signup", {
         controller: "signupController",
         templateUrl: "/app/views/signup.html"

@@ -1,12 +1,10 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using BloodConnector.WebAPI.Models;
+using BloodConnector.WebAPI.Services;
 using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.OAuth;
 
 namespace BloodConnector.WebAPI
 {
@@ -14,14 +12,15 @@ namespace BloodConnector.WebAPI
     //UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<User>
     {
-        public ApplicationUserManager(IUserStore<User> store)
+        public ApplicationUserManager(IUserStore<User> store, IIdentityMessageService emailService)
             : base(store)
         {
+            this.EmailService = emailService;
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<ApplicationDbContext>()), new SmtpEmailService());
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<User>(manager)
             {
@@ -65,11 +64,6 @@ namespace BloodConnector.WebAPI
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
-        }
-
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
-        {
-            return user.GenerateUserIdentityAsync(UserManager, OAuthDefaults.AuthenticationType);
         }
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)

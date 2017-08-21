@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,7 +9,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Results;
+using BloodConnector.WebAPI.Filters;
 using BloodConnector.WebAPI.Helper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -22,7 +21,6 @@ using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Providers;
 using BloodConnector.WebAPI.Results;
 using BloodConnector.WebAPI.Utilities;
-using Microsoft.Practices.Unity;
 using BloodConnector.WebAPI.ServiceResult;
 
 namespace BloodConnector.WebAPI.Controllers
@@ -35,7 +33,7 @@ namespace BloodConnector.WebAPI.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
-        private  _signInManager;
+        private ApplicationSignInManager _signInManager;
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
         public AccountController()
         {
@@ -48,7 +46,6 @@ namespace BloodConnector.WebAPI.Controllers
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
             RoleManager = roleManager;
-
         }
 
         public ApplicationUserManager UserManager
@@ -69,11 +66,23 @@ namespace BloodConnector.WebAPI.Controllers
             private set { _roleManager = value; } 
         }
 
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? Request.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
         private async Task<ServiceResult<RegisterExternalBindingModel>> ForgotPassword(RegisterExternalBindingModel model, string callbackUrl)
         {
             Contract.Assert(!string.IsNullOrEmpty(callbackUrl), "The 'callbackUrl' cannot be null or empty");
 
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return FailedResult<RegisterExternalBindingModel>(model, m => m.Email, "[[[Invalid user]]]");
@@ -86,70 +95,45 @@ namespace BloodConnector.WebAPI.Controllers
 
             var url = callbackUrl + queryString;
 
-            var subject = "Reset your Webcruiter password";
+            var subject = "Reset your BloodConnector password";
             var body = GetResetBody(url);
-            await _userManager.SendEmailAsync(user.Id, subject, body);
+            await UserManager.SendEmailAsync(user.Id, subject, body);
 
             return SuccessResult<RegisterExternalBindingModel>(model);
         }
-        private async Task<ServiceResult<ResetPasswordViewModel>> ResetsPassword(ResetPasswordViewModel model)
-        {
-            var user = await UserManager.FindByNameAsync(model.Email);
-            if (user == null)
-            {
-                return FailedResult<ResetPasswordViewModel>(model, x => x.Email, "Email was not found]");
-            }
-
-            var resetResult = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (!resetResult.Succeeded)
-            {
-                return FailedResult<ResetPasswordViewModel>(model, GetErrors(resetResult));
-            }
-
-            //If the user has not confirmed an email, check it as confirmed now
-            if (!user.EmailConfirmed)
-            {
-                user.EmailConfirmed = true;
-                var result = await UserManager.UpdateAsync(user);
-            }
-
-            await _signInManager.SignInAsync(user, false, false);
-            return SuccessResult<ResetPasswordViewModel>(model);
-        }
 
         [HttpPost]
-        [Route("resetpassword")]
-        public async Task<IHttpActionResult> ResetPassword(ResetPasswordViewModel model)
+        [AllowAnonymous]
+        [ValidateModelState]
+        [Route("passwordrecoverybyemail")]
+        public async Task<IHttpActionResult> PasswordRecoveryByEmail(RegisterExternalBindingModel model)
         {
-            var result = await this.ResetsPassword(model);
-            if (!result.Success)
+            var urlTemplate = Url.Link("Account", new { controller = "Account", action = "ResetPassword" });
+            var result = await this.ForgotPassword(model, urlTemplate);
+
+            if (result.Success)
             {
-                MapErrorsToModelState(result.ErrorMessages);
-                return BadRequest(ModelState);
+                return Ok<RegisterExternalBindingModel>(model);
             }
-
-            var candidate = await Db.Candidate.FirstAsync(c => c.Email == model.Email);
-            if (candidate.HasRecruiterCv && candidate.RecruiterCvImportedOn == null)
+            else
             {
-                model.StartImport = true;
-            }
+                /*// try to import 
+                string confirmationUrl = Url.Link("Account", new { controller = "Account", action = "ConfirmEmail" });
+                var importedResult = await TryImportUserFromRecruiter(model.Email, confirmationUrl, true);
 
-
-            // Call recruiter API to confirm email
-            using (var client = _restClientFactory.GetRecruiterClient())
-            {
-                // check email first. if user does not exists, then confirm_email can not be sent
-                var queryparams = $"?api-version={RecruiterApiVersion}";
-                var resource = $"api/candidate/confirm_email{queryparams}";
-
-                var confirmResponse = await client.PostAsJsonAsync(resource, model.Email);
-                if (!confirmResponse.IsSuccessStatusCode)
+                // check for not found
+                if (!importedResult.Imported)
                 {
-                    return await HandleApiError(confirmResponse);
+                    ModelState.AddModelError("Email", "[[[Email was not found]]]");
+                    return UnprocessableEntity(ModelState);
                 }
+                else
+                {
+                    var result2 = await _accountService.ForgotPassword(model, urlTemplate);
+                    return Ok(model);
+                }*/
+                return null;
             }
-
-            return Ok(model);
         }
 
         // POST api/Account/Logout
@@ -163,6 +147,7 @@ namespace BloodConnector.WebAPI.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
+        [ValidateModelState]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             try
@@ -170,12 +155,10 @@ namespace BloodConnector.WebAPI.Controllers
                 if (await this.EmailAlreadyExist(model.Email))
                 {
                     ModelState.AddModelError("Email", "Email already in use!");
-                }
-
-                if (!ModelState.IsValid)
-                {
                     return BadRequest(ModelState);
                 }
+
+                /*if (!ModelState.IsValid){}*/
 
                 var user = new User()
                 {
@@ -205,37 +188,6 @@ namespace BloodConnector.WebAPI.Controllers
                 //ModelState.AddModelError("Exception", ex.Message);
                 ModelState.AddModelError("Network", "Network problem !");
                 return BadRequest(ModelState);
-            }
-        }
-
-        [HttpPost]
-        [Route("passwordrecoverybyemail")]
-        public async Task<IHttpActionResult> PasswordRecoveryByEmail(RegisterExternalBindingModel model)
-        {
-            var urlTemplate = Url.Link("Account", new { controller = "Account", action = "ResetPassword" });
-            var result = await this.ForgotPassword(model, urlTemplate);
-
-            if (result.Success)
-            {
-                return Ok<RegisterExternalBindingModel>(model);
-            }
-            else
-            {
-                // try to import 
-                string confirmationUrl = Url.Link("Account", new { controller = "Account", action = "ConfirmEmail" });
-                var importedResult = await TryImportUserFromRecruiter(model.Email, confirmationUrl, true);
-
-                // check for not found
-                if (!importedResult.Imported)
-                {
-                    ModelState.AddModelError("Email", "[[[Email was not found]]]");
-                    return UnprocessableEntity(ModelState);
-                }
-                else
-                {
-                    var result2 = await _accountService.ForgotPassword(model, urlTemplate);
-                    return Ok(model);
-                }
             }
         }
 
@@ -543,6 +495,11 @@ namespace BloodConnector.WebAPI.Controllers
         }
 
         #region Helpers
+
+        private void MapErrorsToModelState(List<KeyValuePair<string, string>> errors)
+        {
+            errors?.ToList().ForEach(p => ModelState.AddModelError(p.Key, p.Value));
+        }
 
         protected ServiceResult<TViewModel> FailedResult<TViewModel>(TViewModel model, List<KeyValuePair<string, string>> errorMessages)
         {

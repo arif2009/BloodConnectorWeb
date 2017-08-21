@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('signupController', ['$location', '$timeout', 'authService', 'dataService', function ($location, $timeout, authService, dataService) {
+app.controller('signupController', ['$location', '$timeout', 'authService', 'dataService', 'utilsFactory', function ($location, $timeout, authService, dataService, utilsFactory) {
     var vm = this;
     vm.savedSuccessfully = false;
     vm.messages = [];
@@ -31,13 +31,7 @@ app.controller('signupController', ['$location', '$timeout', 'authService', 'dat
 
         },
          function (response) {
-             var errors = [];
-             for (var key in response.data.modelState) {
-                 for (var i = 0; i < response.data.modelState[key].length; i++) {
-                     errors.push(response.data.modelState[key][i]);
-                 }
-             }
-             vm.messages = errors;
+             vm.messages = utilsFactory.processModelstateError(response.data.modelState);
          });
     };
 

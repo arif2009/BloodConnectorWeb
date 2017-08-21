@@ -75,6 +75,7 @@ namespace BloodConnector.WebAPI.Models
     public class RegisterExternalBindingModel
     {
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
