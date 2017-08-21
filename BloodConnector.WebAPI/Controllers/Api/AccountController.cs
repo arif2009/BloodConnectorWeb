@@ -91,7 +91,7 @@ namespace BloodConnector.WebAPI.Controllers
             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
             // Send an email with this link
             string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-            string queryString = string.Format("?code={0}&Email={1}", HttpUtility.UrlEncode(code), HttpUtility.UrlEncode(user.Email));
+            string queryString = $"?code={HttpUtility.UrlEncode(code)}&Email={HttpUtility.UrlEncode(user.Email)}";
 
             var url = callbackUrl + queryString;
 
@@ -100,6 +100,45 @@ namespace BloodConnector.WebAPI.Controllers
             await UserManager.SendEmailAsync(user.Id, subject, body);
 
             return SuccessResult<RegisterExternalBindingModel>(model);
+        }
+        private async Task<ServiceResult<ResetPasswordViewModel>> ChangePassword(ResetPasswordViewModel model)
+        {
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return FailedResult<ResetPasswordViewModel>(model, x => x.Email, "Email was not found]");
+            }
+
+            var resetResult = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            if (!resetResult.Succeeded)
+            {
+                return FailedResult<ResetPasswordViewModel>(model, GetErrors(resetResult));
+            }
+
+            //If the user has not confirmed an email, check it as confirmed now
+            if (!user.EmailConfirmed)
+            {
+                user.EmailConfirmed = true;
+                var result = await UserManager.UpdateAsync(user);
+            }
+
+            await SignInManager.SignInAsync(user, false, false);
+            return SuccessResult<ResetPasswordViewModel>(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("resetpassword")]
+        public async Task<IHttpActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            var result = await this.ChangePassword(model);
+            if (!result.Success)
+            {
+                MapErrorsToModelState(result.ErrorMessages);
+                return BadRequest(ModelState);
+            }
+
+            return Ok(model);
         }
 
         [HttpPost]
@@ -115,25 +154,9 @@ namespace BloodConnector.WebAPI.Controllers
             {
                 return Ok<RegisterExternalBindingModel>(model);
             }
-            else
-            {
-                /*// try to import 
-                string confirmationUrl = Url.Link("Account", new { controller = "Account", action = "ConfirmEmail" });
-                var importedResult = await TryImportUserFromRecruiter(model.Email, confirmationUrl, true);
 
-                // check for not found
-                if (!importedResult.Imported)
-                {
-                    ModelState.AddModelError("Email", "[[[Email was not found]]]");
-                    return UnprocessableEntity(ModelState);
-                }
-                else
-                {
-                    var result2 = await _accountService.ForgotPassword(model, urlTemplate);
-                    return Ok(model);
-                }*/
-                return null;
-            }
+            ModelState.AddModelError("Email", "[[[Email was not found]]]");
+            return BadRequest(ModelState);
         }
 
         // POST api/Account/Logout
