@@ -23,7 +23,7 @@ using BloodConnector.WebAPI.Results;
 using BloodConnector.WebAPI.Utilities;
 using BloodConnector.WebAPI.ServiceResult;
 
-namespace BloodConnector.WebAPI.Controllers
+namespace BloodConnector.WebAPI.Controllers.Api
 {
     [Authorize]
     [RoutePrefix("api/Account")]

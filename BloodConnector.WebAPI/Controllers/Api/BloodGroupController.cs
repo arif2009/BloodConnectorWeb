@@ -5,7 +5,7 @@ using System.Web.Http;
 using BloodConnector.WebAPI.Interface;
 using Microsoft.AspNet.Identity.Owin;
 
-namespace BloodConnector.WebAPI.Controllers
+namespace BloodConnector.WebAPI.Controllers.Api
 {
     [Authorize]
     [RoutePrefix("api/BloodGroup")]

@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using BloodConnector.WebAPI.Services;
 
-namespace BloodConnector.WebAPI.Controllers
+namespace BloodConnector.WebAPI.Controllers.Api
 {
     [Authorize]
     [RoutePrefix("api/users")]

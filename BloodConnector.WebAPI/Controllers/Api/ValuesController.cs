@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace BloodConnector.WebAPI.Controllers
+namespace BloodConnector.WebAPI.Controllers.Api
 {
     [Authorize]
     [RoutePrefix("api/values")]
