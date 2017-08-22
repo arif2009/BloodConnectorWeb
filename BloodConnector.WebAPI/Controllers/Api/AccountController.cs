@@ -122,13 +122,12 @@ namespace BloodConnector.WebAPI.Controllers.Api
                 var result = await UserManager.UpdateAsync(user);
             }
 
-            await SignInManager.SignInAsync(user, false, false);
             return SuccessResult<ResetPasswordViewModel>(model);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateModelState]
+        [ValidateModelState]
         [Route("resetpassword")]
         public async Task<IHttpActionResult> ResetPassword(ResetPasswordViewModel model)
         {

@@ -82,13 +82,14 @@ namespace BloodConnector.WebAPI.Models
 
     public class ResetPasswordViewModel
     {
-        //[EmailAddress]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        //[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        //[DataType(DataType.Password)]
+        [Required]
+        [DataType(DataType.Password)]
         [Display(Name = "Password")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$", ErrorMessage = "{0} must be min 6 characters, at least one letter and one number!")]
         public string Password { get; set; }
 
         public string Code { get; set; }
