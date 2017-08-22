@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('utilsFactory', [function () {
+app.factory('utilsFactory', ['$location', '$timeout', function ($location, $timeout) {
     return {
         processModelstateError: function(modelstate) {
             var errors = [];
@@ -9,6 +9,12 @@ app.factory('utilsFactory', [function () {
                 }
             }
             return errors;
+        },
+        redirectToLogin : function() {
+            var timer = $timeout(function () {
+                $timeout.cancel(timer);
+                $location.path('/login');
+            }, 2000);
         },
         getWhere: function (array, field, value) {
 

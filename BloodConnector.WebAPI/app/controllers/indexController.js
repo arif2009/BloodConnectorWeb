@@ -1,7 +1,8 @@
 ﻿'use strict';
-app.controller('indexController', ['$scope', '$location', 'authService', function ($scope, $location, authService) {
+app.controller('indexController', ['$scope', '$location', 'authService', 'ngAuthSettings', function ($scope, $location, authService, ngAuthSettings) {
 
     var vm = this;
+    vm.baseURI = ngAuthSettings.apiServiceBaseUri;
     vm.$onInit = function () {
         vm.active = {
             "home": true,

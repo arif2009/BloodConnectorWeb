@@ -6,7 +6,7 @@ app.controller('forgotController', ['localStorageService', 'authService', '$loca
         email: ""
     };
 
-    vm.messages = "";
+    vm.forgotMessages = "";
 
     vm.forgot = function () {
         localStorageService.set('email', vm.forgotData.email);
@@ -14,7 +14,7 @@ app.controller('forgotController', ['localStorageService', 'authService', '$loca
             $location.path('/sentmail');
         },
         function (err) {
-            vm.messages = utilsFactory.processModelstateError(err.data.modelState);
+            vm.forgotMessages = utilsFactory.processModelstateError(err.data.modelState);
         });
     };
 

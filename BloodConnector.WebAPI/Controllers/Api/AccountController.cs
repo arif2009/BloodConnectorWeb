@@ -128,6 +128,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
 
         [HttpPost]
         [AllowAnonymous]
+        //[ValidateModelState]
         [Route("resetpassword")]
         public async Task<IHttpActionResult> ResetPassword(ResetPasswordViewModel model)
         {

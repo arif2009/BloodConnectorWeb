@@ -42,7 +42,7 @@ footer {
     margin: 20px 0;
 }
 
-.form-signin, .form-forgot {
+.form-signin, .form-forgot, .form-reset {
   max-width: 420px;
   padding: 30px 38px 30px;
   margin: 0 auto;

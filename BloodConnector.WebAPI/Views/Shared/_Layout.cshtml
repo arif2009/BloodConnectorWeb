@@ -26,7 +26,7 @@
                 <button type="button" class="btn btn-success navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </button>
-                <a class="navbar-brand" ng-class="{'selected-menu': vm.active.home}" ng-click="vm.changeSelectedClass('home')" href="#!">Home</a>
+                <a class="navbar-brand" ng-class="{'selected-menu': vm.active.home}" ng-click="vm.changeSelectedClass('home')" href="/">Home</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -57,6 +57,7 @@
     <!-- 3rd party libraries -->
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/utility")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/angularJs")
     @Scripts.Render("~/bundles/angularComponents")
