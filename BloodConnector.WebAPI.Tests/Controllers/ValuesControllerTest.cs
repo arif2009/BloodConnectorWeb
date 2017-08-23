@@ -6,7 +6,7 @@ using System.Text;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BloodConnector.WebAPI;
-using BloodConnector.WebAPI.Controllers;
+using BloodConnector.WebAPI.Controllers.Api;
 
 namespace BloodConnector.WebAPI.Tests.Controllers
 {
