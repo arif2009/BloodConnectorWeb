@@ -39,6 +39,7 @@ app.config(function ($routeProvider) {
 
 var serviceBase = 'http://localhost:14290/';
 //var serviceBase = 'http://ngauthenticationapi.azurewebsites.net/';
+//var serviceBase = 'http://local.bloodconnector.org';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
