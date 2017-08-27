@@ -427,6 +427,12 @@
       <DependentUpon>201708120753080_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BloodConnector.Shared\BloodConnector.Shared.csproj">
+      <Project>{b692087c-9df8-46bd-87ca-0805119827da}</Project>
+      <Name>BloodConnector.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

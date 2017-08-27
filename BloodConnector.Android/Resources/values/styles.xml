@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="Theme.BloodConnector1" parent="Base.Theme.DesignDemo">
+  </style>
+  <style name="Base.Theme.DesignDemo" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">#e74c3c</item>
+    <item name="colorPrimaryDark">#cc2b19</item>
+  </style>
+</resources>

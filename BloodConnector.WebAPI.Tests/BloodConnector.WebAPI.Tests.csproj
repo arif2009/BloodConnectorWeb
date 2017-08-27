@@ -103,6 +103,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BloodConnector.Shared\BloodConnector.Shared.csproj">
+      <Project>{b692087c-9df8-46bd-87ca-0805119827da}</Project>
+      <Name>BloodConnector.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BloodConnector.WebAPI\BloodConnector.WebAPI.csproj">
       <Project>{59BC4642-C63A-44D4-8518-E8F1E6A83C93}</Project>
       <Name>BloodConnector.WebAPI</Name>
