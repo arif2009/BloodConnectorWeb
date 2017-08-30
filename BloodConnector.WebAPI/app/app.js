@@ -37,11 +37,13 @@ app.config(function ($routeProvider) {
 
 });
 
-var serviceBase = 'http://localhost:14290/';
-//var serviceBase = 'http://www.bloodconnector.org/';
-//var serviceBase = 'http://local.bloodconnector.org';
+var serviceBase = '/';
+var rootURL = 'http://localhost:14290/';
+//var siteURL = 'http://www.bloodconnector.org/';
+//var siteURL = 'http://local.bloodconnector.org';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
+    rootURL: rootURL,
     clientId: 'ngAuthApp'
 });
 
