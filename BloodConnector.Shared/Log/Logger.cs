@@ -4,40 +4,77 @@ using System.Web;
 
 namespace BloodConnector.Shared.Log
 {
-    public static class Logger
+    public class Logger
     {
+        //private readonly string logDir = ConfigurationManager.AppSettings["logDir"];
+        //private string logFile = "Exception_{0}_{1}_{2}.txt";
+        //private string logFilePath;
 
-        private static void LogWrite(string message)
+        private Logger()
         {
+            //if (String.IsNullOrEmpty(logDir))
+            //    logDir = @"c:\log";
+
+            //if (!Directory.Exists(logDir))
+            //    Directory.CreateDirectory(logDir);
+
+            //logFilePath = String.Format(Path.Combine(logDir, logFile), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+        }
+
+        private void LogWrite(string message)
+        {
+
             var exception = new Exception(message);
-            Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(exception));
+            //  ErrorLog errorLog = ErrorLog.GetDefault(null);
+            //  errorLog.ApplicationName = "EmailScheduler";
+            //  errorLog.Log(new Error(exception));
+
+
+
+            //using (var fs = new FileStream(logFilePath, FileMode.Append))
+            //{
+            //    byte[] buffer = Encoding.UTF8.GetBytes(message);
+            //    fs.Write(buffer, 0, buffer.Length);
+            //}
         }
 
         public static void Log(string message)
         {
-            var sb = new StringBuilder();
-            sb.AppendLine();
-            sb.AppendLine();
-            sb.AppendFormat("===============Event Occuurred at {0}===================", DateTime.Now.ToShortTimeString());
-            sb.AppendLine();
-            sb.AppendLine();
-            sb.Append(message);
-            sb.AppendLine();
-            sb.AppendLine();
-            sb.AppendLine("=======================================================");
-            Logger.LogWrite(sb.ToString());
+            new Logger().LogWrite(message);
         }
 
         public static void Log(Exception ex)
         {
-            try
-            {
-                Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(ex));
-            }
-            catch (Exception x)
-            {
-                //continue
-            }
+            // ErrorLog errorLog = ErrorLog.GetDefault(null);
+            // errorLog.ApplicationName = "EmailScheduler";
+            // errorLog.Log(new Error(ex));
+
+            //var sb = new StringBuilder();
+            //sb.AppendFormat("===============Exception Occuurred at {0}===================", DateTime.Now.ToShortTimeString());
+            //sb.AppendLine();
+            //sb.AppendLine();
+
+            //sb.Append("Message");
+            //sb.AppendLine();
+            //sb.AppendLine("-----------");
+            //sb.AppendLine();
+            //sb.Append(ex.Message);
+
+            //sb.AppendLine();
+            //sb.AppendLine();
+
+
+            //sb.Append("StackTrace");
+            //sb.AppendLine();
+            //sb.AppendLine("-----------");
+            //sb.AppendLine();
+            //sb.Append(ex.StackTrace);
+            //sb.AppendLine();
+            //sb.AppendLine();
+
+            //sb.Append("===============End===================");
+
+            //new Logger().LogWrite(sb.ToString());
         }
     }
 }
