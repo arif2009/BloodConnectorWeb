@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Text;
-using System.Web;
 
 namespace BloodConnector.Shared.Log
 {
     public class Logger
     {
-        //private readonly string logDir = ConfigurationManager.AppSettings["logDir"];
+        private readonly string _logDir = System.Configuration.ConfigurationManager.AppSettings["logDir"];
         //private string logFile = "Exception_{0}_{1}_{2}.txt";
         //private string logFilePath;
 
         private Logger()
         {
-            //if (String.IsNullOrEmpty(logDir))
-            //    logDir = @"c:\log";
+            //if (String.IsNullOrEmpty(_logDir))
+            //    _logDir = @"c:\log";
 
-            //if (!Directory.Exists(logDir))
-            //    Directory.CreateDirectory(logDir);
+            //if (!Directory.Exists(_logDir))
+            //    Directory.CreateDirectory(_logDir);
 
-            //logFilePath = String.Format(Path.Combine(logDir, logFile), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            //logFilePath = String.Format(Path.Combine(_logDir, logFile), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         }
 
         private void LogWrite(string message)
