@@ -6,7 +6,7 @@ namespace BloodConnector.Shared.Log
 {
     public class Logger
     {
-        private readonly string _logDir = @"\";
+        private readonly string _logDir = System.Web.HttpContext.Current.Server.MapPath("~/Log");
         private string logFile = "Exception_{0}_{1}_{2}.txt";
         private string logFilePath;
 
@@ -29,7 +29,15 @@ namespace BloodConnector.Shared.Log
 
         public static void Log(string message)
         {
-            new Logger().LogWrite(message);
+            var sb = new StringBuilder();
+            sb.Append("===========Start===============");
+            sb.AppendLine();
+            sb.Append(message);
+            sb.AppendLine();
+            sb.Append("============End==============");
+            sb.AppendLine();
+            sb.AppendLine();
+            new Logger().LogWrite(sb.ToString());
         }
 
         public static void Log(Exception ex)
