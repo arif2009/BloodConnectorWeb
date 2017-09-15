@@ -6,28 +6,30 @@ namespace BloodConnector.Shared.Log
 {
     public class Logger
     {
-        private readonly string _logDir = System.Web.HttpContext.Current.Server.MapPath("~/Log");
-        private string logFile = "Exception_{0}_{1}_{2}.txt";
-        private string logFilePath;
+        private readonly string _logDir;
+        private readonly string _logFile = "Exception_{0}_{1}_{2}.txt";
+        private readonly string _logFilePath;
 
-        private Logger()
+        public Logger(string logDir)
         {
+            _logDir = logDir;
+
             if (!Directory.Exists(_logDir))
                 Directory.CreateDirectory(_logDir);
 
-            logFilePath = String.Format(Path.Combine(_logDir, logFile), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            _logFilePath = string.Format(Path.Combine(_logDir, _logFile), DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         }
 
         private void LogWrite(string message)
         {
-            using (var fs = new FileStream(logFilePath, FileMode.Append))
+            using (var fs = new FileStream(_logFilePath, FileMode.Append))
             {
                 byte[] buffer = Encoding.UTF8.GetBytes(message);
                 fs.Write(buffer, 0, buffer.Length);
             }
         }
 
-        public static void Log(string message)
+        public void Log(string message)
         {
             var sb = new StringBuilder();
             sb.Append("===========Start===============");
@@ -37,10 +39,10 @@ namespace BloodConnector.Shared.Log
             sb.Append("============End==============");
             sb.AppendLine();
             sb.AppendLine();
-            new Logger().LogWrite(sb.ToString());
+            this.LogWrite(sb.ToString());
         }
 
-        public static void Log(Exception ex)
+        public void Log(Exception ex)
         {
 
             var sb = new StringBuilder();
@@ -68,7 +70,7 @@ namespace BloodConnector.Shared.Log
 
             sb.Append("===============End===================");
 
-            new Logger().LogWrite(sb.ToString());
+            this.LogWrite(sb.ToString());
         }
     }
 }

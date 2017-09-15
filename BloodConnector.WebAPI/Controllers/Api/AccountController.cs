@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
@@ -35,10 +36,12 @@ namespace BloodConnector.WebAPI.Controllers.Api
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
         private ApplicationSignInManager _signInManager;
+        private readonly Logger _logger;
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
         public AccountController()
         {
+            _logger = new Logger(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["logDir"]));
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -104,7 +107,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
             }
             catch (Exception ex)
             {
-                Logger.Log(ex);
+                _logger.Log(ex);
                 return FailedResult<RegisterExternalBindingModel>(model, m => m.Email, "[[[Network Error !]]]");
             }
             
