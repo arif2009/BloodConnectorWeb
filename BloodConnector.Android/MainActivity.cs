@@ -21,7 +21,9 @@ namespace BloodConnector.Android
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
+            _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
+            // Init toolbar
             _toolbar = FindViewById<V7Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(_toolbar);
             SupportActionBar.Title = Const.APP_TITLE;
@@ -30,16 +32,12 @@ namespace BloodConnector.Android
             SupportActionBar.SetHomeButtonEnabled(true);
             SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu);
 
-            _drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            // Attach item selected handler to navigation view
             _navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            _navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
 
-            _drawerToggle = new MyActionBarDrawerToggle(
-                this,                           //Host Activity
-                _drawerLayout,                  //DrawerLayout
-                Resource.String.openDrawer,     //Opened Message
-                Resource.String.closeDrawer     //Closed Message
-            );
-
+            //Create ActionBarDrawerToggle button and add it to the toolbar
+            _drawerToggle = new MyActionBarDrawerToggle(this,  _drawerLayout, Resource.String.openDrawer, Resource.String.closeDrawer); //Host Activity,DrawerLayout, Opened Message, Closed Message
             _drawerLayout.SetDrawerListener(_drawerToggle);
             _drawerToggle.SyncState();
         }
@@ -50,12 +48,22 @@ namespace BloodConnector.Android
             return base.OnOptionsItemSelected(item);
         }
 
-        void setupDrawerContent(NavigationView navigationView)
+        void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
-            navigationView.NavigationItemSelected += (sender, e) => {
-                e.MenuItem.SetChecked(true);
-                _drawerLayout.CloseDrawers();
-            };
+            e.MenuItem.SetChecked(true);
+
+            switch (e.MenuItem.ItemId)
+            {
+                case (Resource.Id.nav_home):
+                    Toast.MakeText(this, "Home selected!", ToastLength.Short).Show();
+                    break;
+                case (Resource.Id.nav_messages):
+                    Toast.MakeText(this, "Message selected!", ToastLength.Short).Show();
+                    break;
+            }
+
+            // Close drawer
+            _drawerLayout.CloseDrawers();
         }
     }
 }
