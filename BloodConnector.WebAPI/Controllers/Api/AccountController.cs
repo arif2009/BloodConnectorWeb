@@ -82,7 +82,6 @@ namespace BloodConnector.WebAPI.Controllers.Api
 
         private async Task<ServiceResult<RegisterExternalBindingModel>> ForgotPassword(RegisterExternalBindingModel model, string callbackUrl)
         {
-            Logger.Log("Start ForgotPassword");
             Contract.Assert(!string.IsNullOrEmpty(callbackUrl), "The 'callbackUrl' cannot be null or empty");
 
             var user = await UserManager.FindByEmailAsync(model.Email);
@@ -90,19 +89,25 @@ namespace BloodConnector.WebAPI.Controllers.Api
             {
                 return FailedResult<RegisterExternalBindingModel>(model, m => m.Email, "[[[Invalid user]]]");
             }
-            Logger.Log("ForgotPassword - 1");
+
             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
             // Send an email with this link
             string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
             string queryString = $"?code={HttpUtility.UrlEncode(code)}&Email={HttpUtility.UrlEncode(user.Email)}";
 
             var url = callbackUrl + queryString;
-            Logger.Log("ForgotPassword - 2");
             var subject = "Reset your BloodConnector password";
             var body = GetResetBody(url);
-            Logger.Log("ForgotPassword - 3");
-            await UserManager.SendEmailAsync(user.Id, subject, body);
-            Logger.Log("End ForgotPassword");
+            try
+            {
+                await UserManager.SendEmailAsync(user.Id, subject, body);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+                return FailedResult<RegisterExternalBindingModel>(model, m => m.Email, "[[[Network Error !]]]");
+            }
+            
             return SuccessResult<RegisterExternalBindingModel>(model);
         }
         private async Task<ServiceResult<ResetPasswordViewModel>> ChangePassword(ResetPasswordViewModel model)
@@ -151,10 +156,8 @@ namespace BloodConnector.WebAPI.Controllers.Api
         [Route("passwordrecoverybyemail")]
         public async Task<IHttpActionResult> PasswordRecoveryByEmail(RegisterExternalBindingModel model)
         {
-            Logger.Log("Start passwordrecoverybyemail");
             var urlTemplate = Url.Link("Account", new { controller = "Account", action = "ResetPassword" });
             var result = await this.ForgotPassword(model, urlTemplate);
-            Logger.Log("End passwordrecoverybyemail");
             if (result.Success)
             {
                 return Ok<RegisterExternalBindingModel>(model);
