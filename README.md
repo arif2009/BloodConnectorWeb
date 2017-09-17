@@ -18,10 +18,10 @@ Cloning the repository:
 
 ```bash
 # HTTPS clone URL
-$ https://Arif2009@bitbucket.org/Arif2009/bloodconnector.git
+$ https://github.com/arif2009/BloodConnectorWebApp.git
 
 # SSH clone URL
-$ git@bitbucket.org:Arif2009/bloodconnector.git
+$ git@github.com:arif2009/BloodConnectorWebApp.git
 ```
 
 You need to have [Git](https://git-scm.com/) installed on your machine before running the followings:
