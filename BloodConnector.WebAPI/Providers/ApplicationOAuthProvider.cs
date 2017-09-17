@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using BloodConnector.WebAPI.Helper;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -28,11 +30,17 @@ namespace BloodConnector.WebAPI.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            if (string.IsNullOrEmpty(context.UserName) || string.IsNullOrEmpty(context.Password))
+            {
+                context.SetError("invalid_grant", "The e-mail or password can't be empty.");
+                return;
+            }
+
+            User user = await userManager.FindAsync(context.UserName, context.Password);
             if (user == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                context.SetError("invalid_grant", "The e-mail or password is incorrect.");
                 return;
             }
 
@@ -41,7 +49,7 @@ namespace BloodConnector.WebAPI.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
+            AuthenticationProperties properties = CreateProperties(user);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -83,11 +91,11 @@ namespace BloodConnector.WebAPI.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(User user)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "userName", ProjectHelper.GetUserName(user.FirstName, user.LastName, user.NikeName, user.Email) }
             };
             return new AuthenticationProperties(data);
         }

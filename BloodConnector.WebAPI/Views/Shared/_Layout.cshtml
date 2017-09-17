@@ -1,41 +1,68 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using System.Configuration
+@{
+    var version = ConfigurationManager.AppSettings["WebCruiter.Version"];
+}
+<!DOCTYPE html>
+<html data-ng-app="BloodConnectorApp">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Blood Connector, Blood donor, Blood, BloodConnector, Save the life" />
+    <meta name="description" content="Blood Connector in all over the world, Bangladeshi blood donor" />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <title>Blood Connector</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top navbar-custom" role="navigation" data-ng-controller="indexController as vm">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <span class="navbar-brand">
+                    <i class="fa fa-tint fa-lg" aria-hidden="true"></i>
+                </span>
+                <button type="button" class="btn btn-success navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" ng-class="{'selected-menu': vm.active.home}" ng-click="vm.changeSelectedClass('home')" href="/">Home</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li data-ng-hide="!vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.welcome}" ng-click="vm.changeSelectedClass('welcome')" href="#!">Welcome To <span class="to-upper-case" ng-bind="vm.authentication.userName"></span></a></li>
+                    <li data-ng-hide="!vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.user}" ng-click="vm.changeSelectedClass('user')" href="#!users">Donor's</a></li>
+                    <li data-ng-hide="!vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.logout}" ng-click="vm.changeSelectedClass('logout'); vm.logOut()" href="javascript:void(0);">LogOut</a></li>
+                    <li data-ng-hide="vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.login}" ng-click="vm.changeSelectedClass('login')" href="#!login">LogIn</a></li>
+                    <li data-ng-hide="vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.signup}" ng-click="vm.changeSelectedClass('signup')" href="#!signup">SignUp</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+
+    <hr class="transparent-border"/>
+
+    <div class="container">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
+    <hr class="transparent-border"/>
+
+    <footer>
+        <div class="container">
+            <p class="pull-right mt10">&copy; @DateTime.Now.Year - BloodConnector&nbsp;@version</p>
+        </div>
+    </footer>
+
+    <!-- 3rd party libraries -->
+
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/utility")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angularJs")
+    @Scripts.Render("~/bundles/angularComponents")
+    @Scripts.Render("~/bundles/angularScripts")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

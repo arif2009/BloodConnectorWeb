@@ -7,31 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodConnector.WebAPI", "Bl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodConnector.WebAPI.Tests", "BloodConnector.WebAPI.Tests\BloodConnector.WebAPI.Tests.csproj", "{53ACA872-7F8E-40FE-93C3-3F21C500AD51}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BloodConnector.Web", "BloodConnector.Web\", "{7732B375-4ED5-499A-AE99-882747E792CB}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_14717"
-		Debug.AspNetCompiler.PhysicalPath = "BloodConnector.Web\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_14717\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_14717"
-		Release.AspNetCompiler.PhysicalPath = "BloodConnector.Web\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_14717\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "14717"
-		SlnRelativePath = "BloodConnector.Web\"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodConnector.MvcWeb", "BloodConnector.MvcWeb\BloodConnector.MvcWeb.csproj", "{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodConnector.MvcWeb.Tests", "BloodConnector.MvcWeb.Tests\BloodConnector.MvcWeb.Tests.csproj", "{5874E469-0874-414B-8AFA-8033CA57DAFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodConnector.Shared", "BloodConnector.Shared\BloodConnector.Shared.csproj", "{B692087C-9DF8-46BD-87CA-0805119827DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,18 +23,10 @@ Global
 		{53ACA872-7F8E-40FE-93C3-3F21C500AD51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53ACA872-7F8E-40FE-93C3-3F21C500AD51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53ACA872-7F8E-40FE-93C3-3F21C500AD51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7732B375-4ED5-499A-AE99-882747E792CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7732B375-4ED5-499A-AE99-882747E792CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7732B375-4ED5-499A-AE99-882747E792CB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{7732B375-4ED5-499A-AE99-882747E792CB}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6935263D-5F84-46C3-9DE6-B5E0FF16A27A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5874E469-0874-414B-8AFA-8033CA57DAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5874E469-0874-414B-8AFA-8033CA57DAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5874E469-0874-414B-8AFA-8033CA57DAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5874E469-0874-414B-8AFA-8033CA57DAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B692087C-9DF8-46BD-87CA-0805119827DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B692087C-9DF8-46BD-87CA-0805119827DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B692087C-9DF8-46BD-87CA-0805119827DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B692087C-9DF8-46BD-87CA-0805119827DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

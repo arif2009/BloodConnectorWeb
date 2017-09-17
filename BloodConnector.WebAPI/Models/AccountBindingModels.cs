@@ -1,6 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations;
+using BloodConnector.WebAPI.Utilities;
 
 namespace BloodConnector.WebAPI.Models
 {
@@ -34,10 +33,32 @@ namespace BloodConnector.WebAPI.Models
 
     public class RegisterBindingModel
     {
+        [StringLength(10, ErrorMessage = "{0} too long.")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [StringLength(10, ErrorMessage = "{0} too long.")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [StringLength(10, ErrorMessage = "{0} too long.")]
+        [Display(Name = "Display Name")]
+        public string NikeName { get; set; }
+
         [Required]
         [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Blood Group")]
+        [Range(1, 8, ErrorMessage = "The {0} field is required.")]
+        public int BloodGroupId { get; set; }
+
+        [Required]
+        [Display(Name = "Contact Number")]
+        [RegularExpression(@"^([0-9\(\)\/\+ \-]{5,15})$", ErrorMessage = "Not a valid Contact Number.")]
+        public string PhoneNumber { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -54,8 +75,24 @@ namespace BloodConnector.WebAPI.Models
     public class RegisterExternalBindingModel
     {
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class ResetPasswordViewModel
+    {
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$", ErrorMessage = "{0} must be min 6 characters, at least one letter and one number!")]
+        public string Password { get; set; }
+
+        public string Code { get; set; }
     }
 
     public class RemoveLoginBindingModel

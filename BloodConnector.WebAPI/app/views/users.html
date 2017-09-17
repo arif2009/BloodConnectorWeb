@@ -1,0 +1,57 @@
+﻿<div class="row" data-ng-controller="usersController as vm">
+    <h2>List of our donor's &amp; receiver's</h2>
+    <hr class="colorgraph">
+    <div class="row search mb10">
+        <div class="col-xs-12 col-sm-4 col-md-4"></div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <input type="text" name="firstName" id="firstName" class="form-control"
+                   placeholder="&#xf002; Search your donor"
+                   ng-model="vm.searchText"
+                   autocomplete='off'
+                   tabindex="0"
+                   autofocus/>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4"></div>
+    </div>
+
+    <div class="row search disable-text-selection">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-condensed table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th>Blood Group</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in vm.items | filter: vm.searchText:strict | offset: vm.currentPage*vm.itemsPerPage | limitTo: vm.itemsPerPage">
+                    <td>{{item.name}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.contactNumber}}</td>
+                    <td>{{item.bloodGroup}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation" class="pull-right">
+            <ul class="pagination m0">
+                <li ng-class="vm.prevPageDisabled()">
+                    <a href="javascript:void(0);" ng-click="vm.prevPage()" aria-label="Previous">
+                        <span aria-hidden="true">&laquo; Prev</span>
+                    </a>
+                </li>
+                <li ng-repeat="n in vm.pages" ng-class="{active: n == vm.currentPage}" ng-click="vm.setPage(n)">
+                    <a href="javascript:void(0);">{{n+1}}</a>
+
+                </li>
+                <li ng-class="vm.nextPageDisabled()">
+                    <a href="javascript:void(0);" aria-label="Next" ng-click="vm.nextPage()">
+                        <span aria-hidden="true">Next &raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
