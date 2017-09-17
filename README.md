@@ -1,4 +1,4 @@
-# Blood Connector Web & MobileApp
+# Blood Connector WebApp
 
 # Technologies
 
