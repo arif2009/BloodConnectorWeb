@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BloodConnector.WebAPI;
 using BloodConnector.WebAPI.Controllers;
 
 namespace BloodConnector.WebAPI.Tests.Controllers
