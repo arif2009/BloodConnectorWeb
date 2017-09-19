@@ -29,10 +29,4 @@ You need to have [Git](https://git-scm.com/) installed on your machine before ru
 
 # License
 
-Copyright (C) 2017 BloodConnector Systems, Inc - All Rights Reserved
-
-Unauthorized copying of this file, via any medium is strictly prohibited
-
-Proprietary and confidential
-
-Written by Elmer Fudd <arif.rahman2009@gmail.com>, July 2017
+Copyright (C) 2017 BloodConnector Systems, Inc - All Rights Reserved Unauthorized copying of this file, via any medium is strictly prohibited Proprietary and confidential Written by Elmer Fudd <arif.rahman2009@gmail.com>, July 2017
