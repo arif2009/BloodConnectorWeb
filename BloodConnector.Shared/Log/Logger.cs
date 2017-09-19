@@ -6,14 +6,12 @@ namespace BloodConnector.Shared.Log
 {
     public class Logger
     {
-        private readonly string _logDir;
+        private readonly string _logDir = System.Web.HttpContext.Current.Server.MapPath("~/Log");
         private readonly string _logFile = "Exception_{0}_{1}_{2}.txt";
         private readonly string _logFilePath;
 
-        public Logger(string logDir)
+        private Logger()
         {
-            _logDir = logDir;
-
             if (!Directory.Exists(_logDir))
                 Directory.CreateDirectory(_logDir);
 
@@ -29,7 +27,7 @@ namespace BloodConnector.Shared.Log
             }
         }
 
-        public void Log(string message)
+        public static void Log(string message)
         {
             var sb = new StringBuilder();
             sb.Append("===========Start===============");
@@ -39,10 +37,10 @@ namespace BloodConnector.Shared.Log
             sb.Append("============End==============");
             sb.AppendLine();
             sb.AppendLine();
-            this.LogWrite(sb.ToString());
+            new Logger().LogWrite(sb.ToString());
         }
 
-        public void Log(Exception ex)
+        public static void Log(Exception ex)
         {
 
             var sb = new StringBuilder();
@@ -70,7 +68,7 @@ namespace BloodConnector.Shared.Log
 
             sb.Append("===============End===================");
 
-            this.LogWrite(sb.ToString());
+            new Logger().LogWrite(sb.ToString());
         }
     }
 }
