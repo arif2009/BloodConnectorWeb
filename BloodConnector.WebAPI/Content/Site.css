@@ -314,17 +314,20 @@ div.user-menu div.user-menu-content:not(.active){
 .mb10 {
     margin-bottom: 10px !important;
 }
+.mt5 {
+    margin-top: 5px !important;
+}
+.mb5 {
+    margin-bottom: 5px !important;
+}
 .p0 {
     padding: 0 !important;
 }
-.to-upper-case {
-    text-transform: uppercase;
-}
+
 .search input {
     font-family: 'FontAwesome';
     padding: 6px 12px !important;
 }
-
 .disable-text-selection {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
