@@ -1,8 +1,11 @@
-﻿using System.Net.Http;
+﻿using System.Data.Entity;
+using System.Linq;
+using System.Net.Http;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BloodConnector.WebAPI.Interface;
+using BloodConnector.WebAPI.Models;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace BloodConnector.WebAPI.Controllers.Api
@@ -14,10 +17,12 @@ namespace BloodConnector.WebAPI.Controllers.Api
     {
         private readonly IBloodGroupRepository _bloodGroupRepository;
         private ApplicationUserManager _userManager;
-        public BloodGroupController(IBloodGroupRepository bloodGroupRepository)
+        public ApplicationDbContext Db { get; private set; }
+        public BloodGroupController(IBloodGroupRepository bloodGroupRepository, ApplicationDbContext db)
         {
             //_bloodGroupRepository = new BaseRepository<BloodGroup>();
             _bloodGroupRepository = bloodGroupRepository;
+            Db = db;
         }
 
         public ApplicationUserManager UserManager
@@ -30,6 +35,14 @@ namespace BloodConnector.WebAPI.Controllers.Api
             {
                 _userManager = value;
             }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("test")]
+        public void Test()
+        {
+            var test = Db.Users.Include(u=>u.BloodGroup).GroupBy(g=>g.BloodGroupId).ToList();
         }
 
         [HttpGet]
