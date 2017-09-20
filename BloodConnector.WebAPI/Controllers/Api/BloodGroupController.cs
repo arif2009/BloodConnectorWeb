@@ -48,7 +48,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
             var userGroups = new UsersBloodGroupDto
             {
                 TotalNumberOfUser = groups.Sum(g=>g.Users.Count),
-                Group = groups.Select(g=> new Group
+                Groups = groups.Select(g=> new Group
                 {
                     NumberOfGroupUser = g.Users.Count,
                     GroupSymbole = g.Symbole

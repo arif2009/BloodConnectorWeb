@@ -3,7 +3,7 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
 
     var vm = this;
 
-    vm.itemsPerPage = 5;
+    vm.itemsPerPage = 10;
     vm.currentPage = 0;
     vm.items = [];
 
@@ -20,7 +20,7 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
     };
 
     vm.range = function () {
-        var rangeSize = 5;
+        var rangeSize = vm.itemsPerPage;
         var ret = [];
         var start;
 

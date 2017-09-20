@@ -5,8 +5,11 @@
         <div class="col-md-8">
             <img class="img-responsive center-block" src="/Images/blood_logo.jpg"/>
             <hr class="colorgraph mb10" />
-            <h3 class="text-center text-uppercase m0">Our donor list</h3>
+            <h3 class="text-center text-uppercase m0 ng-cloak">Number of donor : {{vm.usersBloodGroup.totalNumberOfUser}}</h3>
             <hr class="colorgraph mt10"/>
+            <div class="list-group">
+                <a ng-repeat="group in vm.usersBloodGroup.groups" ng-show="!!group.numberOfGroupUser" class="list-group-item h4 mt0">{{group.groupSymbole}} <span class="badge">{{group.numberOfGroupUser}}</span></a>
+            </div>
         </div>
         <div class="col-md-2">
             &nbsp;

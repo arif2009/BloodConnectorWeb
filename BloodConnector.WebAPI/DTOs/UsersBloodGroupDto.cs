@@ -8,7 +8,7 @@ namespace BloodConnector.WebAPI.DTOs
     public class UsersBloodGroupDto
     {
         public long TotalNumberOfUser { get; set; }
-        public IEnumerable<Group> Group { get; set; }
+        public IEnumerable<Group> Groups { get; set; }
     }
 
     public class Group
