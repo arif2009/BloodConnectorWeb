@@ -44,8 +44,8 @@ app.config(function ($routeProvider) {
 
 var serviceBase = '/';
 var rootURL = 'http://localhost:14290/';
-//var siteURL = 'http://www.bloodconnector.org/';
-//var siteURL = 'http://local.bloodconnector.org';
+//var rootURL = 'http://www.bloodconnector.org/';
+//var rootURL = 'http://local.bloodconnector.org';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     rootURL: rootURL,
