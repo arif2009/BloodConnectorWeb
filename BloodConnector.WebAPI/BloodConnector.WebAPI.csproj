@@ -302,6 +302,7 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexController.js" />
     <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\controllers\profileController.js" />
     <Content Include="app\controllers\sentmailController.js" />
     <Content Include="app\controllers\usersController.js" />
     <Content Include="app\controllers\signupController.js" />
@@ -316,6 +317,7 @@
     <Content Include="app\views\forgot.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\login.html" />
+    <Content Include="app\views\profile.html" />
     <Content Include="app\views\sentmail.html" />
     <Content Include="app\views\users.html" />
     <Content Include="app\views\signup.html" />

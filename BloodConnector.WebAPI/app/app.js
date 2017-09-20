@@ -8,6 +8,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/home.html"
     });
 
+    $routeProvider.when("/profile", {
+        controller: "profileController",
+        templateUrl: "/app/views/profile.html"
+    });
+
     $routeProvider.when("/login", {
         controller: "loginController",
         templateUrl: "/app/views/login.html"
