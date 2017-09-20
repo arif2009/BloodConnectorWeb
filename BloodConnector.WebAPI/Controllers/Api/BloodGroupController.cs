@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Http;
+using BloodConnector.WebAPI.DTOs;
 using BloodConnector.WebAPI.Interface;
 using BloodConnector.WebAPI.Models;
 using Microsoft.AspNet.Identity.Owin;
@@ -11,7 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 namespace BloodConnector.WebAPI.Controllers.Api
 {
     [Authorize]
-    [RoutePrefix("api/BloodGroup")]
+    [RoutePrefix("api/bloodgroup")]
     //[EnableCors("http://localhost:14717,http://localhost:2102", "*", "*")]
     public class BloodGroupController: ApiController
     {
@@ -39,10 +40,22 @@ namespace BloodConnector.WebAPI.Controllers.Api
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("test")]
-        public void Test()
+        [Route("getusersbloodgroup")]
+        public IHttpActionResult GetUsersBloodGroup()
         {
-            var test = Db.Users.Include(u=>u.BloodGroup).GroupBy(g=>g.BloodGroupId).ToList();
+            var groups = Db.BloodGroup.Include(u=>u.Users).ToList();
+
+            var userGroups = new UsersBloodGroupDto
+            {
+                TotalNumberOfUser = groups.Sum(g=>g.Users.Count),
+                Group = groups.Select(g=> new Group
+                {
+                    NumberOfGroupUser = g.Users.Count,
+                    GroupSymbole = g.Symbole
+                })
+            };
+
+            return Ok(userGroups);
         }
 
         [HttpGet]
