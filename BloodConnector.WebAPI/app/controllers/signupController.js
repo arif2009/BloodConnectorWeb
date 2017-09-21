@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('signupController', ['authService', 'dataService', 'utilsFactory', function (authService, dataService, utilsFactory) {
+app.controller('signupController', ['authService', 'dataService', 'utilsFactory', 'toaster', function (authService, dataService, utilsFactory, toaster) {
     var vm = this;
     vm.savedSuccessfully = false;
     vm.messages = [];
@@ -25,8 +25,18 @@ app.controller('signupController', ['authService', 'dataService', 'utilsFactory'
 
         authService.saveRegistration(vm.registration).then(function (response) {
             vm.savedSuccessfully = true;
-            vm.messages = ["User has been registered successfully, you will be redicted to login page in 2 seconds."];
-            utilsFactory.redirectToLogin();
+            toaster.pop({
+                type: 'success',
+                closeButton: true,
+                body: 'Congratulation. You are joined successfully with us !!',
+                timeout: 10000,
+                onShowCallback: function () {
+                    var loginData = { email: vm.registration.email, password: vm.registration.password };
+                    authService.login(loginData).then(function (response) {
+                        utilsFactory.redirectToUsers();
+                    });
+                }
+            });
           },
          function (response) {
              We.scroll(0);

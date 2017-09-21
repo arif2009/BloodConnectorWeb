@@ -16,6 +16,9 @@ app.factory('utilsFactory', ['$location', '$timeout', function ($location, $time
                 $location.path('/login');
             }, 2000);
         },
+        redirectToUsers : function() {
+            $location.path('/users');
+        },
         getWhere: function (array, field, value) {
 
             for (var i = 0; i < array.length; i++) {
