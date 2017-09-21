@@ -32,7 +32,7 @@ namespace BloodConnector.WebAPI
                         "~/Scripts/angular-route.min.js",
                         "~/Scripts/angular-route.min.js",
                         "~/Scripts/angular-local-storage.min.js",
-                        "~/Scripts/loading-bar.min.js"));
+                        "~/Scripts/angular-block-ui.min.js"));
 
             var angularScripts = new ScriptBundle("~/bundles/angularScripts").Include(
                 // main app script
@@ -65,7 +65,7 @@ namespace BloodConnector.WebAPI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/loading-bar.min.css",
+                      "~/Content/angular-block-ui.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/site.css"));
 

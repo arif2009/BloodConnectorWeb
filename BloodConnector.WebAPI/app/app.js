@@ -1,5 +1,5 @@
 ﻿
-var app = angular.module('BloodConnectorApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
+var app = angular.module('BloodConnectorApp', ['ngRoute', 'LocalStorageModule', 'blockUI']);
 
 app.config(function ($routeProvider) {
 
