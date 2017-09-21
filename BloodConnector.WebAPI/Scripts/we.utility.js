@@ -1,4 +1,5 @@
-﻿(function(We, $, undefined) {
+﻿'use strict';
+(function (We, $, undefined) {
     We.scroll = function (position) {
         if (position != undefined) {
             $(window).scrollTop(position);
