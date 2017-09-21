@@ -52,6 +52,11 @@ app.constant('ngAuthSettings', {
     clientId: 'ngAuthApp'
 });
 
+app.config(function (blockUIConfig) {
+    // Change the default delay to 100ms before the blocking is visible
+    //blockUIConfig.delay = 100;
+});
+
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
