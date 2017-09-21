@@ -32,6 +32,7 @@ namespace BloodConnector.WebAPI
                         "~/Scripts/angular-route.min.js",
                         "~/Scripts/angular-route.min.js",
                         "~/Scripts/angular-local-storage.min.js",
+                        "~/Scripts/toaster.min.js",
                         "~/Scripts/angular-block-ui.min.js"));
 
             var angularScripts = new ScriptBundle("~/bundles/angularScripts").Include(
@@ -67,6 +68,7 @@ namespace BloodConnector.WebAPI
                       "~/Content/bootstrap.min.css",
                       "~/Content/angular-block-ui.min.css",
                       "~/Content/font-awesome.min.css",
+                      "~/Content/toaster.min.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
