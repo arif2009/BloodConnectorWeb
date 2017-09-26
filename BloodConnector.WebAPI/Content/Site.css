@@ -13,13 +13,33 @@ body {
 }
 
 
-
+/*START : Footer*/
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: #f5f5f5;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    padding: 10px 0;
+    color:#dec9c9;
 }
+
+footer a {
+    color:#dec9c9!important;
+    font-size: 20px;
+    padding: 10px;
+    border-right: 1px solid #fff;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+footer a:first-child {
+    border-left: 1px solid #fff;
+}
+
+footer a:hover {
+    color: #fff!important;
+}
+/*END : Footer*/
 
 /*START : Customize navbar*/
 .navbar-custom {
