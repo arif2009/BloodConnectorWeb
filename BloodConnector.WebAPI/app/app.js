@@ -43,8 +43,8 @@ app.config(function ($routeProvider) {
 });
 
 var serviceBase = '/';
-var rootURL = 'http://localhost:14290/';
-//var rootURL = 'http://www.bloodconnector.org/';
+//var rootURL = 'http://localhost:14290/';
+var rootURL = 'http://www.bloodconnector.org/';
 //var rootURL = 'http://local.bloodconnector.org';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
@@ -52,10 +52,10 @@ app.constant('ngAuthSettings', {
     clientId: 'ngAuthApp'
 });
 
-app.config(function (blockUIConfig) {
+/*app.config(function (blockUIConfig) {
     // Change the default delay to 100ms before the blocking is visible
     //blockUIConfig.delay = 100;
-});
+});*/
 
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
