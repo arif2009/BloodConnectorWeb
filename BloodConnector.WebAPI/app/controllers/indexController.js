@@ -10,7 +10,8 @@ app.controller('indexController', ['$scope', '$location', 'authService', 'ngAuth
             "user": false,
             "logout": false,
             "login": false,
-            "signup":false
+            "signup": false,
+            "about":false
         };
     };
 

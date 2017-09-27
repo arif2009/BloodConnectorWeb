@@ -355,7 +355,7 @@ div.user-menu div.user-menu-content:not(.active){
     user-select: none;
 }
 
-/* -- media query for user profile image -- */
+/* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
     .user-image {
         max-height: 400px;

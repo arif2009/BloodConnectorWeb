@@ -38,6 +38,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/users.html"
     });
 
+    $routeProvider.when("/about", {
+        controller: "aboutController",
+        templateUrl: "/app/views/about.html"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
