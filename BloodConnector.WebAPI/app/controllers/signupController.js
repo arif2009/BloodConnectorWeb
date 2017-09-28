@@ -12,7 +12,8 @@ app.controller('signupController', ['authService', 'dataService', 'utilsFactory'
         phoneNumber: "",
         bloodGroupId: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        termsAndCondition: 0
     };
 
     vm.$onInit = function () {
