@@ -110,6 +110,14 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input id="chkCondition" name="chkCondition" type="checkbox" ng-model="vm.registration.termsAndCondition" ng-false-value="0" required /> I accept &nbsp;
+                    </label>
+                    <a data-toggle="modal" class="pointer-cursor" data-target="#myModal">this terms and conditions</a>
+                </div>
+            </div>
             <button class="btn btn-lg btn-danger btn-block" type="button" data-ng-click="vm.signUp()" ng-disabled="signupForm.$invalid">Submit</button>
         </form>
     </div>

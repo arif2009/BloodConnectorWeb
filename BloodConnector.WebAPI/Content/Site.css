@@ -355,6 +355,10 @@ div.user-menu div.user-menu-content:not(.active){
     user-select: none;
 }
 
+.pointer-cursor {
+    cursor: pointer;
+}
+
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
     .user-image {
