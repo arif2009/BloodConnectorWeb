@@ -366,6 +366,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Images\blood_logo.jpg" />
+    <Content Include="Images\noimage.jpg" />
     <Content Include="Scripts\angular-block-ui.js" />
     <Content Include="Scripts\angular-block-ui.min.js" />
     <Content Include="Scripts\angular-local-storage.js" />

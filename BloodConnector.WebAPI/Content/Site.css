@@ -363,7 +363,82 @@ div.user-menu div.user-menu-content:not(.active){
     color: #00ff7f;
 }
 
+/*Start : Profile image*/
+.profile-image-button:hover .upload-img {
+    display: block;
+}
+
+.profile-image-button {
+    height: 150px;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    background-image: url('/Images/noimage.jpg');
+    background-repeat: no-repeat;
+    -moz-min-width: 100px;
+    -ms-min-width: 100px;
+    -o-min-width: 100px;
+    -webkit-min-width: 100px;
+    min-width: 100px;
+    -ms-background-size: cover;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    direction: ltr;
+}
+
+.upload-img {
+    position: absolute!important;
+    width: 100%;
+    height: 44px;
+    bottom: 0!important;
+    left: 0;
+    z-index: 999!important;
+    opacity: .6!important;
+    display: none;
+    border: none;
+    overflow: visible;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    font-size: 13px;
+    background: #000;
+    font-weight: bold;
+}
+
+.table-user-information > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+}
+
+.toppad{
+    margin-top:20px;
+}
+
+/*End : Profile image*/
+
 /* Landscape phone to portrait tablet */
+@media (min-width: 1200px) {
+    .col-lg-3 {
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-3 {
+    }
+}
+
+@media (min-width: 768px) {
+    .col-sm-3 {
+    }
+}
+
 @media (max-width: 767px) {
     .user-image {
         max-height: 400px;
