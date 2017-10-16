@@ -14,16 +14,19 @@ namespace BloodConnector.WebAPI.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NikeName { get; set; }
-        public string Name => ProjectHelper.GetUserName(FirstName, LastName, NikeName, Email);
+        public string Name => ProjectHelper.GetUserName(FirstName, LastName, NikeName);
         public string UserName { get; set; }
         public string Email { get; set; }
+        public int BloodGroupId { get; set; }
         public string BloodGroup { get; set; }
         public string ContactNumber { get; set; }
+        public string AlternativeContactNo { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string BirthDate => DateOfBirth?.ToShortDateString();
         public string Address { get; set; }
         public string PostCode { get; set; }
         public string City { get; set; }
+        public int CountryId { get; set; }
         public string Country { get; set; }
         public Enums.GenderType? Gender { get; set; }
         public string GenderName

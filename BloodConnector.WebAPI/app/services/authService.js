@@ -6,6 +6,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _authentication = {
         isAuth: false,
+        userId:"",
         userName: "",
         useRefreshTokens: false,
         token:""
@@ -36,11 +37,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         var onUserComplete = function (response) {
             localStorageService.set('authorizationData', {
                 token: response.data.access_token,
+                userId: response.data.userId,
                 userName: response.data.userName,
                 refreshToken: "",
                 useRefreshTokens: false
             });
             _authentication.isAuth = true;
+            _authentication.userId = response.data.userId,
             _authentication.userName = response.data.userName,
             _authentication.token = response.data.access_token;
 
@@ -65,6 +68,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         localStorageService.remove('authorizationData');
 
         _authentication.isAuth = false;
+        _authentication.userId = "",
         _authentication.userName = "";
         _authentication.useRefreshTokens = false;
 
@@ -81,6 +85,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             _authentication.isAuth = true;
+            _authentication.userId = authData.userId;
             _authentication.userName = authData.userName;
             _authentication.useRefreshTokens = authData.useRefreshTokens;
         }
@@ -102,7 +107,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                 $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+                    localStorageService.set('authorizationData', { token: response.access_token, userId:response.userId, userName: response.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
 
                     deferred.resolve(response);
 
@@ -122,9 +127,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         $http.get(serviceBase + 'api/account/ObtainLocalAccessToken', { params: { provider: externalData.provider, externalAccessToken: externalData.externalAccessToken } }).success(function (response) {
 
-            localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
+            localStorageService.set('authorizationData', { token: response.access_token, userId: response.userId, userName: response.userName, refreshToken: "", useRefreshTokens: false });
 
             _authentication.isAuth = true;
+            _authentication.userId = response.userId;
             _authentication.userName = response.userName;
             _authentication.useRefreshTokens = false;
 
@@ -145,9 +151,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         $http.post(serviceBase + 'api/account/registerexternal', registerExternalData).success(function (response) {
 
-            localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
+            localStorageService.set('authorizationData', { token: response.access_token, userId : response.userId, userName: response.userName, refreshToken: "", useRefreshTokens: false });
 
             _authentication.isAuth = true;
+            _authentication.userId = response.userId;
             _authentication.userName = response.userName;
             _authentication.useRefreshTokens = false;
 

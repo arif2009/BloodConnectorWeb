@@ -20,5 +20,10 @@ namespace BloodConnector.WebAPI.Controllers.Api
         {
             return Ok(_userServices.GetUsers());
         }
+
+        public IHttpActionResult Get(string id)
+        {
+            return Ok(_userServices.GetUserById(id));
+        }
    }
 }

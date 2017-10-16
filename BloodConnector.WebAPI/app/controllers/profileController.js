@@ -1,25 +1,52 @@
 ﻿'use strict';
-app.controller('profileController', ['dataService', function (dataService) {
+app.controller('profileController', ['$scope', 'dataService', 'authService', function ($scope, dataService, authService) {
     var vm = this;
     vm.savedSuccessfully = false;
     vm.editMode = false;
     vm.messages = [];
     vm.bloodGrups = [];
-    vm.registration = {
+    vm.profile = {
+        name: "",
+        userName: "",
         firstName: "",
         lastName: "",
         nikeName: "",
-        email: "",
+        bloodGroupId: "",
+        bloodGroup: "",
         phoneNumber: "",
-        bloodGroupId: ""
+        alternativeContactNo: "",
+        dateOfBirth: "",
+        BirthDate:"",
+        address: "",
+        postCode: "",
+        city: "",
+        country: "",
+        countryId: "",
+        gender: "",
+        genderName: "",
+        religion: "",
+        religionName: "",
+        personalIdentityNum: "",
+        email: "",
+        attachments:""
     };
 
-    vm.toggleEditMode = function() {
-        vm.editMode = !vm.editMode;
+    vm.enableEditMode = function () {
+        vm.editMode = true;
     };
 
     vm.disablEditeMode = function() {
         vm.editMode = false;
+    };
+
+    vm.$onInit = function () {
+        var userId = authService.authentication.userId;
+        dataService.getUserById(userId).then(function (result) {
+            var userData = result.data;
+            Object.keys(vm.profile).forEach(function (key) {
+                vm.profile[key] = userData[key];
+            });
+        });
     };
 
     vm.populateBloodGroup = function () {

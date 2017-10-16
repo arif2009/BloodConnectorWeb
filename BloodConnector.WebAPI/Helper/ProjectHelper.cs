@@ -9,11 +9,11 @@ namespace BloodConnector.WebAPI.Helper
 {
     public class ProjectHelper
     {
-        public static string GetUserName(string fName, string lName, string nName, string email)
+        public static string GetUserName(string fName, string lName, string nName)
         {
             var fullName = $"{fName} {lName}".Trim();
 
-            return string.IsNullOrEmpty(nName) ? (string.IsNullOrEmpty(fullName) ? email : fullName) : nName;
+            return string.IsNullOrEmpty(nName) ?  fullName : nName;
         }
 
         public static string GetName<TObject>(Expression<Func<TObject, object>> propertyRefExpr)

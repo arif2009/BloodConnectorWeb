@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('indexController', ['$scope', '$location', 'authService', 'ngAuthSettings', function ($scope, $location, authService, ngAuthSettings) {
+app.controller('indexController', ['$location', 'authService', 'ngAuthSettings', function ($location, authService, ngAuthSettings) {
 
     var vm = this;
     vm.baseURI = ngAuthSettings.apiServiceBaseUri;

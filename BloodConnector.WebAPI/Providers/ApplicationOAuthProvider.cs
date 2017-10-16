@@ -95,7 +95,9 @@ namespace BloodConnector.WebAPI.Providers
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", ProjectHelper.GetUserName(user.FirstName, user.LastName, user.NikeName, user.Email) }
+                {"userId", user.UserId.ToString().Encrypt()},
+                {"userName", ProjectHelper.GetUserName(user.FirstName, user.LastName, user.NikeName)},
+                {"email", user.Email }
             };
             return new AuthenticationProperties(data);
         }
