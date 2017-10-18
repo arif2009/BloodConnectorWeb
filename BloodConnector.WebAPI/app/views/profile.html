@@ -22,76 +22,149 @@
                         <img class="img-circle img-responsive">
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <table class="table table-user-information">
-                            <tbody>
+                        <form class="form-profile" role="form" novalidate name="profileForm">
+                            <table class="table table-user-information">
+                                <tbody>
                                 <tr>
-                                    <td>Name:</td>
+                                    <td class="h4">Name</td>
                                     <td ng-if="!vm.editMode" ng-bind="vm.profile.name"></td>
                                     <td ng-if="vm.editMode">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-6 col-md-6">
-                                            <div class="form-group">
-                                                <span class="control-label">First Name :</span>
-                                                <input type="text" name="firstName" id="firstName" class="form-control input-lg"
-                                                       placeholder="First Name"
-                                                       ng-model="vm.registration.firstName"
-                                                       tabindex="0"
-                                                       autofocus/>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <span class="control-label">First Name :</span>
+                                                    <input type="text" name="firstName" id="firstName" class="form-control"
+                                                            placeholder="First Name"
+                                                            ng-model="vm.profile.firstName"
+                                                            tabindex="0"
+                                                            autofocus />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <span class="control-label">Last Name :</span>
+                                                    <input type="text" name="lastName" id="lastName" class="form-control"
+                                                            placeholder="Last Name"
+                                                            ng-model="vm.profile.lastName"
+                                                            tabindex="0" />
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6 col-md-6">
-                                            <div class="form-group">
-                                                <span class="control-label">Last Name :</span>
-                                                <input type="text" name="lastName" id="lastName" class="form-control input-lg"
-                                                       placeholder="Last Name"
-                                                       ng-model="vm.registration.lastName"
-                                                       tabindex="0"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                            <div class="form-group">
-                                                <span class="control-label">Display Name / Nick Name :</span>
-                                                <input type="text" name="nikeName" id="nikeName" class="form-control input-lg"
-                                                       ng-model="vm.registration.nikeName"
-                                                       placeholder="Display Name"
-                                                       tabindex="0" />
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <span class="control-label">Display Name / Nick Name :</span>
+                                                    <input type="text" name="nikeName" id="nikeName" class="form-control"
+                                                            ng-model="vm.profile.nikeName"
+                                                            placeholder="Display Name"
+                                                            tabindex="0" />
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Hire date:</td>
-                                    <td>06/23/2013</td>
+                                    <td class="h4">Mobile Phone</td>
+                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.phoneNumber"></td>
+                                    <td ng-if="vm.editMode">
+                                        <div class="form-group required" ng-class="{'has-error':profileForm.txtPhone.$invalid && profileForm.txtPhone.$dirty}">
+                                            <input type="text" class="form-control" id="txtPhone" name="txtPhone"
+                                                   placeholder="+880XXXXXXXXXX"
+                                                   ng-model="vm.profile.phoneNumber"
+                                                   ng-pattern="/^([0-9\(\)\/\+ \-]{5,15})$/"
+                                                   required/>
+                                            <span class="help-block has-error" ng-if="profileForm.txtPhone.$dirty">
+                                                    <span ng-show="profileForm.txtPhone.$error.required">Required!</span>
+                                                    <span ng-show="profileForm.txtPhone.$error.pattern">Not a valid Contact Number!</span>
+                                                </span>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Date of Birth</td>
-                                    <td>01/24/1988</td>
+                                    <td class="h4">Blood Group</td>
+                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.bloodGroup"></td>
+                                    <td ng-if="vm.editMode">
+                                        <div class="form-group required" ng-class="{'has-error':profileForm.drpBloodGroup.$invalid && profileForm.drpBloodGroup.$dirty}">
+                                            <select class="form-control" id="drpBloodGroup" name="drpBloodGroup" ng-model="vm.profile.bloodGroupId" required>
+                                                <option value="" disabled>Select Blood Group</option>
+                                                <option ng-repeat="bloodGroup in vm.bloodGroups" value="{{bloodGroup.id}}">{{bloodGroup.symbole}}</option>
+                                            </select>
+                                            <span class="help-block has-error" ng-if="profileForm.drpBloodGroup.$dirty">
+                                                <span ng-show="profileForm.drpBloodGroup.$error.required">Required!</span>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="h4">Date of Birth</td>
+                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.dateOfBirth | date:'dd.mm.yy'"></td>
+                                    <td ng-if="vm.editMode">
+                                        <div class="form-group">
+                                            <input type="text" name="dateOfBirth" id="dateOfBirth" class="form-control"
+                                                    ng-model="vm.profile.dateOfBirth"
+                                                    placeholder="dd.mm.yy"
+                                                    tabindex="0" 
+                                                    jqdatepicker />
+                                        </div>
+                                    </td>
                                 </tr>
 
-                                
                                 <tr>
-                                    <td>Gender</td>
-                                    <td>Female</td>
+                                    <td class="h4">Contact Address</td>
+                                    <td ng-if="!vm.editMode"></td>
+                                    <td ng-if="vm.editMode">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <span class="control-label">Address :</span>
+                                                    <input type="text" name="txtAddress" id="txtAddress" class="form-control"
+                                                            ng-model="vm.profile.address"
+                                                            placeholder="Your Address"
+                                                            tabindex="0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <span class="control-label">Postcode :</span>
+                                                    <input type="text" name="txtPostCode" id="txtPostCode" class="form-control"
+                                                            placeholder="Your Postcode"
+                                                            ng-model="vm.profile.postCode"
+                                                            tabindex="0"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <span class="control-label">City :</span>
+                                                    <input type="text" name="txtCity" id="txtCity" class="form-control"
+                                                            placeholder="Your City"
+                                                            ng-model="vm.profile.city"
+                                                            tabindex="0"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Home Address</td>
                                     <td>Kathmandu,Nepal</td>
                                 </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td><a href="mailto:info@support.com">info@support.com</a></td>
-                            </tr>
-                            <tr>
-                            <td>Phone Number</td>
-                            <td>
-                                123-4567-890(Landline)<br><br>555-4567-890(Mobile)
-                            </td>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><a href="mailto:info@support.com">info@support.com</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td>
+                                        123-4567-890(Landline)<br><br>555-4567-890(Mobile)
+                                    </td>
 
-                            </tr>
+                                </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>

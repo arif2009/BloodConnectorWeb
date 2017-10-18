@@ -8,7 +8,8 @@ namespace BloodConnector.WebAPI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-3.1.1.min.js"));
+                        "~/Scripts/jquery-3.1.1.min.js",
+                        "~/Scripts/jquery-ui.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/utility").Include(
                         "~/Scripts/we.utility.js"));
@@ -70,6 +71,7 @@ namespace BloodConnector.WebAPI
                       "~/Content/angular-block-ui.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/toaster.min.css",
+                      "~/Content/jquery-ui.min.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

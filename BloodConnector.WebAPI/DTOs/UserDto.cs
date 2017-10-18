@@ -19,7 +19,8 @@ namespace BloodConnector.WebAPI.DTOs
         public string Email { get; set; }
         public int BloodGroupId { get; set; }
         public string BloodGroup { get; set; }
-        public string ContactNumber { get; set; }
+        public string ContactNumber => PhoneNumber;
+        public string PhoneNumber { get; set; }
         public string AlternativeContactNo { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string BirthDate => DateOfBirth?.ToShortDateString();

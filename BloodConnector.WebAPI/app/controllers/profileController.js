@@ -16,7 +16,6 @@ app.controller('profileController', ['$scope', 'dataService', 'authService', fun
         phoneNumber: "",
         alternativeContactNo: "",
         dateOfBirth: "",
-        BirthDate:"",
         address: "",
         postCode: "",
         city: "",
