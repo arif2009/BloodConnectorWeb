@@ -276,6 +276,10 @@
     <Compile Include="Migrations\201708120753080_InitialMigration.Designer.cs">
       <DependentUpon>201708120753080_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710181821172_AddedColBloodGiven.cs" />
+    <Compile Include="Migrations\201710181821172_AddedColBloodGiven.Designer.cs">
+      <DependentUpon>201710181821172_AddedColBloodGiven.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -449,6 +453,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708120753080_InitialMigration.resx">
       <DependentUpon>201708120753080_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710181821172_AddedColBloodGiven.resx">
+      <DependentUpon>201710181821172_AddedColBloodGiven.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@ app.controller('signupController', ['authService', 'dataService', 'utilsFactory'
         firstName: "",
         lastName: "",
         nikeName: "",
+        bloodGiven: "",
         email: "",
         phoneNumber: "",
         bloodGroupId: "",
@@ -17,7 +18,7 @@ app.controller('signupController', ['authService', 'dataService', 'utilsFactory'
     };
 
     vm.$onInit = function () {
-        dataService.getBloodGroup.then(function(result) {
+        dataService.getBloodGroup().then(function(result) {
             vm.bloodGroups = result.data;
         });
     };

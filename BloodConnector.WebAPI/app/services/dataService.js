@@ -5,9 +5,13 @@ app.factory('dataService', ['$http', 'ngAuthSettings', function ($http, ngAuthSe
 
     var dataService = {};
 
-    dataService.getBloodGroup = $http.get(serviceBase + 'api/bloodgroup');
+    dataService.getBloodGroup = function() {
+        return $http.get(serviceBase + 'api/bloodgroup');
+    }
 
-    dataService.getUsersBloodGroup = $http.get(serviceBase + 'api/bloodgroup/getusersbloodgroup');
+    dataService.getUsersBloodGroup = function() {
+        return $http.get(serviceBase + 'api/bloodgroup/getusersbloodgroup');
+    }
 
     dataService.getUserById = function(id) {
         return $http.get(serviceBase + 'api/users/' + id);

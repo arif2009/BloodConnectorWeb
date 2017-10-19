@@ -4,7 +4,7 @@ app.controller('homeController', ['dataService', function (dataService) {
     vm.usersBloodGroup = [];
 
     vm.$onInit = function () {
-        dataService.getUsersBloodGroup.then(function (result) {
+        dataService.getUsersBloodGroup().then(function (result) {
             vm.usersBloodGroup = result.data;
         });
     };

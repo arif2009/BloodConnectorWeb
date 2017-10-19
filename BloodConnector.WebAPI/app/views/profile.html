@@ -1,4 +1,4 @@
-﻿<div class="row" data-ng-controller="profileController as vm">
+﻿<div class="row ng-cloak" data-ng-controller="profileController as vm" ng-cloak>
     <div class="toppad" ng-class="{'edit-mode': vm.editMode}">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
@@ -34,19 +34,19 @@
                                                 <div class="form-group">
                                                     <span class="control-label">First Name :</span>
                                                     <input type="text" name="firstName" id="firstName" class="form-control"
-                                                            placeholder="First Name"
-                                                            ng-model="vm.profile.firstName"
-                                                            tabindex="0"
-                                                            autofocus />
+                                                           placeholder="First Name"
+                                                           ng-model="vm.profile.firstName"
+                                                           tabindex="0"
+                                                           autofocus/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-6 col-md-6">
                                                 <div class="form-group">
                                                     <span class="control-label">Last Name :</span>
                                                     <input type="text" name="lastName" id="lastName" class="form-control"
-                                                            placeholder="Last Name"
-                                                            ng-model="vm.profile.lastName"
-                                                            tabindex="0" />
+                                                           placeholder="Last Name"
+                                                           ng-model="vm.profile.lastName"
+                                                           tabindex="0"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -55,11 +55,27 @@
                                                 <div class="form-group">
                                                     <span class="control-label">Display Name / Nick Name :</span>
                                                     <input type="text" name="nikeName" id="nikeName" class="form-control"
-                                                            ng-model="vm.profile.nikeName"
-                                                            placeholder="Display Name"
-                                                            tabindex="0" />
+                                                           ng-model="vm.profile.nikeName"
+                                                           placeholder="Display Name"
+                                                           tabindex="0"/>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="h4"># of times given blood</td>
+                                    <td ng-if="!vm.editMode" class="h4 blue"><strong ng-bind="vm.profile.bloodGiven"></strong> {{vm.profile.bloodGiven==0 || vm.profile.bloodGiven==1 ?"time":"times"}}</td>
+                                    <td ng-if="vm.editMode">
+                                        <div class="form-group" ng-class="{'has-error':profileForm.numBloodGiven.$invalid && profileForm.numBloodGiven.$dirty}">
+                                            <input type="number" name="numBloodGiven" id="numBloodGiven" class="form-control input-lg"
+                                                   ng-model="vm.profile.bloodGiven"
+                                                   placeholder="E.g. 5"
+                                                   max="50"
+                                                   tabindex="0" />
+                                            <span class="help-block has-error" ng-if="profileForm.numBloodGiven.$dirty">
+                                                <span ng-show="profileForm.numBloodGiven.$error.max">Too long!</span>
+                                            </span>
                                         </div>
                                     </td>
                                 </tr>
@@ -69,7 +85,7 @@
                                     <td ng-if="vm.editMode">
                                         <div class="form-group required" ng-class="{'has-error':profileForm.txtPhone.$invalid && profileForm.txtPhone.$dirty}">
                                             <input type="text" class="form-control" id="txtPhone" name="txtPhone"
-                                                   placeholder="+880XXXXXXXXXX"
+                                                   placeholder="E.g. +880XXXXXXXXXX"
                                                    ng-model="vm.profile.phoneNumber"
                                                    ng-pattern="/^([0-9\(\)\/\+ \-]{5,15})$/"
                                                    required/>
@@ -82,8 +98,8 @@
                                 </tr>
                                 <tr>
                                     <td class="h4">Blood Group</td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.bloodGroup"></td>
-                                    <td ng-if="vm.editMode">
+                                    <td ng-hide="vm.editMode" ng-bind="vm.profile.bloodGroup"></td>
+                                    <td ng-show="vm.editMode">
                                         <div class="form-group required" ng-class="{'has-error':profileForm.drpBloodGroup.$invalid && profileForm.drpBloodGroup.$dirty}">
                                             <select class="form-control" id="drpBloodGroup" name="drpBloodGroup" ng-model="vm.profile.bloodGroupId" required>
                                                 <option value="" disabled>Select Blood Group</option>

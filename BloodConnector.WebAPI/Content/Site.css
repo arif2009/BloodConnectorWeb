@@ -362,6 +362,9 @@ div.user-menu div.user-menu-content:not(.active){
 .light-green-color {
     color: #00ff7f;
 }
+.blue {
+    color: blue;
+}
 
 /*Start : Profile image*/
 .profile-image {

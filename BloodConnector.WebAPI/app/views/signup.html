@@ -22,7 +22,7 @@
                                placeholder="First Name"
                                ng-model="vm.registration.firstName"
                                tabindex="0"
-                               autofocus />
+                               autofocus/>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
@@ -42,6 +42,17 @@
                        placeholder="Display Name"
                        tabindex="0"/>
             </div>
+            <div class="form-group" ng-class="{'has-error':signupForm.numBloodGiven.$invalid && signupForm.numBloodGiven.$dirty}">
+                <span class="control-label">Number of times given blood :</span>
+                <input type="number" name="numBloodGiven" id="numBloodGiven" class="form-control input-lg"
+                       ng-model="vm.registration.bloodGiven"
+                       placeholder="E.g. 5"
+                       max="50"
+                       tabindex="0" />
+                <span class="help-block has-error" ng-if="signupForm.numBloodGiven.$dirty">
+                    <span ng-show="signupForm.numBloodGiven.$error.max">Too long!</span>
+                </span>
+            </div>
             <div class="form-group required" ng-class="{'has-error':signupForm.txtEmail.$invalid && signupForm.txtEmail.$dirty}">
                 <span class="control-label">E-mail :</span>
                 <input class="form-control input-lg" id="txtEmail" name="txtEmail" type="email"
@@ -56,7 +67,7 @@
             <div class="form-group required" ng-class="{'has-error':signupForm.txtPhone.$invalid && signupForm.txtPhone.$dirty}">
                 <span class="control-label">Contact Number :</span>
                 <input type="text" class="form-control input-lg" id="txtPhone" name="txtPhone"
-                       placeholder="+880XXXXXXXXXX"
+                       placeholder="E.g. +880XXXXXXXXXX"
                        ng-model="vm.registration.phoneNumber"
                        ng-pattern="/^([0-9\(\)\/\+ \-]{5,15})$/"
                        required/>

@@ -45,6 +45,10 @@ namespace BloodConnector.WebAPI.Models
         [Display(Name = "Display Name")]
         public string NikeName { get; set; }
 
+        [Range(0, 50, ErrorMessage = "{0} too long.")]
+        [Display(Name = "Blood Given")]
+        public int BloodGiven { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]

@@ -19,6 +19,7 @@ namespace BloodConnector.WebAPI.DTOs
         public string Email { get; set; }
         public int BloodGroupId { get; set; }
         public string BloodGroup { get; set; }
+        public int BloodGiven { get; set; }
         public string ContactNumber => PhoneNumber;
         public string PhoneNumber { get; set; }
         public string AlternativeContactNo { get; set; }

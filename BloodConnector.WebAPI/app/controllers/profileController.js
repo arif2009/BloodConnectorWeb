@@ -13,6 +13,7 @@ app.controller('profileController', ['$scope', 'dataService', 'authService', fun
         nikeName: "",
         bloodGroupId: "",
         bloodGroup: "",
+        bloodGiven: "",
         phoneNumber: "",
         alternativeContactNo: "",
         dateOfBirth: "",
@@ -40,17 +41,20 @@ app.controller('profileController', ['$scope', 'dataService', 'authService', fun
 
     vm.$onInit = function () {
         var userId = authService.authentication.userId;
-        dataService.getUserById(userId).then(function (result) {
+        /*dataService.getUserById(userId).then(function (result) {
             var userData = result.data;
             Object.keys(vm.profile).forEach(function (key) {
                 vm.profile[key] = userData[key];
             });
+
+
+        });*/
+        //angular.element($0).scope().$apply()
+        //angular.element($0).scope().vm.profile.bloodGroupId = 1
+        dataService.getBloodGroup().then(function (group) {
+            vm.bloodGroups = group.data;
         });
+
     };
 
-    vm.populateBloodGroup = function () {
-        dataService.getBloodGroup.then(function (result) {
-            vm.bloodGroups = result.data;
-        });
-    };
 }]);

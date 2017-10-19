@@ -197,6 +197,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     NikeName = model.NikeName,
+                    BloodGiven = model.BloodGiven,
                     UserName = model.Email,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
