@@ -30,7 +30,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _login = function (loginData) {
 
-        var data = "grant_type=password&username=" + loginData.email + "&password=" + loginData.password;
+        var data = "grant_type=password&username=" + encodeURIComponent(loginData.email) + "&password=" + encodeURIComponent(loginData.password);
 
         var deferred = $q.defer();
 

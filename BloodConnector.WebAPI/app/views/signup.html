@@ -80,7 +80,7 @@
                 <span class="control-label">Blood Group :</span>
                 <select class="form-control input-lg" id="drpBloodGroup" name="drpBloodGroup" ng-model="vm.registration.bloodGroupId" required>
                     <option value="" disabled>Select Blood Group</option>
-                    <option ng-repeat="bloodGroup in vm.bloodGroups" value="{{bloodGroup.id}}">{{bloodGroup.symbole}}</option>
+                    <option ng-repeat="bloodGroup in vm.bloodGroups" ng-value="bloodGroup.id">{{bloodGroup.symbole}}</option>
                 </select>
                 <span class="help-block has-error" ng-if="signupForm.drpBloodGroup.$dirty">
                     <span ng-show="signupForm.drpBloodGroup.$error.required">Required!</span>
@@ -95,7 +95,6 @@
                                tabindex="0"
                                placeholder="Password"
                                data-ng-model="vm.registration.password"
-                               ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/"
                                required/>
                         <span class="help-block has-error" ng-if="signupForm.password.$dirty">
                             <span ng-show="signupForm.password.$error.required">Required!</span>
