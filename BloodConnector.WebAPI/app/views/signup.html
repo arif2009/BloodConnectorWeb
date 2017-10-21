@@ -94,11 +94,13 @@
                         <input type="password" id="password" name="password" class="form-control input-lg"
                                tabindex="0"
                                placeholder="Password"
+                               ng-minlength="6" ng-maxlength="12"
                                data-ng-model="vm.registration.password"
                                required/>
                         <span class="help-block has-error" ng-if="signupForm.password.$dirty">
                             <span ng-show="signupForm.password.$error.required">Required!</span>
-                            <span ng-show="signupForm.password.$error.pattern">Minimum six characters, at least one letter and one number!</span>
+                            <span ng-show="signupForm.password.$error.minlength">Minimum 6 charecter required!</span>
+                            <span ng-show="signupForm.password.$error.maxlength">Password length can't be more than 12 charecter!</span>
                         </span>
                     </div>
                 </div>

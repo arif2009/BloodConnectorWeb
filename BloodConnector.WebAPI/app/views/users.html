@@ -22,15 +22,17 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Contact Number</th>
+                    <th>Donate</th>
                     <th>Blood Group</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in vm.items | filter: vm.searchText:strict | offset: vm.currentPage*vm.itemsPerPage | limitTo: vm.itemsPerPage">
-                    <td>{{item.name}}</td>
-                    <td>{{item.email}}</td>
-                    <td>{{item.contactNumber}}</td>
-                    <td>{{item.bloodGroup}}</td>
+                    <td ng-bind="item.name"></td>
+                    <td ng-bind="item.email"></td>
+                    <td ng-bind="item.contactNumber"></td>
+                    <td class="h4 blue"><strong ng-bind="item.bloodGiven"></strong> times</td>
+                    <td ng-bind="item.bloodGroup"></td>
                 </tr>
                 </tbody>
             </table>
