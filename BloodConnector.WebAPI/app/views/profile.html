@@ -1,8 +1,8 @@
-﻿<div class="row ng-cloak" data-ng-controller="profileController as vm" ng-cloak>
+﻿<div class="ng-cloak" data-ng-controller="profileController as vm" ng-cloak>
     <div class="toppad" ng-class="{'edit-mode': vm.editMode}">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
-                <h3 class="panel-title pull-left">Sheena Shrestha</h3>
+                <h3 class="panel-title pull-left" ng-bind="vm.profile.fullName"></h3>
                 <span class="pull-right">
                     <button ng-click="vm.enableEditMode()" title="Edit Profile" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></button>
                     <button ng-click="vm.disablEditeMode()" title="Clear Edit" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
@@ -27,7 +27,7 @@
                                 <tbody>
                                 <tr>
                                     <td class="h4">Name</td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.name"></td>
+                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.fullName"></td>
                                     <td ng-if="vm.editMode">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-6 col-md-6">

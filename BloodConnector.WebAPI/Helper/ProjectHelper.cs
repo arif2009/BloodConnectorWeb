@@ -16,6 +16,13 @@ namespace BloodConnector.WebAPI.Helper
             return string.IsNullOrEmpty(nName) ?  fullName : nName;
         }
 
+        public static string GetFullName(string fName, string lName, string nName)
+        {
+            var fullName = $"{fName} {lName}".Trim();
+
+            return string.IsNullOrEmpty(nName) ? fullName: $"{fullName} ({nName})";
+        }
+
         public static string GetName<TObject>(Expression<Func<TObject, object>> propertyRefExpr)
         {
             return GetPropertyNameCore(propertyRefExpr.Body);

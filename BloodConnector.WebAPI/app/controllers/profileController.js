@@ -11,6 +11,7 @@ app.controller('profileController', ['$scope', 'dataService', 'authService', fun
         firstName: "",
         lastName: "",
         nikeName: "",
+        fullName: "",
         bloodGroupId: "",
         bloodGroup: "",
         bloodGiven: "",

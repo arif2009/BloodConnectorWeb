@@ -17,66 +17,76 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top navbar-custom" role="navigation" data-ng-controller="indexController as vm">
-        <div class="container">
-            <div class="navbar-header">
-                <span class="navbar-brand">
-                    <i class="fa fa-tint fa-lg" aria-hidden="true"></i>
-                </span>
-                <button type="button" class="btn btn-success navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                </button>
-                <a class="navbar-brand" ng-class="{'selected-menu': vm.active.home}" ng-click="vm.changeSelectedClass('home')" href="/">Home</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li data-ng-hide="!vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.welcome}" ng-click="vm.changeSelectedClass('welcome')" href="#!profile">Welcome To <b ng-bind="vm.authentication.userName"></b></a></li>
-                    <li data-ng-hide="!vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.user}" ng-click="vm.changeSelectedClass('user')" href="#!users">Donor's</a></li>
-                    <li data-ng-hide="!vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.logout}" ng-click="vm.changeSelectedClass('logout'); vm.logOut()" href="javascript:void(0);">LogOut</a></li>
-                    <li data-ng-hide="vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.login}" ng-click="vm.changeSelectedClass('login')" href="#!login">LogIn</a></li>
-                    <li data-ng-hide="vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.signup}" ng-click="vm.changeSelectedClass('signup')" href="#!signup">Join Us</a></li>
-                    <li><a ng-class="{'selected-menu': vm.active.about}" ng-click="vm.changeSelectedClass('about')" href="#!about">About</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
-    <hr class="transparent-border"/>
+<toaster-container></toaster-container>
 
+<div class="navbar navbar-inverse navbar-fixed-top navbar-custom" role="navigation" data-ng-controller="indexController as vm">
     <div class="container">
-        <toaster-container></toaster-container>
-        @RenderBody()
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><i class="fa fa-info-circle light-green-color" aria-hidden="true"></i> Information</h4>
-                    </div>
-                    <div class="modal-body">
-                        All the registered user can see your <b>Contact Number</b> and <b>E-mail</b>. So they can call you or send email for 
-                        blood.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="navbar-header">
+                    <span class="navbar-brand">
+                        <i class="fa fa-tint fa-lg" aria-hidden="true"></i>
+                    </span>
+                    <button type="button" class="btn btn-success navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </button>
+                    <a class="navbar-brand" ng-class="{'selected-menu': vm.active.home}" ng-click="vm.changeSelectedClass('home')" href="/">Home</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li data-ng-hide="!vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.welcome}" ng-click="vm.changeSelectedClass('welcome')" href="#!profile">Welcome To <b ng-bind="vm.authentication.userName"></b></a></li>
+                        <li data-ng-hide="!vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.user}" ng-click="vm.changeSelectedClass('user')" href="#!users">Donor's</a></li>
+                        <li data-ng-hide="!vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.logout}" ng-click="vm.changeSelectedClass('logout'); vm.logOut()" href="javascript:void(0);">LogOut</a></li>
+                        <li data-ng-hide="vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.login}" ng-click="vm.changeSelectedClass('login')" href="#!login">LogIn</a></li>
+                        <li data-ng-hide="vm.authentication.isAuth"><a ng-class="{'selected-menu': vm.active.signup}" ng-click="vm.changeSelectedClass('signup')" href="#!signup">Join Us</a></li>
+                        <li><a ng-class="{'selected-menu': vm.active.about}" ng-click="vm.changeSelectedClass('about')" href="#!about">About</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <hr class="transparent-border"/>
+<div class="main-body">
+    <div class="container">
+        @RenderBody()
+    </div>
 
-    <footer class="navbar-fixed-bottom">
-        <div class="container text-left">
-            <a href="https://www.facebook.com/bloodconnector" target="_blank"><i class="fa fa-facebook"></i></a>
-            <a href="javascript:void(0);" target="_blank"><i class="fa fa-twitter"></i></a>
-            <a href="javascript:void(0);" target="_blank"><i class="fa fa-youtube"></i></a>
-            <span class="pull-right">&copy; @DateTime.Now.Year - BloodConnector&nbsp;@version</span>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><i class="fa fa-info-circle light-green-color" aria-hidden="true"></i> Information</h4>
+                </div>
+                <div class="modal-body">
+                    All the registered user can see your <b>Contact Number</b> and <b>E-mail</b>. So they can call you or send email for
+                    blood.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-    </footer>
+    </div>
+</div>
 
+<footer class="navbar-fixed-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6 text-left">
+                <a href="https://www.facebook.com/bloodconnector" target="_blank"><i class="fa fa-facebook"></i></a>
+                <a href="javascript:void(0);" target="_blank"><i class="fa fa-twitter"></i></a>
+                <a href="javascript:void(0);" target="_blank"><i class="fa fa-youtube"></i></a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6 text-right">
+                <span>&copy; @DateTime.Now.Year - BloodConnector&nbsp;@version</span>
+            </div>
+        </div>
+    </div>
+</footer>
     <!-- 3rd party libraries -->
 
     @Scripts.Render("~/bundles/jquery")

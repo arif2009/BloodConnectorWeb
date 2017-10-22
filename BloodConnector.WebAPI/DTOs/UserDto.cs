@@ -15,6 +15,7 @@ namespace BloodConnector.WebAPI.DTOs
         public string LastName { get; set; }
         public string NikeName { get; set; }
         public string Name => ProjectHelper.GetUserName(FirstName, LastName, NikeName);
+        public string FullName => ProjectHelper.GetFullName(FirstName, LastName, NikeName);
         public string UserName { get; set; }
         public string Email { get; set; }
         public int BloodGroupId { get; set; }

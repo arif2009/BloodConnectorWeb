@@ -1,21 +1,23 @@
-﻿<form role="form" class="form-forgot" data-ng-controller="forgotController as vm">
-    <div data-ng-hide="!vm.forgotMessages" class="alert alert-danger">
-        <ul>
-            <li ng-repeat="message in vm.messages">{{message}}</li>
-        </ul>
-    </div>
-    <img class="img-responsive" src="/Images/blood_logo.jpg" />
-    <h3 class="form-signin-heading">Send a new password</h3>
-    <hr class="colorgraph" />
-    <div class="form-group">
-        <span class="control-label">E-mail :</span>
-        <input id="txtEmail" name="txtEmail" type="text" class="form-control input-lg"
-               tabindex="0"
-               placeholder="Your Email"
-               data-ng-model="vm.forgotData.email"
-               autofocus/>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-lg btn-danger btn-block" name="Submit" type="button" data-ng-click="vm.forgot()">Send a new password <i class="fa fa-arrow-right"></i></button>
-    </div>
-</form>
+﻿<div class="row">
+    <form role="form" class="form-forgot" data-ng-controller="forgotController as vm">
+        <div data-ng-hide="!vm.forgotMessages" class="alert alert-danger">
+            <ul>
+                <li ng-repeat="message in vm.messages">{{message}}</li>
+            </ul>
+        </div>
+        <img class="img-responsive" src="/Images/blood_logo.jpg" />
+        <h3 class="form-signin-heading">Send a new password</h3>
+        <hr class="colorgraph" />
+        <div class="form-group">
+            <span class="control-label">E-mail :</span>
+            <input id="txtEmail" name="txtEmail" type="text" class="form-control input-lg"
+                   tabindex="0"
+                   placeholder="Your Email"
+                   data-ng-model="vm.forgotData.email"
+                   autofocus />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lg btn-danger btn-block" name="Submit" type="button" data-ng-click="vm.forgot()">Send a new password <i class="fa fa-arrow-right"></i></button>
+        </div>
+    </form>
+</div>
