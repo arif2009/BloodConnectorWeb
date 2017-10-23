@@ -166,20 +166,15 @@
                                     <td class="h4">Gender</td>
                                     <td ng-if="!vm.editMode" ng-bind="vm.profile.genderName"></td>
                                     <td ng-if="vm.editMode">
-                                        <div class="form-group" ng-class="{'has-error':profileForm.numBloodGiven.$invalid && profileForm.numBloodGiven.$dirty}">
-                                            <!-- <input type="number" name="numBloodGiven" id="numBloodGiven" class="form-control input-lg"
-                                                        ng-model="vm.profile.bloodGiven"
-                                                        placeholder="E.g. 5"
-                                                        max="50"
-                                                        tabindex="0"/>-->
+                                        <div class="form-group" ng-class="{'has-error':profileForm.sex.$invalid && profileForm.sex.$dirty}">
                                             Male :
-                                            <input type="radio" name="sex" value="f" data-icon=''/>
+                                            <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="1" data-icon=''/>
                                             Female :
-                                            <input type="radio" name="sex" value="m" data-icon='' />
+                                            <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="0" data-icon='' />
 
-<!--                                            <span class="help-block has-error" ng-if="profileForm.numBloodGiven.$dirty">
-                                                <span ng-show="profileForm.numBloodGiven.$error.max">Too long!</span>
-                                            </span>-->
+                                            <span class="help-block has-error" ng-if="profileForm.sex.$dirty">
+                                                <span ng-show="profileForm.sex.$error.required">Select gender!</span>
+                                            </span>
                                         </div>
                                     </td>
                                 </tr>
