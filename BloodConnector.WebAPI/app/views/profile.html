@@ -163,8 +163,25 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Home Address</td>
-                                    <td>Kathmandu,Nepal</td>
+                                    <td class="h4">Gender</td>
+                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.genderName"></td>
+                                    <td ng-if="vm.editMode">
+                                        <div class="form-group" ng-class="{'has-error':profileForm.numBloodGiven.$invalid && profileForm.numBloodGiven.$dirty}">
+                                            <!-- <input type="number" name="numBloodGiven" id="numBloodGiven" class="form-control input-lg"
+                                                        ng-model="vm.profile.bloodGiven"
+                                                        placeholder="E.g. 5"
+                                                        max="50"
+                                                        tabindex="0"/>-->
+                                            Male :
+                                            <input type="radio" name="sex" value="f" data-icon=''/>
+                                            Female :
+                                            <input type="radio" name="sex" value="m" data-icon='' />
+
+<!--                                            <span class="help-block has-error" ng-if="profileForm.numBloodGiven.$dirty">
+                                                <span ng-show="profileForm.numBloodGiven.$error.max">Too long!</span>
+                                            </span>-->
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>

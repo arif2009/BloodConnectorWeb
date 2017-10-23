@@ -501,6 +501,41 @@ div.user-menu div.user-menu-content:not(.active){
 
 /*End : Profile image*/
 
+/*Start : Radio button style*/
+input[name='sex'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: none;
+}
+
+input[name='sex']:after {
+    font-family: 'FontAwesome';
+    display: inline-block;
+    text-align: center;
+    font-size: 2em;
+    content: attr(data-icon);
+    padding: 0.25em 0.25em;
+    -ms-border-radius: 0.5em;
+    border-radius: 0.5em;
+    color: gray;
+    border: 0.1em solid transparent;
+    -webkit-transition: box-shadow 1s, color 1s;
+    -moz-transition: box-shadow 1s, color 1s;
+    -ms-transition: box-shadow 1s, color 1s;
+    -o-transition: box-shadow 1s, color 1s;
+    transition: box-shadow 1s, color 1s;
+}
+
+input[name='sex']:checked:after {
+    color: #d9534f;
+    border-color: #d43f3a;
+}
+
+/*End : Radio button style*/
+
 /* Landscape phone to portrait tablet */
 @media (min-width: 1200px) {
     .col-lg-3 {
