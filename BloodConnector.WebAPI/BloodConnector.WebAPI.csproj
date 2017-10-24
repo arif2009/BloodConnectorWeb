@@ -256,6 +256,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\BloodGroupController.cs" />
+    <Compile Include="Controllers\Api\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="Helper\ProjectHelper.cs" />
     <Compile Include="Helper\StateHelper.cs" />
     <Compile Include="Interface\IBloodGroupRepository.cs" />
+    <Compile Include="Interface\ICountryRepository.cs" />
     <Compile Include="Interface\IObjectWithState.cs" />
     <Compile Include="Interface\IRepository.cs" />
     <Compile Include="Migrations\201708120753080_InitialMigration.cs" />
@@ -293,6 +295,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\BloodGroupRepository.cs" />
+    <Compile Include="Repository\CountryRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="ServiceResult\ServiceResult.cs" />
     <Compile Include="Services\SmtpEmailService.cs" />

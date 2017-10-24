@@ -9,7 +9,8 @@ namespace BloodConnector.WebAPI.App_Start
         public AutoMapperProfile()
         {
             CreateMap<User, UserDto>()
-                .ForMember(dto => dto.BloodGroup, opt => opt.MapFrom(u => u.BloodGroup.Symbole));
+                .ForMember(dto => dto.BloodGroup, opt => opt.MapFrom(u => u.BloodGroup.Symbole))
+                .ForMember(dto => dto.Country, opt => opt.MapFrom(u => u.Country.Name));
         }
     }
 }

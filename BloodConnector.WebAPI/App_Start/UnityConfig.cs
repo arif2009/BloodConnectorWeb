@@ -47,6 +47,7 @@ namespace BloodConnector.WebAPI.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType(typeof(IRepository<>), typeof(BaseRepository<>));
             container.RegisterType<IBloodGroupRepository, BloodGroupRepository>();
+            container.RegisterType<ICountryRepository, CountryRepository>();
             container.RegisterType<IIdentityMessageService, SmtpEmailService>();
             container.RegisterType<IUserStore<User>, UserStore<User>>(new InjectionConstructor(typeof(ApplicationDbContext)));
             //container.RegisterType<ApplicationUserManager>();

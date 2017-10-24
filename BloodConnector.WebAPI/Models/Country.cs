@@ -2,7 +2,7 @@
 
 namespace BloodConnector.WebAPI.Models
 {
-    public class Country
+    public class Country: BaseEntity
     {
         public int ID { get; set; }
         public string Name { get; set; }

@@ -4,7 +4,8 @@ app.controller('profileController', ['$scope', 'dataService', 'authService', fun
     vm.savedSuccessfully = false;
     vm.editMode = false;
     vm.messages = [];
-    vm.bloodGrups = [];
+    vm.bloodGroups = [];
+    vm.countries = [];
     vm.profile = {
         name: "",
         userName: "",
@@ -51,10 +52,23 @@ app.controller('profileController', ['$scope', 'dataService', 'authService', fun
     };
 
     $scope.$watch("vm.editMode", function (value) {
-        if (value && !vm.bloodGroups) {
-            dataService.getBloodGroup().then(function (group) {
-                vm.bloodGroups = group.data;
-            });
+        if (value) {
+
+            if (!vm.bloodGroups.length) {
+                dataService.getBloodGroup().then(function (result) {
+                    vm.bloodGroups = result.data;
+                });
+            }
+
+            if (!vm.countries.length) {
+                dataService.getCountry().then(function (result) {
+                    vm.countries = result.data;
+
+                    if (!vm.profile.countryId) {
+                        vm.profile.countryId = 11;
+                    }
+                });
+            }
         }
     });
 

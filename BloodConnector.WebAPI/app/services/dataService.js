@@ -9,6 +9,10 @@ app.factory('dataService', ['$http', 'ngAuthSettings', function ($http, ngAuthSe
         return $http.get(serviceBase + 'api/bloodgroup');
     }
 
+    dataService.getCountry = function (id) {
+        return $http.get(serviceBase + 'api/country');
+    }
+
     dataService.getUsersBloodGroup = function() {
         return $http.get(serviceBase + 'api/bloodgroup/getusersbloodgroup');
     }
