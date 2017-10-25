@@ -63,6 +63,16 @@ namespace BloodConnector.WebAPI.DTOs
             }
         }
         public string PersonalIdentityNum { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public DateTime LastUpdatedDate
+        {
+            get
+            {
+                var utcDate = DateTime.SpecifyKind(UpdatedDate, DateTimeKind.Utc);
+                return utcDate.ToLocalTime();
+            }
+
+        }
         public IList<Attachment> Attachments { get; set; }
     }
 }

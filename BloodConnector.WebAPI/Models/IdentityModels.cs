@@ -38,6 +38,9 @@ namespace BloodConnector.WebAPI.Models
         public Enums.Religion? Religion { get; set; }
         public string PersonalIdentityNum { get; set; }
         public IList<Attachment> Attachments { get; set; }
+        public DateTime CreatedDate { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime UpdatedDate { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

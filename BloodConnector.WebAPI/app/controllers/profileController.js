@@ -16,6 +16,7 @@ app.controller('profileController', ['$scope', 'dataService', 'authService', fun
         bloodGroupId: "",
         bloodGroup: "",
         bloodGiven: "",
+        email: "",
         phoneNumber: "",
         alternativeContactNo: "",
         dateOfBirth: "",
@@ -29,7 +30,7 @@ app.controller('profileController', ['$scope', 'dataService', 'authService', fun
         religion: "",
         religionName: "",
         personalIdentityNum: "",
-        email: "",
+        lastUpdatedDate: "",
         attachments:""
     };
 
