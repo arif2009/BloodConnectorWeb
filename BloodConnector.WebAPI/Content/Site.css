@@ -380,7 +380,7 @@ div.user-menu div.user-menu-content:not(.active){
     border-radius: 0px!important;
 }
 
-.form-group.required .control-label:after { 
+.form-group.required .control-label:after, label.required:after { 
     color: #d00;
     font-family: 'FontAwesome';
     font-size: 0.65em;

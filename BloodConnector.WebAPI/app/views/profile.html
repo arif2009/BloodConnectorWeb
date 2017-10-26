@@ -98,11 +98,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="h4">E-mail</td>
+                                    <td class="h4">E-mail<label ng-if="vm.editMode" class="required"></label></td>
                                     <td ng-if="!vm.editMode" ng-bind="vm.profile.email"></td>
                                     <td ng-if="vm.editMode">
                                         <div class="form-group required" ng-class="{'has-error':profileForm.txtEmail.$invalid && profileForm.txtEmail.$dirty}">
-                                            <span class="control-label">E-mail :</span>
                                             <input class="form-control input-lg" id="txtEmail" name="txtEmail" type="email"
                                                    placeholder="Your Email"
                                                    ng-model="vm.profile.email"
@@ -184,13 +183,14 @@
                                     <td class="h4">Gender</td>
                                     <td ng-if="!vm.editMode" ng-bind="vm.profile.genderName"></td>
                                     <td ng-if="vm.editMode">
-                                        <div class="form-group" ng-class="{'has-error':profileForm.sex.$invalid && profileForm.sex.$dirty}">
-                                            Male :
-                                            <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="1" data-icon=''/>
-                                            Female :
-                                            <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="0" data-icon='' />
-
-                                            <span class="help-block has-error" ng-if="profileForm.sex.$dirty">
+                                        <div class="form-group" ng-class="{'has-error':profileForm.sex.$invalid}">
+                                            <div class="form-control">
+                                                Male :
+                                                <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="1" data-icon=''/>
+                                                Female :
+                                                <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="0" data-icon=''/>
+                                            </div>
+                                            <span class="help-block has-error" ng-if="profileForm.sex.$invalid">
                                                 <span ng-show="profileForm.sex.$error.required">Select gender!</span>
                                             </span>
                                         </div>
