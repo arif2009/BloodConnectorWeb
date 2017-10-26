@@ -286,6 +286,10 @@
     <Compile Include="Migrations\201710250307245_CreateAndUpdateDate.Designer.cs">
       <DependentUpon>201710250307245_CreateAndUpdateDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710260323348_UniqueEmailConstraints.cs" />
+    <Compile Include="Migrations\201710260323348_UniqueEmailConstraints.Designer.cs">
+      <DependentUpon>201710260323348_UniqueEmailConstraints.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -466,6 +470,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710250307245_CreateAndUpdateDate.resx">
       <DependentUpon>201710250307245_CreateAndUpdateDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710260323348_UniqueEmailConstraints.resx">
+      <DependentUpon>201710260323348_UniqueEmailConstraints.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

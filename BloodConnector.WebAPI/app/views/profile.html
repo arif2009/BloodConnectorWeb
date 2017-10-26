@@ -4,8 +4,9 @@
             <div class="panel-heading clearfix">
                 <h3 class="panel-title pull-left" ng-bind="vm.profile.fullName"></h3>
                 <span class="pull-right">
-                    <button ng-click="vm.enableEditMode()" title="Edit Profile" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></button>
-                    <button ng-click="vm.disablEditeMode()" title="Clear Edit" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
+                    <button ng-click="vm.enableEditMode()" title="Edit Profile" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    <button ng-if="vm.editMode" title="Update Profile" type="button" class="btn btn-sm btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                    <button ng-click="vm.disablEditeMode()" title="Clear Edit" type="button" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </span>
             </div>
             <div class="panel-body">
@@ -23,7 +24,7 @@
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <form class="form-profile" role="form" novalidate name="profileForm">
-                            <table class="table table-user-information">
+                            <table class="table table-user-information mb0">
                                 <tbody>
                                 <tr>
                                     <td class="h4">Name</td>
@@ -93,6 +94,23 @@
                                                     <span ng-show="profileForm.txtPhone.$error.required">Required!</span>
                                                     <span ng-show="profileForm.txtPhone.$error.pattern">Not a valid Contact Number!</span>
                                                 </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="h4">E-mail</td>
+                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.email"></td>
+                                    <td ng-if="vm.editMode">
+                                        <div class="form-group required" ng-class="{'has-error':profileForm.txtEmail.$invalid && profileForm.txtEmail.$dirty}">
+                                            <span class="control-label">E-mail :</span>
+                                            <input class="form-control input-lg" id="txtEmail" name="txtEmail" type="email"
+                                                   placeholder="Your Email"
+                                                   ng-model="vm.profile.email"
+                                                   required />
+                                            <span class="help-block has-error" ng-if="profileForm.txtEmail.$dirty">
+                                                <span ng-show="profileForm.txtEmail.$error.required">Required!</span>
+                                                <span ng-show="profileForm.txtEmail.$error.email">Not valid email!</span>
+                                            </span>
                                         </div>
                                     </td>
                                 </tr>
@@ -196,12 +214,15 @@
                                     <td ng-if="vm.editMode">
                                         <div class="form-group required">
                                             <input type="text" class="form-control" id="txtPersonalIdentity" name="txtPersonalIdentity"
-                                                    placeholder="National ID"
-                                                    ng-model="vm.profile.personalIdentityNum"/>
+                                                   placeholder="National ID"
+                                                   ng-model="vm.profile.personalIdentityNum"/>
                                         </div>
                                     </td>
                                 </tr>
-
+                                <tr ng-if="vm.editMode">
+                                    <td>&nbsp;</td>
+                                    <td class="text-right"><button type="button" class="btn btn-success" title="Update Profile"><strong><i class="fa fa-floppy-o" aria-hidden="true"></i> Update</strong></button></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </form>
