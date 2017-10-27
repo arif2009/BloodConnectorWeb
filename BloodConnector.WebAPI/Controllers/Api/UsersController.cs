@@ -1,4 +1,6 @@
 ﻿using System.Web.Http;
+using BloodConnector.WebAPI.DTOs;
+using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Services;
 
 namespace BloodConnector.WebAPI.Controllers.Api
@@ -24,6 +26,11 @@ namespace BloodConnector.WebAPI.Controllers.Api
         public IHttpActionResult Get(string id)
         {
             return Ok(_userServices.GetUserById(id));
+        }
+
+        public IHttpActionResult Put(User userData)
+        {
+            return null;
         }
    }
 }

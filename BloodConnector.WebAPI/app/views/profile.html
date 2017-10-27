@@ -1,238 +1,244 @@
 ﻿<div class="ng-cloak" data-ng-controller="profileController as vm" ng-cloak>
     <div class="toppad" ng-class="{'edit-mode': vm.editMode}">
-        <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-                <h3 class="panel-title pull-left" ng-bind="vm.profile.fullName"></h3>
-                <span class="pull-right">
-                    <button ng-click="vm.enableEditMode()" title="Edit Profile" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                    <button ng-if="vm.editMode" title="Update Profile" type="button" class="btn btn-sm btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                    <button ng-click="vm.disablEditeMode()" title="Clear Edit" type="button" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
-                </span>
-            </div>
-            <div class="panel-body">
+        <form class="form-profile" role="form" novalidate ng-submit="profileForm.$valid && vm.update()" enctype="multipart/form-data" name="profileForm">
+            <div class="panel panel-default">
+            <div class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3" align="center">
-                        <div class="profile-image" tabindex="0" aria-label="Profile image">
-                            <div class="profile-image-button">
-                                <button class="upload-img" type="button">
-                                    <i class="fa fa-camera" aria-hidden="true"></i>
-                                    <span>Add</span>
-                                </button>
-                            </div>
-                        </div>
-                        <img class="img-circle img-responsive">
+                    <div class="col-md-3 panel-title text-left" ng-bind="vm.profile.fullName"></div>
+                    <div class="col-md-7 text-center">
+                        
                     </div>
-                    <div class="col-lg-9 col-md-9 col-sm-9">
-                        <form class="form-profile" role="form" novalidate name="profileForm">
-                            <table class="table table-user-information mb0">
-                                <tbody>
-                                <tr>
-                                    <td class="h4">Name</td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.fullName"></td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <span class="control-label">First Name :</span>
-                                                    <input type="text" name="firstName" id="firstName" class="form-control"
-                                                           placeholder="First Name"
-                                                           ng-model="vm.profile.firstName"
-                                                           tabindex="0"
-                                                           autofocus/>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <span class="control-label">Last Name :</span>
-                                                    <input type="text" name="lastName" id="lastName" class="form-control"
-                                                           placeholder="Last Name"
-                                                           ng-model="vm.profile.lastName"
-                                                           tabindex="0"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <span class="control-label">Display Name / Nick Name :</span>
-                                                    <input type="text" name="nikeName" id="nikeName" class="form-control"
-                                                           ng-model="vm.profile.nikeName"
-                                                           placeholder="Display Name"
-                                                           tabindex="0"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="h4"># of times given blood</td>
-                                    <td ng-if="!vm.editMode" class="h4 blue"><strong ng-bind="vm.profile.bloodGiven"></strong> {{vm.profile.bloodGiven==0 || vm.profile.bloodGiven==1 ?"time":"times"}}</td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="form-group" ng-class="{'has-error':profileForm.numBloodGiven.$invalid && profileForm.numBloodGiven.$dirty}">
-                                            <input type="number" name="numBloodGiven" id="numBloodGiven" class="form-control input-lg"
-                                                   ng-model="vm.profile.bloodGiven"
-                                                   placeholder="E.g. 5"
-                                                   max="50"
-                                                   tabindex="0" />
-                                            <span class="help-block has-error" ng-if="profileForm.numBloodGiven.$dirty">
-                                                <span ng-show="profileForm.numBloodGiven.$error.max">Too long!</span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="h4">Mobile Phone</td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.phoneNumber"></td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="form-group required" ng-class="{'has-error':profileForm.txtPhone.$invalid && profileForm.txtPhone.$dirty}">
-                                            <input type="text" class="form-control" id="txtPhone" name="txtPhone"
-                                                   placeholder="E.g. +880XXXXXXXXXX"
-                                                   ng-model="vm.profile.phoneNumber"
-                                                   ng-pattern="/^([0-9\(\)\/\+ \-]{5,15})$/"
-                                                   required/>
-                                            <span class="help-block has-error" ng-if="profileForm.txtPhone.$dirty">
-                                                    <span ng-show="profileForm.txtPhone.$error.required">Required!</span>
-                                                    <span ng-show="profileForm.txtPhone.$error.pattern">Not a valid Contact Number!</span>
-                                                </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="h4">E-mail<label ng-if="vm.editMode" class="required"></label></td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.email"></td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="form-group required" ng-class="{'has-error':profileForm.txtEmail.$invalid && profileForm.txtEmail.$dirty}">
-                                            <input class="form-control input-lg" id="txtEmail" name="txtEmail" type="email"
-                                                   placeholder="Your Email"
-                                                   ng-model="vm.profile.email"
-                                                   required />
-                                            <span class="help-block has-error" ng-if="profileForm.txtEmail.$dirty">
-                                                <span ng-show="profileForm.txtEmail.$error.required">Required!</span>
-                                                <span ng-show="profileForm.txtEmail.$error.email">Not valid email!</span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="h4">Blood Group</td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.bloodGroup"></td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="form-group required" ng-class="{'has-error':profileForm.drpBloodGroup.$invalid && profileForm.drpBloodGroup.$dirty}">
-                                            <select class="form-control" id="drpBloodGroup" name="drpBloodGroup" ng-model="vm.profile.bloodGroupId" required>
-                                                <option value="" disabled>Select Blood Group</option>
-                                                <option ng-repeat="bloodGroup in vm.bloodGroups" ng-value="bloodGroup.id">{{bloodGroup.symbole}}</option>
-                                            </select>
-                                            <span class="help-block has-error" ng-if="profileForm.drpBloodGroup.$dirty">
-                                                <span ng-show="profileForm.drpBloodGroup.$error.required">Required!</span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="h4">Date of Birth</td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.dateOfBirth | date:'dd.mm.yy'"></td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="form-group">
-                                            <input type="text" name="dateOfBirth" id="dateOfBirth" class="form-control"
-                                                    ng-model="vm.profile.dateOfBirth"
-                                                    placeholder="dd.mm.yy"
-                                                    tabindex="0" 
-                                                    jqdatepicker />
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="h4">Contact Address</td>
-                                    <td ng-if="!vm.editMode"></td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <span class="control-label">Address :</span>
-                                                    <input type="text" name="txtAddress" id="txtAddress" class="form-control"
-                                                            ng-model="vm.profile.address"
-                                                            placeholder="Your Address"
-                                                            tabindex="0" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <span class="control-label">Postcode :</span>
-                                                    <input type="text" name="txtPostCode" id="txtPostCode" class="form-control"
-                                                            placeholder="Your Postcode"
-                                                            ng-model="vm.profile.postCode"
-                                                            tabindex="0"/>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <span class="control-label">City :</span>
-                                                    <input type="text" name="txtCity" id="txtCity" class="form-control"
-                                                            placeholder="Your City"
-                                                            ng-model="vm.profile.city"
-                                                            tabindex="0"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="h4">Gender</td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.genderName"></td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="form-group" ng-class="{'has-error':profileForm.sex.$invalid}">
-                                            <div class="form-control">
-                                                Male :
-                                                <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="1" data-icon=''/>
-                                                Female :
-                                                <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="0" data-icon=''/>
-                                            </div>
-                                            <span class="help-block has-error" ng-if="profileForm.sex.$invalid">
-                                                <span ng-show="profileForm.sex.$error.required">Select gender!</span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="h4">Country</td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.country"></td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="form-group">
-                                            <select class="form-control" id="drpCountry" name="drpCountry" ng-model="vm.profile.countryId">
-                                                <option value="" disabled>Select Country</option>
-                                                <option ng-repeat="country in vm.countries" ng-value="country.id">{{country.name}}</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="h4">Personal Identity Number</td>
-                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.personalIdentityNum"></td>
-                                    <td ng-if="vm.editMode">
-                                        <div class="form-group required">
-                                            <input type="text" class="form-control" id="txtPersonalIdentity" name="txtPersonalIdentity"
-                                                   placeholder="National ID"
-                                                   ng-model="vm.profile.personalIdentityNum"/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr ng-if="vm.editMode">
-                                    <td>&nbsp;</td>
-                                    <td class="text-right"><button type="button" class="btn btn-success" title="Update Profile"><strong><i class="fa fa-floppy-o" aria-hidden="true"></i> Update</strong></button></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </form>
+                    <div class="col-md-2 text-right">
+                        <button ng-click="vm.enableEditMode()" title="Edit Profile" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        <button ng-if="vm.editMode" title="Update Profile" type="submit" class="btn btn-sm btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                        <button ng-click="vm.disablEditeMode()" title="Clear Edit" type="button" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer text-right">
-                Last Update : <span class="text-info" ng-bind="vm.profile.lastUpdatedDate | date:'medium'"></span>
-            </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3" align="center" style="display: none;">
+                            <div class="profile-image" tabindex="0" aria-label="Profile image">
+                                <div class="profile-image-button">
+                                    <button class="upload-img" type="button">
+                                        <i class="fa fa-camera" aria-hidden="true"></i>
+                                        <span>Add</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <img class="img-circle img-responsive">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <table class="table table-user-information mb0">
+                                <tbody>
+                                    <tr>
+                                        <td class="h4">Name</td>
+                                        <td ng-if="!vm.editMode" ng-bind="vm.profile.fullName"></td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="control-label">First Name :</span>
+                                                        <input type="text" name="firstName" id="firstName" class="form-control"
+                                                        placeholder="First Name"
+                                                        ng-model="vm.profile.firstName"
+                                                        tabindex="0"
+                                                        autofocus />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="control-label">Last Name :</span>
+                                                        <input type="text" name="lastName" id="lastName" class="form-control"
+                                                        placeholder="Last Name"
+                                                        ng-model="vm.profile.lastName"
+                                                        tabindex="0" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <span class="control-label">Display Name / Nick Name :</span>
+                                                        <input type="text" name="nikeName" id="nikeName" class="form-control"
+                                                        ng-model="vm.profile.nikeName"
+                                                        placeholder="Display Name"
+                                                        tabindex="0" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="h4"># of times given blood</td>
+                                        <td ng-if="!vm.editMode" class="h4 blue"><strong ng-bind="vm.profile.bloodGiven"></strong> {{vm.profile.bloodGiven==0 || vm.profile.bloodGiven==1 ?"time":"times"}}</td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="form-group" ng-class="{'has-error':profileForm.numBloodGiven.$invalid && profileForm.numBloodGiven.$dirty}">
+                                                <input type="number" name="numBloodGiven" id="numBloodGiven" class="form-control input-lg"
+                                                ng-model="vm.profile.bloodGiven"
+                                                placeholder="E.g. 5"
+                                                max="50"
+                                                tabindex="0" />
+                                                <span class="help-block has-error" ng-if="profileForm.numBloodGiven.$dirty">
+                                                    <span ng-show="profileForm.numBloodGiven.$error.max">Too long!</span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="h4">Mobile Phone <label ng-if="vm.editMode" class="required"></label></td>
+                                        <td ng-if="!vm.editMode" ng-bind="vm.profile.phoneNumber"></td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="form-group required" ng-class="{'has-error':profileForm.txtPhone.$invalid && profileForm.txtPhone.$dirty}">
+                                                <input type="text" class="form-control" id="txtPhone" name="txtPhone"
+                                                placeholder="E.g. +880XXXXXXXXXX"
+                                                ng-model="vm.profile.phoneNumber"
+                                                ng-pattern="/^([0-9\(\)\/\+ \-]{5,15})$/"
+                                                required />
+                                                <span class="help-block has-error" ng-if="profileForm.txtPhone.$dirty">
+                                                    <span ng-show="profileForm.txtPhone.$error.required">Required!</span>
+                                                    <span ng-show="profileForm.txtPhone.$error.pattern">Not a valid Contact Number!</span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="h4">E-mail<label ng-if="vm.editMode" class="required"></label></td>
+                                        <td ng-if="!vm.editMode" ng-bind="vm.profile.email"></td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="form-group required" ng-class="{'has-error':profileForm.txtEmail.$invalid && profileForm.txtEmail.$dirty}">
+                                                <input class="form-control input-lg" id="txtEmail" name="txtEmail" type="email"
+                                                placeholder="Your Email"
+                                                ng-model="vm.profile.email"
+                                                required />
+                                                <span class="help-block has-error" ng-if="profileForm.txtEmail.$dirty">
+                                                    <span ng-show="profileForm.txtEmail.$error.required">Required!</span>
+                                                    <span ng-show="profileForm.txtEmail.$error.email">Not valid email!</span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="h4">Blood Group <label ng-if="vm.editMode" class="required"></label></td>
+                                        <td ng-if="!vm.editMode" ng-bind="vm.profile.bloodGroup"></td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="form-group required" ng-class="{'has-error':profileForm.drpBloodGroup.$invalid && profileForm.drpBloodGroup.$dirty}">
+                                                <select class="form-control" id="drpBloodGroup" name="drpBloodGroup" ng-model="vm.profile.bloodGroupId" required>
+                                                    <option value="" disabled>Select Blood Group</option>
+                                                    <option ng-repeat="bloodGroup in vm.bloodGroups" ng-value="bloodGroup.id">{{bloodGroup.symbole}}</option>
+                                                </select>
+                                                <span class="help-block has-error" ng-if="profileForm.drpBloodGroup.$dirty">
+                                                    <span ng-show="profileForm.drpBloodGroup.$error.required">Required!</span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="h4">Date of Birth</td>
+                                        <td ng-if="!vm.editMode" ng-bind="vm.profile.dateOfBirth | date:'dd.mm.yy'"></td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="form-group">
+                                                <input type="text" name="dateOfBirth" id="dateOfBirth" class="form-control"
+                                                ng-model="vm.profile.dateOfBirth"
+                                                placeholder="dd.mm.yy"
+                                                tabindex="0"
+                                                jqdatepicker />
+                                            </div>
+                                        </td>
+                                    </tr>
 
-        </div>
+                                    <tr>
+                                        <td class="h4">Contact Address</td>
+                                        <td ng-if="!vm.editMode"></td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <span class="control-label">Address :</span>
+                                                        <input type="text" name="txtAddress" id="txtAddress" class="form-control"
+                                                        ng-model="vm.profile.address"
+                                                        placeholder="Your Address"
+                                                        tabindex="0" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="control-label">Postcode :</span>
+                                                        <input type="text" name="txtPostCode" id="txtPostCode" class="form-control"
+                                                        placeholder="Your Postcode"
+                                                        ng-model="vm.profile.postCode"
+                                                        tabindex="0" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="control-label">City :</span>
+                                                        <input type="text" name="txtCity" id="txtCity" class="form-control"
+                                                        placeholder="Your City"
+                                                        ng-model="vm.profile.city"
+                                                        tabindex="0" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="h4">Gender <label ng-if="vm.editMode" class="required"></label></td>
+                                        <td ng-if="!vm.editMode" ng-bind="vm.profile.genderName"></td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="form-group" ng-class="{'has-error':profileForm.sex.$invalid}">
+                                                <div class="form-control">
+                                                    Male :
+                                                    <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="1" data-icon='' />
+                                                    Female :
+                                                    <input type="radio" name="sex" ng-model="vm.profile.gender" ng-required="!vm.profile.gender" ng-value="0" data-icon='' />
+                                                </div>
+                                                <span class="help-block has-error" ng-if="profileForm.sex.$invalid">
+                                                    <span ng-show="profileForm.sex.$error.required">Select gender!</span>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="h4">Country</td>
+                                        <td ng-if="!vm.editMode" ng-bind="vm.profile.country"></td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="form-group">
+                                                <select class="form-control" id="drpCountry" name="drpCountry" ng-model="vm.profile.countryId">
+                                                    <option value="" disabled>Select Country</option>
+                                                    <option ng-repeat="country in vm.countries" ng-value="country.id">{{country.name}}</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="h4">Personal Identity Number</td>
+                                        <td ng-if="!vm.editMode" ng-bind="vm.profile.personalIdentityNum"></td>
+                                        <td ng-if="vm.editMode">
+                                            <div class="form-group required">
+                                                <input type="text" class="form-control" id="txtPersonalIdentity" name="txtPersonalIdentity"
+                                                placeholder="National ID"
+                                                ng-model="vm.profile.personalIdentityNum" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="vm.editMode">
+                                        <td>&nbsp;</td>
+                                        <td class="text-right"><button type="submit" class="btn btn-success" title="Update Profile"><strong><i class="fa fa-floppy-o" aria-hidden="true"></i> Update</strong></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer text-right">
+                    Last Update : <span class="text-info" ng-bind="vm.profile.lastUpdatedDate | date:'medium'"></span>
+                </div>
+
+            </div>
+        </form>
     </div>
 </div>

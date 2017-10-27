@@ -5,14 +5,15 @@ app.factory('usersService', ['$http', 'ngAuthSettings', function ($http, ngAuthS
 
     var usersServiceFactory = {};
 
-    var _getUsers = function () {
-        
+    usersServiceFactory.getUsers = function () {
         return $http.get(serviceBase + 'api/users').then(function (results) {
             return results;
         });
     };
 
-    usersServiceFactory.getUsers = _getUsers;
+    usersServiceFactory.updateUser = function (data) {
+        return $http.put(serviceBase + 'api/users', data);
+    };
 
     return usersServiceFactory;
 

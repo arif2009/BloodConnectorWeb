@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('profileController', ['$scope', 'dataService', 'authService', function ($scope, dataService, authService) {
+app.controller('profileController', ['$scope', 'usersService', 'dataService', 'authService', function ($scope, usersService, dataService, authService) {
     var vm = this;
     vm.savedSuccessfully = false;
     vm.editMode = false;
@@ -32,6 +32,12 @@ app.controller('profileController', ['$scope', 'dataService', 'authService', fun
         personalIdentityNum: "",
         lastUpdatedDate: "",
         attachments:""
+    };
+
+    vm.update = function() {
+        usersService.updateUser(vm.profile).then(function(result) {
+            
+        });
     };
 
     vm.enableEditMode = function () {
