@@ -2,17 +2,15 @@
     <div class="toppad" ng-class="{'edit-mode': vm.editMode}">
         <form class="form-profile" role="form" novalidate ng-submit="profileForm.$valid && vm.update()" enctype="multipart/form-data" name="profileForm">
             <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-md-3 panel-title text-left" ng-bind="vm.profile.fullName"></div>
-                    <div class="col-md-7 text-center">
-                        
-                    </div>
-                    <div class="col-md-2 text-right">
-                        <button ng-click="vm.enableEditMode()" title="Edit Profile" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                        <button ng-if="vm.editMode" title="Update Profile" type="submit" class="btn btn-sm btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                        <button ng-click="vm.disablEditeMode()" title="Clear Edit" type="button" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
-                    </div>
+            <div class="panel-heading clearfix">
+                <div class="panel-title" ng-bind="vm.profile.fullName"></div>
+                <div ng-class="{'invisible':profileForm.$valid}">
+                    &nbsp;<span ng-if="vm.editMode" class="red-alert">Please fillup required fields.</span>
+                </div>
+                <div>
+                    <button ng-click="vm.enableEditMode()" title="Edit Profile" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    <button ng-if="vm.editMode" title="Update Profile" type="submit" class="btn btn-sm btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                    <button ng-click="vm.disablEditeMode()" title="Clear Edit" type="button" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
             </div>
                 <div class="panel-body">

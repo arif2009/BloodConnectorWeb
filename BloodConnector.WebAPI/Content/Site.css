@@ -504,6 +504,33 @@ div.user-menu div.user-menu-content:not(.active){
 
 /*End : Profile image*/
 
+.red-alert {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.form-profile .panel-heading div:first-child {
+    width: 25%;
+    float: left;
+    text-align: left;
+}
+.form-profile .panel-heading div:first-child+div {
+    width: 55%;
+    float: left;
+    text-align: center;
+}
+
+.form-profile .panel-heading div:first-child+div+div {
+    width: 20%;
+    float: right;
+    text-align: right;
+    -moz-min-width: 110px; 
+    -ms-min-width: 110px;
+    -o-min-width: 110px; 
+    -webkit-min-width: 110px;
+    min-width: 110px;
+}
+
 /*Start : Radio button style*/
 input[name='sex'] {
     -webkit-appearance: none;
