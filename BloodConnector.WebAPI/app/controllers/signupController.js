@@ -40,9 +40,9 @@ app.controller('signupController', ['authService', 'dataService', 'utilsFactory'
                 }
             });
           },
-         function (response) {
+         function (error) {
              We.scroll(0);
-             vm.messages = utilsFactory.processModelstateError(response.data.modelState);
+             vm.messages = utilsFactory.processModelstateError(error.data.modelState);
          });
     };
 

@@ -18,17 +18,24 @@ var compareTo = function () {
     };
 };
 
-var jqDatePicker = function() {
+//https://stackoverflow.com/a/33129539/3835843
+var jqDatePicker = function ($filter) {
     return {
         restrict: 'A',
         require: 'ngModel',
         link: function (scope, element, attrs, ngModelCtrl) {
+            $.datepicker.setDefaults($.datepicker.regional['en-US']);
             element.datepicker({
-                dateFormat: 'dd.mm.yy',
-                onSelect: function(date) {
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-50:+0",
+                onSelect: function (date) {
                     scope.$parent.vm.profile.dateOfBirth = date;
                     scope.$apply();
                 }
+            });
+            ngModelCtrl.$formatters.unshift(function (v) {
+                return $filter('date')(v, 'shortDate');
             });
         }
     };

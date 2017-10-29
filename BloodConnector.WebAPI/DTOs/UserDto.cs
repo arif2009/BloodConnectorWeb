@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using AutoMapper.Configuration;
 using BloodConnector.WebAPI.Helper;
@@ -11,17 +12,26 @@ namespace BloodConnector.WebAPI.DTOs
 {
     public class UserDto
     {
+        public string UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NikeName { get; set; }
         public string Name => ProjectHelper.GetUserName(FirstName, LastName, NikeName);
         public string FullName => ProjectHelper.GetFullName(FirstName, LastName, NikeName);
         public string UserName { get; set; }
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
+        [Required]
+        [Display(Name = "Blood Group")]
+        [Range(1, 8, ErrorMessage = "The {0} field is required.")]
         public int BloodGroupId { get; set; }
         public string BloodGroup { get; set; }
         public int BloodGiven { get; set; }
         public string ContactNumber => PhoneNumber;
+        [Required]
+        [Display(Name = "Contact Number")]
+        [RegularExpression(@"^([0-9\(\)\/\+ \-]{5,15})$", ErrorMessage = "Not a valid Contact Number.")]
         public string PhoneNumber { get; set; }
         public string AlternativeContactNo { get; set; }
         public DateTime? DateOfBirth { get; set; }
@@ -31,6 +41,7 @@ namespace BloodConnector.WebAPI.DTOs
         public string City { get; set; }
         public int CountryId { get; set; }
         public string Country { get; set; }
+        [Required]
         public Enums.GenderType? Gender { get; set; }
         public string GenderName
         {

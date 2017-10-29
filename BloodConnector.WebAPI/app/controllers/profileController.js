@@ -1,12 +1,12 @@
 ﻿'use strict';
-app.controller('profileController', ['$scope', 'usersService', 'dataService', 'authService', function ($scope, usersService, dataService, authService) {
+app.controller('profileController', ['$scope', 'usersService', 'dataService', 'authService', 'toaster', function ($scope, usersService, dataService, authService, toaster) {
     var vm = this;
-    vm.savedSuccessfully = false;
     vm.editMode = false;
     vm.messages = [];
     vm.bloodGroups = [];
     vm.countries = [];
     vm.profile = {
+        userId: "",
         name: "",
         userName: "",
         firstName: "",
@@ -36,7 +36,20 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
 
     vm.update = function() {
         usersService.updateUser(vm.profile).then(function(result) {
-            
+            vm.disablEditeMode();
+            We.scroll(0);
+            toaster.pop({
+                type: 'success',
+                body: 'Successfully update your information.',
+                timeout: 10000
+            });
+        }, function (error) {
+            We.scroll(0);
+            toaster.pop({
+                type: 'warning',
+                body: 'Required field missing.',
+                timeout: 10000
+            });
         });
     };
 
@@ -57,6 +70,10 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
             });
         });
     };
+
+    $scope.$watch("vm.profile.gender", function(value) {
+        vm.profile.genderName = value === 0 ? "Female" : "Male";
+    });
 
     $scope.$watch("vm.editMode", function (value) {
         if (value) {
