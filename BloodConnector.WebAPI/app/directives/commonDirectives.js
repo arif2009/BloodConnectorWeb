@@ -41,5 +41,20 @@ var jqDatePicker = function ($filter) {
     };
 };
 
+var myEnter = function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if (event.which === 13) {
+                scope.$apply(function () {
+                    scope.$eval(attrs.myEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+};
+
 app.directive("compareTo", compareTo);
 app.directive("jqdatepicker", jqDatePicker);
+app.directive("myEnter", myEnter);

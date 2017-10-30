@@ -294,6 +294,10 @@
     <Compile Include="Migrations\201710291452347_RemoveUniqueKeyFromEmail.Designer.cs">
       <DependentUpon>201710291452347_RemoveUniqueKeyFromEmail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710300325370_DisableDatabaseGeneratedOption.cs" />
+    <Compile Include="Migrations\201710300325370_DisableDatabaseGeneratedOption.Designer.cs">
+      <DependentUpon>201710300325370_DisableDatabaseGeneratedOption.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -352,6 +356,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\toaster.css" />
@@ -457,7 +467,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\" />
     <Folder Include="Log\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
@@ -480,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710291452347_RemoveUniqueKeyFromEmail.resx">
       <DependentUpon>201710291452347_RemoveUniqueKeyFromEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710300325370_DisableDatabaseGeneratedOption.resx">
+      <DependentUpon>201710300325370_DisableDatabaseGeneratedOption.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

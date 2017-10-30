@@ -39,7 +39,7 @@ namespace BloodConnector.WebAPI.Models
         public string PersonalIdentityNum { get; set; }
         public IList<Attachment> Attachments { get; set; }
         public DateTime CreatedDate { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime UpdatedDate { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {

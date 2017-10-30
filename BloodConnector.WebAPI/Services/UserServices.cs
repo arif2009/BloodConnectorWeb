@@ -63,6 +63,7 @@ namespace BloodConnector.WebAPI.Services
             user.CountryId = data.CountryId;
             user.PersonalIdentityNum = data.PersonalIdentityNum;
             user.UpdatedDate = DateTime.UtcNow;
+            data.UpdatedDate = DateTime.UtcNow;
 
             //Step-3 : Save
             //Mark entity as modified

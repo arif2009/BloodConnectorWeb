@@ -35,7 +35,8 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
     };
 
     vm.update = function() {
-        usersService.updateUser(vm.profile).then(function(result) {
+        usersService.updateUser(vm.profile).then(function (result) {
+            vm.profile.lastUpdatedDate = result.data.lastUpdatedDate;
             vm.disablEditeMode();
             We.scroll(0);
             toaster.pop({

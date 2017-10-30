@@ -202,7 +202,8 @@ namespace BloodConnector.WebAPI.Controllers.Api
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
                     BloodGroupId = model.BloodGroupId,
-                    CreatedDate = DateTime.UtcNow
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow
                 };
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);

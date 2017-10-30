@@ -33,7 +33,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
         }
 
         [ValidateModelState]
-        public async Task<IHttpActionResult> Put([Bind(Exclude = "CreatedDate")]UserDto userData)
+        public async Task<IHttpActionResult> Put([Bind(Exclude = "CreatedDate,UpdatedDate")]UserDto userData)
         {
             try
             {
