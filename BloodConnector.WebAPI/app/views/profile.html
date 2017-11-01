@@ -1,6 +1,6 @@
 ﻿<div class="ng-cloak" data-ng-controller="profileController as vm" ng-cloak>
     <div class="toppad" ng-class="{'edit-mode': vm.editMode}">
-        <form class="form-profile" role="form" novalidate ng-submit="profileForm.$valid && vm.update()" enctype="multipart/form-data" name="profileForm">
+        <form name="profileForm" role="form" class="form-profile" ng-submit="profileForm.$valid && vm.update()" enctype="multipart/form-data" novalidate>
             <div class="panel panel-default">
             <div class="panel-heading clearfix">
                 <div class="panel-title">
@@ -21,8 +21,9 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3" align="center">
                             <div class="profile-image" tabindex="0" aria-label="Profile image">
-                                <div class="profile-image-button">
-                                    <input type="file" ng-model="vm.profile.attachments" accept="image/*" id="profileImage" name="profileImage"/>
+                                <!--http://itsolutionstuff.com/post/angularjs-simple-image-upload-with-preview-example-in-phpexample.html-->
+                                <div class="profile-image-button" style="background-image: url({{vm.imageSource}})">
+                                    <input type="file" id="profileImage" name="profileImage" onchange="angular.element(this).scope().vm.selectFile(this)" accept="image/*"/>
                                     <label class="upload-img" for="profileImage">
                                         <i class="fa fa-camera" aria-hidden="true"></i>
                                         <span>Add</span>

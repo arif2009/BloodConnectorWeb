@@ -106,7 +106,6 @@ namespace BloodConnector.WebAPI.Models
 
             var attachConfig = modelBuilder.Entity<Attachment>();
             attachConfig.Property(p => p.FileguId).HasMaxLength(256);
-            attachConfig.Property(p => p.Type).HasMaxLength(128);
             attachConfig.Property(p => p.ContentType).HasMaxLength(128);
             attachConfig.Property(p => p.FileName).HasMaxLength(256);
             attachConfig.HasRequired(p => p.User).WithMany(p => p.Attachments);

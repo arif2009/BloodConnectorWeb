@@ -30,7 +30,7 @@ namespace BloodConnector.WebAPI.Services
         public UserDto GetUserById(string userId)
         {
             var id = Convert.ToInt64(userId.Decrypt());
-            var user = Db.Users.Include(x=>x.BloodGroup).Include(y=>y.Country).FirstOrDefault(x=>x.UserId == id);
+            var user = Db.Users.Include(x=>x.BloodGroup).Include(y=>y.Country).Include(z=>z.Attachments).FirstOrDefault(x=>x.UserId == id);
             return Mapper.Map<UserDto>(user);
         }
 

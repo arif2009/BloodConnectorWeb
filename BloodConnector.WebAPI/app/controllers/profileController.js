@@ -31,8 +31,19 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
         religionName: "",
         personalIdentityNum: "",
         lastUpdatedDate: "",
-        attachments:""
+        attachments:[]
     };
+
+    vm.imageSource = '../../Images/noimage.jpg';
+
+    vm.selectFile = function (element) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            vm.imageSource = event.target.result;
+            $scope.$apply();
+        }
+        reader.readAsDataURL(element.files[0]);
+    }
 
     vm.update = function() {
         usersService.updateUser(vm.profile).then(function (result) {

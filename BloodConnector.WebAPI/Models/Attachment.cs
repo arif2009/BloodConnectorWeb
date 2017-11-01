@@ -8,7 +8,7 @@ namespace BloodConnector.WebAPI.Models
         public string UserId { get; set; }
         public User User { get; set; }
         public string FileguId { get; set; }
-        public string Type { get; set; }
+        public int Type { get; set; }
         public string FileName { get; set; }
         public string ContentType { get; set; }
         public long Size { get; set; }

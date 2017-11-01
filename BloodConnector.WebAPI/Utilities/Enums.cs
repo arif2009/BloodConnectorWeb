@@ -19,6 +19,13 @@ namespace BloodConnector.WebAPI.Utilities
             Other = 5
         }
 
+        public enum FileType
+        {
+            Avatar = 1,
+            Resume = 2,
+            Document = 3
+        }
+
         public static IDictionary<string, string> Role = new Dictionary<string, string>
         {
             {"SuperAdmin", "1"},

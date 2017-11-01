@@ -298,6 +298,10 @@
     <Compile Include="Migrations\201710300325370_DisableDatabaseGeneratedOption.Designer.cs">
       <DependentUpon>201710300325370_DisableDatabaseGeneratedOption.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711010351409_MakeTypeInt.cs" />
+    <Compile Include="Migrations\201711010351409_MakeTypeInt.Designer.cs">
+      <DependentUpon>201711010351409_MakeTypeInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -492,6 +496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710300325370_DisableDatabaseGeneratedOption.resx">
       <DependentUpon>201710300325370_DisableDatabaseGeneratedOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711010351409_MakeTypeInt.resx">
+      <DependentUpon>201711010351409_MakeTypeInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
