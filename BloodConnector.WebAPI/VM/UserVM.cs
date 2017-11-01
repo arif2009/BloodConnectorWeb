@@ -8,9 +8,9 @@ using BloodConnector.WebAPI.Interface;
 using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Utilities;
 
-namespace BloodConnector.WebAPI.DTOs
+namespace BloodConnector.WebAPI.VM
 {
-    public class UserDto
+    public class UserVM
     {
         public string UserId { get; set; }
         public string FirstName { get; set; }

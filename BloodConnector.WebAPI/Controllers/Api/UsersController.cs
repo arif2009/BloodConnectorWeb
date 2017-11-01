@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
-using BloodConnector.WebAPI.DTOs;
+using BloodConnector.WebAPI.VM;
 using BloodConnector.WebAPI.Filters;
 using BloodConnector.WebAPI.Services;
 using Microsoft.AspNet.Identity;
@@ -33,7 +33,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
         }
 
         [ValidateModelState]
-        public async Task<IHttpActionResult> Put([Bind(Exclude = "CreatedDate,UpdatedDate")]UserDto userData)
+        public async Task<IHttpActionResult> Put([Bind(Exclude = "CreatedDate,UpdatedDate")]UserVM userData)
         {
             try
             {

@@ -260,8 +260,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />
-    <Compile Include="DTOs\UsersBloodGroupDto.cs" />
-    <Compile Include="DTOs\UserDto.cs" />
+    <Compile Include="VM\UsersBloodGroupVM.cs" />
+    <Compile Include="VM\UserVM.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using BloodConnector.WebAPI.DTOs;
 using BloodConnector.WebAPI.Helper;
 using BloodConnector.WebAPI.Models;
+using BloodConnector.WebAPI.VM;
 
 namespace BloodConnector.WebAPI.Services
 {
@@ -20,18 +20,18 @@ namespace BloodConnector.WebAPI.Services
             Db = db;
         }
 
-        public IList<UserDto> GetUsers()
+        public IList<UserVM> GetUsers()
         {
             var users = _userManager.Users.Include(x => x.BloodGroup).OrderByDescending(y=>y.UserId);
-            var userList = Mapper.Map<IEnumerable<UserDto>>(users).ToList();
+            var userList = Mapper.Map<IEnumerable<UserVM>>(users).ToList();
             return userList;
         }
 
-        public UserDto GetUserById(string userId)
+        public UserVM GetUserById(string userId)
         {
             var id = Convert.ToInt64(userId.Decrypt());
             var user = Db.Users.Include(x=>x.BloodGroup).Include(y=>y.Country).Include(z=>z.Attachments).FirstOrDefault(x=>x.UserId == id);
-            return Mapper.Map<UserDto>(user);
+            return Mapper.Map<UserVM>(user);
         }
 
         public async Task<bool> EmailAlreadyExist(string userId, string email)
@@ -40,7 +40,7 @@ namespace BloodConnector.WebAPI.Services
             return await Db.Users.AnyAsync(x => x.Email == email && x.UserId != id);
         }
 
-        public async Task<UserDto> UpdateUser(UserDto data)
+        public async Task<UserVM> UpdateUser(UserVM data)
         {
             //Step-1 : Retrieve
             var id = Convert.ToInt64(data.UserId.Decrypt());

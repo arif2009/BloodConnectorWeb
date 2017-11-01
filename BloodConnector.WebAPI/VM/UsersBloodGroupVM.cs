@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BloodConnector.WebAPI.DTOs
+namespace BloodConnector.WebAPI.VM
 {
-    public class UsersBloodGroupDto
+    public class UsersBloodGroupVM
     {
         public long TotalNumberOfUser { get; set; }
         public IEnumerable<Group> Groups { get; set; }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using BloodConnector.WebAPI.DTOs;
+using BloodConnector.WebAPI.VM;
 using BloodConnector.WebAPI.Interface;
 using BloodConnector.WebAPI.Models;
 using Microsoft.AspNet.Identity.Owin;
@@ -44,7 +44,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
         {
             var groups = Db.BloodGroup.Include(u=>u.Users).ToList();
 
-            var userGroups = new UsersBloodGroupDto
+            var userGroups = new UsersBloodGroupVM
             {
                 TotalNumberOfUser = groups.Sum(g=>g.Users.Count),
                 Groups = groups.Select(g=> new Group
