@@ -10,10 +10,10 @@ namespace BloodConnector.WebAPI.App_Start
         public AutoMapperProfile()
         {
             CreateMap<User, UserVM>()
-                .ForMember(dto=>dto.UserId, opt=>opt.MapFrom(u=>u.UserId.ToString().Encrypt()))
+                .ForMember(dto => dto.UserId, opt => opt.MapFrom(u => u.UserId.ToString().Encrypt()))
                 .ForMember(dto => dto.BloodGroup, opt => opt.MapFrom(u => u.BloodGroup.Symbole))
                 .ForMember(dto => dto.Country, opt => opt.MapFrom(u => u.Country.Name))
-                .ForMember(dto => dto.Attachments, opt=>opt.MapFrom(u=>u.Attachments));
+                .ForMember(dto=>dto.Attachments, opt=>opt.MapFrom(u=>u.Attachments));
         }
     }
 }

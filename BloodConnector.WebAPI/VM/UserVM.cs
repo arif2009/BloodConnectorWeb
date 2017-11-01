@@ -84,6 +84,6 @@ namespace BloodConnector.WebAPI.VM
             }
 
         }
-        public IList<Attachment> Attachments { get; set; }
+        public IList<AttachmentVM> Attachments { get; set; }
     }
 }
