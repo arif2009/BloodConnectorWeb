@@ -34,7 +34,8 @@ namespace BloodConnector.WebAPI
                         "~/Scripts/angular-route.min.js",
                         "~/Scripts/angular-local-storage.min.js",
                         "~/Scripts/toaster.min.js",
-                        "~/Scripts/angular-block-ui.min.js"));
+                        "~/Scripts/angular-block-ui.min.js",
+                        "~/Scripts/ng-file-upload.min.js"));
 
             var angularScripts = new ScriptBundle("~/bundles/angularScripts").Include(
                 // main app script
