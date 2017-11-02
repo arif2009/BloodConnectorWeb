@@ -1,5 +1,5 @@
 ﻿
-var app = angular.module('BloodConnectorApp', ['ngRoute', 'LocalStorageModule', 'blockUI', 'toaster']);
+var app = angular.module('BloodConnectorApp', ['ngRoute', 'ngFileUpload', 'LocalStorageModule', 'blockUI', 'toaster']);
 
 app.config(function ($routeProvider) {
 
