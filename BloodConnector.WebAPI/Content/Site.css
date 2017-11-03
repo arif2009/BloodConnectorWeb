@@ -416,6 +416,10 @@ div.user-menu div.user-menu-content:not(.active){
 .p0 {
     padding: 0 !important;
 }
+
+.text-wrap {
+    white-space: normal !important;
+}
 .search input {
     font-family: 'FontAwesome';
     padding: 6px 12px !important;
@@ -496,9 +500,6 @@ input[type='file'] {
 	width: 0.1px;
 	height: 0.1px;
 	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
 }
 
 .table-user-information > tbody > tr {

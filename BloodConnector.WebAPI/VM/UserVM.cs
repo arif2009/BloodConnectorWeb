@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using AutoMapper;
 using AutoMapper.Configuration;
 using BloodConnector.WebAPI.Helper;
@@ -84,6 +85,7 @@ namespace BloodConnector.WebAPI.VM
             }
 
         }
+        public HttpPostedFile avatar { get; set; }
         public IList<AttachmentVM> Attachments { get; set; }
     }
 }

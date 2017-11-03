@@ -260,6 +260,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="VM\AttachmentVM.cs" />
     <Compile Include="VM\UsersBloodGroupVM.cs" />
     <Compile Include="VM\UserVM.cs" />

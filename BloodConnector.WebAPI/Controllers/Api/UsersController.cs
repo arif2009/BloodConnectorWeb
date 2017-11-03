@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using BloodConnector.WebAPI.VM;
@@ -33,8 +34,10 @@ namespace BloodConnector.WebAPI.Controllers.Api
         }
 
         [ValidateModelState]
+        [ValidateAntiForgeryToken]
         public async Task<IHttpActionResult> Put([Bind(Exclude = "CreatedDate,UpdatedDate")]UserVM userData)
         {
+            var fileCollection = HttpContext.Current.Request.Files;
             try
             {
                 /*if (await _userServices.EmailAlreadyExist(userData.UserId, userData.Email))
@@ -42,7 +45,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
                     ModelState.AddModelError("Email", "Email already in use!");
                     return BadRequest(ModelState);
                 }*/
-
+                return Ok();
                 return Ok(await _userServices.UpdateUser(userData));
             }
             catch (Exception ex)

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('profileController', ['$scope', 'usersService', 'dataService', 'authService', 'toaster', function ($scope, usersService, dataService, authService, toaster) {
+app.controller('profileController', ['$scope', 'usersService', 'dataService', 'authService', 'toaster', 'fileService', function ($scope, usersService, dataService, authService, toaster, fileService) {
     var vm = this;
     vm.editMode = false;
     vm.messages = [];
@@ -31,22 +31,33 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
         religionName: "",
         personalIdentityNum: "",
         lastUpdatedDate: "",
+        avatar: "../../Images/noimage.jpg",
         attachments:[]
     };
 
-    vm.imageSource = '../../Images/noimage.jpg';
-
-    vm.selectFile = function (element) {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-            vm.imageSource = event.target.result;
-            $scope.$apply();
-        }
-        reader.readAsDataURL(element.files[0]);
-    }
-
-    vm.update = function() {
-        usersService.updateUser(vm.profile).then(function (result) {
+    vm.update = function () {
+        fileService.postMultipartForm({
+            method: "PUT",
+            url: "/api/users",
+            data: vm.profile
+        }).success(function (data) {
+            vm.profile.lastUpdatedDate = result.data.lastUpdatedDate;
+            vm.disablEditeMode();
+            We.scroll(0);
+            toaster.pop({
+                type: 'success',
+                body: 'Successfully update your information.',
+                timeout: 10000
+            });
+        }).error(function (response) {
+            We.scroll(0);
+            toaster.pop({
+                type: 'warning',
+                body: 'Required field missing.',
+                timeout: 10000
+            });
+        });
+/*        usersService.updateUser(vm.profile).then(function (result) {
             vm.profile.lastUpdatedDate = result.data.lastUpdatedDate;
             vm.disablEditeMode();
             We.scroll(0);
@@ -62,7 +73,7 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
                 body: 'Required field missing.',
                 timeout: 10000
             });
-        });
+        });*/
     };
 
     vm.enableEditMode = function () {
