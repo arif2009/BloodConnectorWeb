@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using BloodConnector.WebAPI.VM;
 using BloodConnector.WebAPI.Filters;
+using BloodConnector.WebAPI.Helper;
 using BloodConnector.WebAPI.Services;
 using Microsoft.AspNet.Identity;
 
@@ -33,19 +35,28 @@ namespace BloodConnector.WebAPI.Controllers.Api
             return Ok(_userServices.GetUserById(id));
         }
 
-        [ValidateModelState]
-        [ValidateAntiForgeryToken]
-        public async Task<IHttpActionResult> Put([Bind(Exclude = "CreatedDate,UpdatedDate")]UserVM userData)
+        public async Task<IHttpActionResult> Post()
         {
-            var fileCollection = HttpContext.Current.Request.Files;
+
+            var avater = HttpContext.Current.Request.Files[0];
+            var id = HttpContext.Current.Request.Form["id"];
+
             try
             {
-                /*if (await _userServices.EmailAlreadyExist(userData.UserId, userData.Email))
-                {
-                    ModelState.AddModelError("Email", "Email already in use!");
-                    return BadRequest(ModelState);
-                }*/
-                return Ok();
+                return Ok(await _userServices.ManageAvater(id, avater));
+            }
+            catch
+            {
+                return BadRequest(ModelState);
+            }
+            
+        }
+
+        [ValidateModelState]
+        public async Task<IHttpActionResult> Put([Bind(Exclude = "CreatedDate,UpdatedDate")]UserVM userData)
+        {
+            try
+            {
                 return Ok(await _userServices.UpdateUser(userData));
             }
             catch (Exception ex)

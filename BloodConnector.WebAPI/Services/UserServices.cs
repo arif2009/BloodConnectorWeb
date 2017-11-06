@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using AutoMapper;
 using BloodConnector.WebAPI.Helper;
 using BloodConnector.WebAPI.Models;
+using BloodConnector.WebAPI.Utilities;
 using BloodConnector.WebAPI.VM;
 
 namespace BloodConnector.WebAPI.Services
@@ -70,6 +72,32 @@ namespace BloodConnector.WebAPI.Services
             Db.Entry(user).State = EntityState.Modified;
             await Db.SaveChangesAsync();
             return data;
+        }
+
+        public async Task<int> ManageAvater(string userId, HttpPostedFile avater)
+        {
+            var uploadConfig = FileHelper.Upload(avater, Enums.FileType.Avatar);
+
+            var userAvater = Db.Attachment.FirstOrDefault(x => x.Type == (int) Enums.FileType.Avatar) ?? new Attachment();
+            userAvater.UserId = userId;
+            userAvater.FileName = uploadConfig.FileName;
+            userAvater.Type = (int) Enums.FileType.Avatar;
+            userAvater.FileguId = uploadConfig.FileguId;
+            userAvater.ContentType = avater.ContentType;
+            userAvater.Size = avater.ContentLength/1024; //Make byte to KB
+            userAvater.LastUpdatedOn = DateTime.UtcNow;
+
+            if (userAvater.ID == default(int))
+            {
+                Db.Entry(userAvater).State = EntityState.Added;
+                Db.Attachment.Add(userAvater);
+            }
+            else
+            {
+                Db.Entry(userAvater).State = EntityState.Modified;
+            }
+
+            return await Db.SaveChangesAsync();
         }
     }
 }

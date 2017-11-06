@@ -19,7 +19,7 @@ namespace BloodConnector.WebAPI.Utilities
             Other = 5
         }
 
-        public enum FileType
+        public enum FileType:int
         {
             Avatar = 1,
             Resume = 2,

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web;
 using AutoMapper;
 using AutoMapper.Configuration;
@@ -13,6 +14,7 @@ namespace BloodConnector.WebAPI.VM
 {
     public class UserVM
     {
+        public string Id { get; set; }
         public string UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -85,7 +87,16 @@ namespace BloodConnector.WebAPI.VM
             }
 
         }
-        public HttpPostedFile avatar { get; set; }
+
+        public string Avater
+        {
+            get
+            {
+                var userAvater = this.Attachments.FirstOrDefault(x => x.Type == (int) Enums.FileType.Avatar)??new AttachmentVM();
+                return userAvater.FileName;
+            }
+        }
+
         public IList<AttachmentVM> Attachments { get; set; }
     }
 }

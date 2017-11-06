@@ -6,6 +6,7 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
     vm.bloodGroups = [];
     vm.countries = [];
     vm.profile = {
+        id: "",
         userId: "",
         name: "",
         userName: "",
@@ -31,40 +32,30 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
         religionName: "",
         personalIdentityNum: "",
         lastUpdatedDate: "",
-        avatar: "../../Images/noimage.jpg",
         attachments:[]
     };
 
+    vm.attachment = {
+        id: "",
+        userId: "",
+        avatar: ""
+    };
+
     vm.update = function () {
-        fileService.postMultipartForm({
-            method: "PUT",
-            url: "/api/users",
-            data: vm.profile
-        }).success(function (data) {
-            vm.profile.lastUpdatedDate = result.data.lastUpdatedDate;
-            vm.disablEditeMode();
-            We.scroll(0);
-            toaster.pop({
-                type: 'success',
-                body: 'Successfully update your information.',
-                timeout: 10000
-            });
-        }).error(function (response) {
-            We.scroll(0);
-            toaster.pop({
-                type: 'warning',
-                body: 'Required field missing.',
-                timeout: 10000
-            });
-        });
-/*        usersService.updateUser(vm.profile).then(function (result) {
-            vm.profile.lastUpdatedDate = result.data.lastUpdatedDate;
-            vm.disablEditeMode();
-            We.scroll(0);
-            toaster.pop({
-                type: 'success',
-                body: 'Successfully update your information.',
-                timeout: 10000
+
+        usersService.updateUser(vm.profile).then(function (result) {
+            fileService.postMultipartForm({
+                url: "/api/users",
+                data: vm.attachment
+            }).success(function(data) {
+                vm.profile.lastUpdatedDate = result.data.lastUpdatedDate;
+                vm.disablEditeMode();
+                We.scroll(0);
+                toaster.pop({
+                    type: 'success',
+                    body: 'Successfully update your information.',
+                    timeout: 10000
+                });
             });
         }, function (error) {
             We.scroll(0);
@@ -73,7 +64,7 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
                 body: 'Required field missing.',
                 timeout: 10000
             });
-        });*/
+        });
     };
 
     vm.enableEditMode = function () {
@@ -91,6 +82,10 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
             Object.keys(vm.profile).forEach(function (key) {
                 vm.profile[key] = userData[key];
             });
+
+            vm.attachment.id = result.data.id;
+            vm.attachment.avatar = result.data.avatar;
+            vm.attachment.userId = result.data.userId;
         });
     };
 

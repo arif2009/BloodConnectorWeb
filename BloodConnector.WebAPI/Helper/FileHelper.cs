@@ -15,35 +15,35 @@ namespace BloodConnector.WebAPI.Helper
         public string FileName { get; set; }
 
         public string FilePath { get; set; }
+
+        public string FileguId { get; set; }
     }
 
     public class FileHelper
     {
         public static UploadConfig Upload(HttpPostedFile fileBase, Enums.FileType fileType)
         {
-            //var fileName = $"{Guid.NewGuid()}.{Path.GetFileName(fileBase.FileName)}";
-            var fileName = String.Format("{0}{1}", Guid.NewGuid(), Path.GetFileName(fileBase.FileName));
-
+            Guid fileguId = Guid.NewGuid();
+            var fileName = String.Format("{0}{1}", fileguId, Path.GetExtension(fileBase.FileName));
+            
             var filePath = string.Empty;
 
             switch (fileType)
             {
                 case Enums.FileType.Avatar:
-                    filePath = Const.FILEPATH;
-                    break;
-                case Enums.FileType.Resume:
-                    filePath = Const.FILEPATH;
+                    filePath = Path.Combine(Const.UPLOAD,Const.AVATER);
                     break;
                 case Enums.FileType.Document:
-                    filePath = Const.FILEPATH;
+                    filePath = Path.Combine(Const.UPLOAD, Const.DOCUMENT);
                     break;
             }
 
             var uploadConfig = new UploadConfig
             {
                 FileBase = fileBase,
-                FileName = fileName,
-                FilePath = filePath
+                FileName = Path.Combine(filePath,fileName),
+                FilePath = filePath,
+                FileguId = fileguId.ToString()
             };
 
             try
@@ -80,7 +80,7 @@ namespace BloodConnector.WebAPI.Helper
 
             if (string.IsNullOrEmpty(config.FilePath))
             {
-                config.FilePath = Const.FILEPATH;
+                config.FilePath = Const.UPLOAD;
             }
 
             var fullPath = HttpContext.Current.Server.MapPath(Path.Combine(config.FilePath, config.FileName));
