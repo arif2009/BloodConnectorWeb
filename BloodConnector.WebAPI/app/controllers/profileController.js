@@ -1,4 +1,5 @@
-﻿'use strict';
+﻿/// <reference path="profileController.js" />
+'use strict';
 app.controller('profileController', ['$scope', 'usersService', 'dataService', 'authService', 'toaster', 'fileService', function ($scope, usersService, dataService, authService, toaster, fileService) {
     var vm = this;
     vm.editMode = false;
@@ -38,7 +39,7 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
     vm.attachment = {
         id: "",
         userId: "",
-        avatar: ""
+        avater: ""
     };
 
     vm.update = function () {
@@ -84,7 +85,7 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
             });
 
             vm.attachment.id = result.data.id;
-            vm.attachment.avatar = result.data.avatar;
+            vm.attachment.avater = result.data.avater;
             vm.attachment.userId = result.data.userId;
         });
     };

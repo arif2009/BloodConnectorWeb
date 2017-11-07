@@ -20,11 +20,15 @@
                 <div class="panel-body">
                     <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3" align="center">
-                        <img ngf-src="vm.attachment.avatar" class="img-circle img-responsive"/>
-                        <img ng-if="!vm.attachment.avatar" src="../../Images/noimage.jpg" alt="Profile picture" class="img-circle img-responsive"/>
-                        <button ng-if="vm.editMode" class="btn btn-primary text-wrap mt10" type="button" onclick="document.getElementById('profileImage').click();">Select Your Profile Picture</button>
-                        <input type="file" id="profileImage" name="profileImage" ng-model="vm.attachment.avatar" ngf-select accept="image/*"/>
-                   </div>
+                            <span class="has-error" ng-if="profileForm.profileImage.$dirty">
+                                <span class="help-block" ng-show="profileForm.profileImage.$error.pattern">Select a valid image !</span>
+                                <span class="help-block" ng-show="profileForm.profileImage.$error.maxSize">Too large. Image should not more than 1.5 MB !</span>
+                            </span>
+                            <img ngf-src="vm.attachment.avater" class="img-circle img-responsive"/>
+                            <img ng-if="!vm.attachment.avater" src="../../Images/noimage.jpg" alt="Profile picture" class="img-circle img-responsive"/>
+                            <button ng-if="vm.editMode" class="btn btn-primary text-wrap mt10" type="button" onclick="document.getElementById('profileImage').click();">Select Your Profile Picture</button>
+                            <input type="file" id="profileImage" name="profileImage" ng-model="vm.attachment.avater" ngf-select ngf-max-size="1.5MB" ngf-pattern="'image/*'" ngf-accept="'image/*'"/>
+                    </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <table class="table table-user-information mb0">
                             <tbody>

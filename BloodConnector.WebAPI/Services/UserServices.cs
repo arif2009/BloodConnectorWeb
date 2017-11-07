@@ -80,7 +80,7 @@ namespace BloodConnector.WebAPI.Services
 
             var userAvater = Db.Attachment.FirstOrDefault(x => x.Type == (int) Enums.FileType.Avatar && x.UserId==userId) ?? new Attachment();
             userAvater.UserId = userId;
-            userAvater.FileName = uploadConfig.FileName;
+            userAvater.FileName = uploadConfig.FileNameWithPath;
             userAvater.Type = (int) Enums.FileType.Avatar;
             userAvater.FileguId = uploadConfig.FileguId;
             userAvater.ContentType = avater.ContentType;

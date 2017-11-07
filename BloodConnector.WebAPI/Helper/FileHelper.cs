@@ -12,6 +12,7 @@ namespace BloodConnector.WebAPI.Helper
     {
         public HttpPostedFile FileBase { get; set; }
 
+        public string FileNameWithPath { get; set; }
         public string FileName { get; set; }
 
         public string FilePath { get; set; }
@@ -41,7 +42,8 @@ namespace BloodConnector.WebAPI.Helper
             var uploadConfig = new UploadConfig
             {
                 FileBase = fileBase,
-                FileName = Path.Combine(filePath,fileName),
+                FileName = fileName,
+                FileNameWithPath = Path.Combine(filePath,fileName),
                 FilePath = filePath,
                 FileguId = fileguId.ToString()
             };
@@ -83,7 +85,7 @@ namespace BloodConnector.WebAPI.Helper
                 config.FilePath = Const.UPLOAD;
             }
 
-            var fullPath = HttpContext.Current.Server.MapPath(Path.Combine(config.FilePath, config.FileName));
+            var fullPath = HttpContext.Current.Server.MapPath(config.FileNameWithPath);
 
             var dir = Path.GetDirectoryName(fullPath) ?? string.Empty;
 
