@@ -79,6 +79,7 @@ namespace BloodConnector.WebAPI.Services
             var uploadConfig = FileHelper.Upload(avater, Enums.FileType.Avatar);
 
             var userAvater = Db.Attachment.FirstOrDefault(x => x.Type == (int) Enums.FileType.Avatar && x.UserId==userId) ?? new Attachment();
+            var oldPath = userAvater.FileName;
             userAvater.UserId = userId;
             userAvater.FileName = uploadConfig.FileNameWithPath;
             userAvater.Type = (int) Enums.FileType.Avatar;
@@ -94,6 +95,7 @@ namespace BloodConnector.WebAPI.Services
             }
             else
             {
+                FileHelper.Delete(oldPath);
                 Db.Entry(userAvater).State = EntityState.Modified;
             }
 

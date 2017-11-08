@@ -62,9 +62,11 @@ namespace BloodConnector.WebAPI.Helper
 
         public static void Delete(string relativePath)
         {
-            if (System.IO.File.Exists(HttpContext.Current.Server.MapPath(relativePath)))
+            var fullPath = HttpContext.Current.Server.MapPath(relativePath);
+
+            if (File.Exists(fullPath))
             {
-                System.IO.File.Delete(HttpContext.Current.Server.MapPath(relativePath));
+                File.Delete(fullPath);
             }
         }
 
