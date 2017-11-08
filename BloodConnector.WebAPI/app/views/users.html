@@ -23,6 +23,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact Number</th>
+                        <th>Address</th>
                         <th>Donate</th>
                         <th>Blood Group</th>
                     </tr>
@@ -32,6 +33,15 @@
                         <td ng-bind="item.name"></td>
                         <td ng-bind="item.email"></td>
                         <td ng-bind="item.contactNumber"></td>
+                        <td>
+                            <span ng-bind="item.address"></span>
+                            <span ng-if="item.city || item.address">
+                                <br />
+                                <span ng-bind="item.city"></span>
+                                <span ng-if="item.postCode">,</span>
+                                <span ng-bind="item.postCode"></span>
+                            </span>
+                        </td>
                         <td class="h4 blue"><strong ng-bind="item.bloodGiven"></strong> times</td>
                         <td ng-bind="item.bloodGroup"></td>
                     </tr>
