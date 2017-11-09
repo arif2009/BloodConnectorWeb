@@ -2,6 +2,8 @@
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using BloodConnector.WebAPI.Models;
+using BloodConnector.WebAPI.VM;
 
 namespace BloodConnector.WebAPI.Helper
 {
@@ -37,5 +39,23 @@ namespace BloodConnector.WebAPI.Helper
         {
             return Convert.FromBase64String(text).ByteToString();
         }
+
+        public static bool Equal(this UserVM vm, User user)
+        {
+            return string.Equals(vm.FirstName, user.FirstName) &&
+                   string.Equals(vm.LastName, user.LastName) &&
+                   string.Equals(vm.NikeName, user.NikeName) &&
+                   string.Equals(vm.Email, user.Email) &&
+                   vm.BloodGiven == user.BloodGiven &&
+                   string.Equals(vm.PhoneNumber, user.PhoneNumber) &&
+                   vm.BloodGroupId == user.BloodGroupId &&
+                   vm.DateOfBirth.Equals(user.DateOfBirth) &&
+                   string.Equals(vm.Address, user.Address) &&
+                   string.Equals(vm.PostCode, user.PostCode) &&
+                   string.Equals(vm.City, user.City) &&
+                   vm.Gender == user.Gender &&
+                   vm.CountryId == user.CountryId &&
+                   string.Equals(vm.PersonalIdentityNum, user.PersonalIdentityNum);
+        } 
     }
 }

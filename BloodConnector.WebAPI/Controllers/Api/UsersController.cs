@@ -37,6 +37,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
 
         public async Task<IHttpActionResult> Post()
         {
+            if (HttpContext.Current.Request.Files.Count == 0) { return Ok();}
 
             var avater = HttpContext.Current.Request.Files[0];
             var id = HttpContext.Current.Request.Form["id"];
