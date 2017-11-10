@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using BloodConnector.WebAPI.Helper;
 using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.VM;
@@ -16,6 +17,12 @@ namespace BloodConnector.WebAPI.App_Start
                 .ForMember(dto => dto.Attachments, opt => opt.MapFrom(u => u.Attachments));
 
             CreateMap<Attachment, AttachmentVM>();
+
+            CreateMap<User, DeveloperVM>()
+                .ForMember(vm => vm.Name, u => u.MapFrom(x => ProjectHelper.GetFullName(x.FirstName, x.LastName, x.NikeName)))
+                .ForMember(vm=>vm.Email, u=>u.MapFrom(x=>x.Email))
+                .ForMember(vm=>vm.MobileNo, u=>u.MapFrom(x=>x.PhoneNumber))
+                .ForMember(vm=>vm.ProfileImage, u=>u.MapFrom(x=>x.Attachments.FirstOrDefault().FileName));
         }
     }
 }

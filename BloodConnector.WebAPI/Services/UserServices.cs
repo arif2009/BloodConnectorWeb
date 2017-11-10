@@ -22,6 +22,19 @@ namespace BloodConnector.WebAPI.Services
             Db = db;
         }
 
+        public IList<DeveloperVM> GetDevelopers()
+        {
+            var ids = new[]
+            {
+                "958f320c-d525-44bc-b54c-b6687f8bc521",
+                "c75fba3a-485f-40e8-b864-31ff4c4c78db",
+                "4319a182-9115-473c-a633-a83bc6fc5ca6"
+            };
+            var developers = _userManager.Users.Include(x => x.Attachments).Where(y => ids.Contains(y.Id));
+            var developerList = Mapper.Map<IEnumerable<DeveloperVM>>(developers).ToList();
+            return developerList;
+        }
+
         public IList<UserVM> GetUsers()
         {
             var users = _userManager.Users.Include(x => x.BloodGroup).OrderByDescending(y=>y.UserId);
