@@ -48,7 +48,11 @@ namespace BloodConnector.WebAPI.Services
             var id = Convert.ToInt64(data.UserId.Decrypt());
             var user = Db.Users.First(x => x.UserId == id);
 
-            if (data.Equal(user)) { return data;}
+            if (data.Equal(user))
+            {
+                data.UpdatedDate = user.UpdatedDate;
+                return data;
+            }
 
             //Step-2 : Update
             user.FirstName = data.FirstName;
