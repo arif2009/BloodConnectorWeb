@@ -257,11 +257,13 @@
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\BloodGroupController.cs" />
     <Compile Include="Controllers\Api\CountryController.cs" />
+    <Compile Include="Controllers\Api\DevelopersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="VM\AttachmentVM.cs" />
+    <Compile Include="VM\DeveloperVM.cs" />
     <Compile Include="VM\UsersBloodGroupVM.cs" />
     <Compile Include="VM\UserVM.cs" />
     <Compile Include="Filters\ValidateModelStateAttribute.cs" />
