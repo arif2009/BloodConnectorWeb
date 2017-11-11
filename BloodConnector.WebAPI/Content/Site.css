@@ -117,6 +117,10 @@ footer a:hover {
 .navbar-custom .navbar-brand {
     color: #dec9c9;
 }
+.navbar-custom button:hover,.navbar-custom button:focus {
+    background-color: #d9534f!important;
+    color: #62c2e4;
+}
 .selected-menu {
     color: #ffffff!important;
 }
