@@ -54,7 +54,12 @@ var rootURL = 'http://www.bloodconnector.org/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     rootURL: rootURL,
-    clientId: 'ngAuthApp'
+    clientId: 'ngAuthApp',
+    developers: {
+        'arif' : 1,
+        'jahangir' : 2,
+        'mafi' : 3
+    }
 });
 
 /*app.config(function (blockUIConfig) {

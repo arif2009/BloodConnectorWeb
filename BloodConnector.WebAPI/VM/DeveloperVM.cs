@@ -7,6 +7,7 @@ namespace BloodConnector.WebAPI.VM
 {
     public class DeveloperVM
     {
+        public int UserId { get; set; }
         public string Name { get; set; }
         public string MobileNo { get; set; }
         public string Email { get; set; }

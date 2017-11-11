@@ -32,5 +32,12 @@ namespace BloodConnector.WebAPI.Utilities
             {"Admin", "2"},
             {"User", "3"}
         };
+
+        public enum Developers : long
+        {
+            Arif = 1,
+            Jahangir = 2,
+            Mafi = 3
+        }
     }
 }

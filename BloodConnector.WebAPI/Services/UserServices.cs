@@ -24,13 +24,8 @@ namespace BloodConnector.WebAPI.Services
 
         public IList<DeveloperVM> GetDevelopers()
         {
-            var ids = new[]
-            {
-                "958f320c-d525-44bc-b54c-b6687f8bc521",
-                "c75fba3a-485f-40e8-b864-31ff4c4c78db",
-                "4319a182-9115-473c-a633-a83bc6fc5ca6"
-            };
-            var developers = _userManager.Users.Include(x => x.Attachments).Where(y => ids.Contains(y.Id));
+            var devIds = Enum.GetValues(typeof(Enums.Developers)).Cast<long>().ToList();
+            var developers = _userManager.Users.Include(x => x.Attachments).Where(y => devIds.Contains(y.UserId));
             var developerList = Mapper.Map<IEnumerable<DeveloperVM>>(developers).ToList();
             return developerList;
         }
