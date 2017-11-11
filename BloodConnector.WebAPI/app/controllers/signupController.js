@@ -25,6 +25,10 @@ app.controller('signupController', ['authService', 'dataService', 'utilsFactory'
 
     vm.signUp = function () {
 
+        if (!vm.registration.bloodGiven) {
+            vm.registration.bloodGiven = 0;
+        }
+
         authService.saveRegistration(vm.registration).then(function (response) {
             vm.savedSuccessfully = true;
             toaster.pop({
