@@ -12,9 +12,9 @@
                     &nbsp;<span ng-if="vm.editMode" class="red-alert">Please fillup the required fields.</span>
                 </div>
                 <div>
-                    <button ng-click="vm.enableEditMode()" title="Edit Profile" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                    <button ng-if="vm.editMode" title="Update Profile" type="submit" class="btn btn-sm btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                    <button ng-click="vm.disablEditeMode()" title="Clear Edit" type="button" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <button ng-click="vm.enableEditMode()" title="Edit Profile" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                    <button ng-if="vm.editMode" title="Update Profile" type="submit" class="btn btn-sm btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                    <button ng-click="vm.disablEditeMode()" title="Clear Edit" type="button" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
                 </div>
             </div>
                 <div class="panel-body">
@@ -107,10 +107,10 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr ng-if="!vm.editMode">
-                                    <td class="h4">E-mail</td>
-                                    <td ng-bind="vm.profile.email"></td>
-                                    <!--<td ng-if="vm.editMode">
+                                <tr>
+                                    <td class="h4">E-mail <label ng-if="vm.editMode" class="required"></label></td>
+                                    <td ng-if="!vm.editMode" ng-bind="vm.profile.email"></td>
+                                    <td ng-if="vm.editMode">
                                         <div class="form-group required" ng-class="{'has-error':profileForm.txtEmail.$invalid}">
                                             <input class="form-control input-lg" id="txtEmail" name="txtEmail" type="email"
                                             placeholder="Your Email"
@@ -121,7 +121,7 @@
                                                 <span ng-show="profileForm.txtEmail.$error.email">Not valid email!</span>
                                             </span>
                                         </div>
-                                    </td>-->
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="h4">Blood Group <label ng-if="vm.editMode" class="required"></label></td>
@@ -239,7 +239,7 @@
                                 </tr>
                                 <tr ng-if="vm.editMode">
                                     <td>&nbsp;</td>
-                                    <td class="text-right"><button type="submit" class="btn btn-success" title="Update Profile"><strong><i class="fa fa-floppy-o" aria-hidden="true"></i> Update</strong></button></td>
+                                    <td class="text-right"><button type="submit" class="btn btn-success" title="Update Profile"><strong><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</strong></button></td>
                                 </tr>
                             </tbody>
                         </table>

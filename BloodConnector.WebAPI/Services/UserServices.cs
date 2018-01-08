@@ -68,8 +68,8 @@ namespace BloodConnector.WebAPI.Services
             user.NikeName = data.NikeName;
             user.BloodGiven = data.BloodGiven;
             user.PhoneNumber = data.PhoneNumber;
-            //user.Email = data.Email;
-            //user.UserName = data.Email;
+            user.Email = data.Email;
+            user.UserName = data.Email;
             user.BloodGroupId = data.BloodGroupId;
             user.DateOfBirth = data.DateOfBirth;
             user.Address = data.Address;
