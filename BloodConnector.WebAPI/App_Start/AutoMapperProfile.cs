@@ -13,6 +13,7 @@ namespace BloodConnector.WebAPI.App_Start
             CreateMap<User, UserVM>()
                 .ForMember(dto => dto.UserId, opt => opt.MapFrom(u => u.UserId.ToString().Encrypt()))
                 .ForMember(dto => dto.BloodGroup, opt => opt.MapFrom(u => u.BloodGroup.Symbole))
+                .ForMember(dto => dto.SimilarBlood, opt => opt.MapFrom(u=>u.BloodGroup.Users.Count))
                 .ForMember(dto => dto.Country, opt => opt.MapFrom(u => u.Country.Name))
                 .ForMember(dto => dto.Attachments, opt => opt.MapFrom(u => u.Attachments));
 

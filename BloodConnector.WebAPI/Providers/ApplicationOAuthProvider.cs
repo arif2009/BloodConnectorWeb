@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using AutoMapper;
 using BloodConnector.WebAPI.Helper;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using BloodConnector.WebAPI.Models;
+using BloodConnector.WebAPI.VM;
 
 namespace BloodConnector.WebAPI.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
+        public ApplicationDbContext Db { get; private set; }
 
         public ApplicationOAuthProvider(string publicClientId)
         {
@@ -25,6 +30,8 @@ namespace BloodConnector.WebAPI.Providers
             }
 
             _publicClientId = publicClientId;
+
+            Db = new ApplicationDbContext();
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
@@ -50,7 +57,10 @@ namespace BloodConnector.WebAPI.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user);
+            var userDetails = Db.Users.Include(x => x.BloodGroup.Users).FirstOrDefault(x => x.UserId == user.UserId);
+            var userDetailsVm = Mapper.Map<UserVM>(userDetails);
+
+            AuthenticationProperties properties = CreateProperties(userDetailsVm);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -92,13 +102,15 @@ namespace BloodConnector.WebAPI.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(User user)
+        public static AuthenticationProperties CreateProperties(UserVM user)
         {
-            IDictionary<string, string> data = new Dictionary<string, string>
+            var data = new Dictionary<string, string>
             {
-                {"userId", user.UserId.ToString().Encrypt()},
+                {"userId", user.UserId},
                 {"userName", ProjectHelper.GetUserName(user.FirstName, user.LastName, user.NikeName)},
-                {"email", user.Email }
+                {"email", user.Email },
+                {"bloodGroup", user.BloodGroup },
+                {"similarBlood", Convert.ToString(user.SimilarBlood) }
             };
             return new AuthenticationProperties(data);
         }

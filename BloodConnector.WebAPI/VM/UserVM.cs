@@ -30,6 +30,7 @@ namespace BloodConnector.WebAPI.VM
         [Range(1, 8, ErrorMessage = "The {0} field is required.")]
         public int BloodGroupId { get; set; }
         public string BloodGroup { get; set; }
+        public int SimilarBlood { get; set; }
         public int BloodGiven { get; set; }
         public string ContactNumber => PhoneNumber;
         [Required]

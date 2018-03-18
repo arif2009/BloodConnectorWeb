@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,6 +10,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using AutoMapper;
 using BloodConnector.Shared.Log;
 using BloodConnector.WebAPI.Filters;
 using BloodConnector.WebAPI.Helper;
@@ -23,6 +25,7 @@ using BloodConnector.WebAPI.Providers;
 using BloodConnector.WebAPI.Results;
 using BloodConnector.WebAPI.Utilities;
 using BloodConnector.WebAPI.ServiceResult;
+using BloodConnector.WebAPI.VM;
 
 namespace BloodConnector.WebAPI.Controllers.Api
 {
@@ -35,10 +38,11 @@ namespace BloodConnector.WebAPI.Controllers.Api
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
         private ApplicationSignInManager _signInManager;
-
+        public ApplicationDbContext Db { get; private set; }
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
         public AccountController()
         {
+            Db = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -430,7 +434,10 @@ namespace BloodConnector.WebAPI.Controllers.Api
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user);
+                var userDetails = Db.Users.Include(x => x.BloodGroup.Users).FirstOrDefault(x => x.UserId == user.UserId);
+                var userDetailsVm = Mapper.Map<UserVM>(userDetails);
+
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(userDetailsVm);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
