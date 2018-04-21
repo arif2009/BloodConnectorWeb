@@ -107,7 +107,8 @@ namespace BloodConnector.WebAPI.Providers
             var data = new Dictionary<string, string>
             {
                 {"userId", user.UserId},
-                {"userName", ProjectHelper.GetUserName(user.FirstName, user.LastName, user.NikeName)},
+                {"userName", user.Name},
+                {"fullName", user.FullName },
                 {"email", user.Email },
                 {"bloodGroup", user.BloodGroup },
                 {"similarBlood", Convert.ToString(user.SimilarBlood) }
