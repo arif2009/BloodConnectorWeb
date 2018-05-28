@@ -229,6 +229,62 @@ namespace BloodConnector.WebAPI.Controllers.Api
             }
         }
 
+        // POST api/Account/app_register
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("app_register")]
+        //[ValidateModelState]
+        public async Task<IHttpActionResult> AppRegister(AppRegisterBindingModel model)
+        {
+
+            try
+            {
+                var splitedName = model.Name.Split(' ');
+
+                if (await this.EmailAlreadyExist(model.Email))
+                {
+                    ModelState.AddModelError("Email", "Email already in use!");
+                    return BadRequest(ModelState);
+                }
+
+                var user = new User()
+                {
+                    FirstName = splitedName.ElementAtOrDefault(0),
+                    LastName = splitedName.ElementAtOrDefault(1),
+                    NikeName = splitedName.ElementAtOrDefault(2),
+                    BloodGiven = model.BloodGiven,
+                    UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    BloodGroupId = model.BloodGroupId,
+                    Gender = model.Gender,
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedDate = DateTime.UtcNow
+                };
+
+                /*IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, Enums.Role.FirstOrDefault(x => x.Value == "3").Key);
+
+                    return Ok();
+                }
+
+                return GetErrorResult(result);*/
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                ModelState.Clear();
+                //ModelState.AddModelError("Exception", ex.Message);
+                ModelState.AddModelError("Network", "Network problem !");
+                return BadRequest(ModelState);
+            }
+
+            return Ok(model);
+        }
+
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]

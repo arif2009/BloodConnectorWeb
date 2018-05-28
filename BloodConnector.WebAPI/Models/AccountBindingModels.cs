@@ -76,6 +76,54 @@ namespace BloodConnector.WebAPI.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class AppRegisterBindingModel
+    {
+        [Required]
+        [StringLength(40, ErrorMessage = "{0} too long.")]
+        public string Name { get; set; }
+
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Display Name")]
+        public string NikeName { get; set; }
+
+        public Enums.GenderType? Gender { get; set; }
+
+        [Range(0, 50, ErrorMessage = "{0} too long.")]
+        [Display(Name = "Blood Given")]
+        public int BloodGiven { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Blood Group")]
+        [Range(1, 8, ErrorMessage = "The {0} field is required.")]
+        public int BloodGroupId { get; set; }
+
+        [Required]
+        [Display(Name = "Contact Number")]
+        [RegularExpression(@"^([0-9\(\)\/\+ \-]{5,15})$", ErrorMessage = "Not a valid Contact Number.")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at most 12 characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
+
     public class RegisterExternalBindingModel
     {
         [Required]
