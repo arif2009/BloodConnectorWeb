@@ -233,7 +233,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
         [AllowAnonymous]
         [HttpPost]
         [Route("app_register")]
-        //[ValidateModelState]
+        [ValidateModelState]
         public async Task<IHttpActionResult> AppRegister(AppRegisterBindingModel model)
         {
 
@@ -272,7 +272,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
                 }
 
                 return GetErrorResult(result);*/
-                return Ok(user);
+                return Ok(model);
             }
             catch (Exception ex)
             {
