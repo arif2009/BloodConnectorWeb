@@ -243,7 +243,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
 
                 if (await this.EmailAlreadyExist(model.Email))
                 {
-                    ModelState.AddModelError("Email", "Email already in use!");
+                    ModelState.AddModelError("model.Email", "Email already in use!");
                     return BadRequest(ModelState);
                 }
 
@@ -262,7 +262,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
                     UpdatedDate = DateTime.UtcNow
                 };
 
-                /*IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
@@ -271,18 +271,15 @@ namespace BloodConnector.WebAPI.Controllers.Api
                     return Ok();
                 }
 
-                return GetErrorResult(result);*/
-                return Ok(model);
+                return GetErrorResult(result);
             }
             catch (Exception ex)
             {
                 ModelState.Clear();
                 //ModelState.AddModelError("Exception", ex.Message);
-                ModelState.AddModelError("Network", "Network problem !");
+                ModelState.AddModelError("model.Network", "Network problem !");
                 return BadRequest(ModelState);
             }
-
-            return Ok(model);
         }
 
         // GET api/Account/UserInfo
