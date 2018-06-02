@@ -33,15 +33,15 @@ namespace BloodConnector.WebAPI.Models
 
     public class RegisterBindingModel
     {
-        [StringLength(10, ErrorMessage = "{0} too long.")]
+        [StringLength(20, ErrorMessage = "{0} is too long.")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [StringLength(10, ErrorMessage = "{0} too long.")]
+        [StringLength(20, ErrorMessage = "{0} is too long.")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [StringLength(10, ErrorMessage = "{0} too long.")]
+        [StringLength(20, ErrorMessage = "{0} is too long.")]
         [Display(Name = "Display Name")]
         public string NikeName { get; set; }
 
@@ -79,7 +79,7 @@ namespace BloodConnector.WebAPI.Models
     public class AppRegisterBindingModel
     {
         [Required]
-        [StringLength(40, ErrorMessage = "{0} too long.")]
+        [StringLength(40, ErrorMessage = "{0} is too long.")]
         public string Name { get; set; }
 
         [Display(Name = "First Name")]
