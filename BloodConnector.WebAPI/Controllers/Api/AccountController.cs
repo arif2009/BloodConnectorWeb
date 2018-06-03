@@ -211,14 +211,13 @@ namespace BloodConnector.WebAPI.Controllers.Api
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+                if (!result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, Enums.Role.FirstOrDefault(x => x.Value == "3").Key);
-
-                    return Ok();
+                    return GetErrorResult(result);
                 }
 
-                return GetErrorResult(result);
+                var role = await UserManager.AddToRoleAsync(user.Id, Enums.Role.FirstOrDefault(x => x.Value == "3").Key);
+                return Ok(role);
             }
             catch (Exception ex)
             {
@@ -264,14 +263,13 @@ namespace BloodConnector.WebAPI.Controllers.Api
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+                if (!result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, Enums.Role.FirstOrDefault(x => x.Value == "3").Key);
-
-                    return Ok();
+                    return GetErrorResult(result);
                 }
 
-                return GetErrorResult(result);
+                var role = await UserManager.AddToRoleAsync(user.Id, Enums.Role.FirstOrDefault(x => x.Value == "3").Key);
+                return Ok(role);
             }
             catch (Exception ex)
             {
@@ -658,6 +656,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
 
         private IHttpActionResult GetErrorResult(IdentityResult result)
         {
+            Logger.Log("Error from GetErrorResult function");
             if (result == null)
             {
                 return InternalServerError();
