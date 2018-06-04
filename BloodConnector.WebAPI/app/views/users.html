@@ -45,7 +45,7 @@
                         </td>
                         <td class="h4 blue"><strong ng-bind="item.bloodGiven"></strong> times</td>
                         <td ng-bind="item.bloodGroup"></td>
-                        <td ng-if="vm.hasDeleteAbility"><span><i class="fa fa-trash text-danger" aria-hidden="true"></i></span></td>
+                        <td ng-if="vm.hasDeleteAbility"><span class="pointer-cursor" ng-click="vm.setDeleteItem(item)" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash text-danger" aria-hidden="true"></i></span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -68,6 +68,23 @@
                     </li>
                 </ul>
             </nav>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="Delete confirmation" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Delete User!!
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete <strong>{{vm.deleteUserName}}</strong> ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" role="button" data-dismiss="modal" ng-click="vm.deleteUser()">Delete</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

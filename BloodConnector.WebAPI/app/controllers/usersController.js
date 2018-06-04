@@ -16,6 +16,24 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
         });
     };
 
+    vm.itemToDel = "";
+    vm.deleteUserName = "";
+    vm.setDeleteItem = function(user) {
+        vm.itemToDel = user.id;
+        vm.deleteUserName = user.fullName;
+    };
+
+    vm.deleteUser = function () {
+
+        usersService.deleteUser(vm.itemToDel).then(function() {
+            vm.items = vm.items.filter(function (item) {
+                return item.id !== vm.itemToDel;
+            });
+        },function(err) {
+            alert("Can't delete");
+        });
+    };
+
     vm.pageCount = function () {
         var pages = $filter('filter')(vm.items, vm.searchText);
         return Math.ceil(pages.length / vm.itemsPerPage);

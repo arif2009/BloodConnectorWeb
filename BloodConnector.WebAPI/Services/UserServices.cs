@@ -120,5 +120,11 @@ namespace BloodConnector.WebAPI.Services
 
             return await Db.SaveChangesAsync();
         }
+
+        public async Task<Microsoft.AspNet.Identity.IdentityResult> DeleteUserById(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            return await _userManager.DeleteAsync(user);
+        }
     }
 }

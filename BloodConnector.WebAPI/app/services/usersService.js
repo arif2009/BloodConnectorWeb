@@ -15,6 +15,10 @@ app.factory('usersService', ['$http', 'ngAuthSettings', function ($http, ngAuthS
         return $http.put(serviceBase + 'api/users', data);
     };
 
+    usersServiceFactory.deleteUser = function (id) {
+        return $http.delete(serviceBase + 'api/users/'+id);
+    };
+
     return usersServiceFactory;
 
 }]);

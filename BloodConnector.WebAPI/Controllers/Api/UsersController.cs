@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using BloodConnector.WebAPI.VM;
 using BloodConnector.WebAPI.Filters;
@@ -70,6 +71,19 @@ namespace BloodConnector.WebAPI.Controllers.Api
                 ModelState.AddModelError("Network", "Network problem !");
                 return BadRequest(ModelState);
             }
+        }
+
+        [System.Web.Http.HttpDelete]
+        [System.Web.Http.Authorize(Roles = "SuperAdmin")]
+        public async Task<IHttpActionResult> Delete(string id)
+        {
+            var userId = User.Identity.GetUserId();
+            if (userId == id)
+            {
+                return BadRequest("You cant kill your self");
+            }
+            var result = await _userServices.DeleteUserById(id);
+            return Ok(result);
         }
     }
 }
