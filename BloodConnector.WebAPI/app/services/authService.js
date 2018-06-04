@@ -72,6 +72,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         _authentication.userName = "";
         _authentication.useRefreshTokens = false;
 
+        return $http.post(serviceBase + 'api/Account/Logout');
     };
 
     var _forgot = function(forgotData) {
