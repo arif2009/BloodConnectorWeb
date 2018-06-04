@@ -141,7 +141,7 @@ namespace BloodConnector.WebAPI.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$", ErrorMessage = "{0} must be min 6 characters, at least one letter and one number!")]
+        [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at most 12 characters long.", MinimumLength = 6)]
         public string Password { get; set; }
 
         public string Code { get; set; }
