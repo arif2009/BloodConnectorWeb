@@ -262,6 +262,7 @@
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />
     <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\We.cs" />
     <Compile Include="VM\AttachmentVM.cs" />
     <Compile Include="VM\DeveloperVM.cs" />
     <Compile Include="VM\UsersBloodGroupVM.cs" />

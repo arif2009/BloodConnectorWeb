@@ -100,4 +100,10 @@ namespace BloodConnector.WebAPI.VM
 
         public IList<AttachmentVM> Attachments { get; set; }
     }
+
+    public class UserData
+    {
+        public string Role { get; set; } = Enums.Role.First(r=>r.Value == "3").Key;
+        public List<UserVM> Users { get; set; }
+    }
 }

@@ -6,10 +6,12 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
     vm.itemsPerPage = 10;
     vm.currentPage = 0;
     vm.items = [];
+    vm.logedInUserRole = "";
 
     vm.$onInit = function() {
         usersService.getUsers().then(function(results) {
-            vm.items = results.data;
+            vm.items = results.data.users;
+            vm.logedInUserRole = results.data.role;
             vm.pages = vm.range();
         });
     };

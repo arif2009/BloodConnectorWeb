@@ -30,11 +30,16 @@ namespace BloodConnector.WebAPI.Services
             return developerList;
         }
 
-        public IList<UserVM> GetUsers()
+        public UserData GetUsers(string userRole = "user")
         {
             var users = _userManager.Users.Include(x => x.BloodGroup).OrderByDescending(y=>y.UserId);
             var userList = Mapper.Map<IEnumerable<UserVM>>(users).ToList();
-            return userList;
+
+            return new UserData
+            {
+               Role = userRole.ToLower(),
+               Users = userList
+            };
         }
 
         public UserVM GetUserById(string userId)

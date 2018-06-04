@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -27,7 +29,8 @@ namespace BloodConnector.WebAPI.Controllers.Api
         // GET api/orders
         public IHttpActionResult Get()
         {
-            return Ok(_userServices.GetUsers());
+            var role = We.Roles(User.Identity as ClaimsIdentity).First();
+            return Ok(_userServices.GetUsers(role));
         }
 
         public IHttpActionResult Get(string id)
