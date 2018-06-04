@@ -26,6 +26,7 @@
                         <th>Address</th>
                         <th>Donate</th>
                         <th>Blood Group</th>
+                        <th ng-if="vm.hasDeleteAbility">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,6 +45,7 @@
                         </td>
                         <td class="h4 blue"><strong ng-bind="item.bloodGiven"></strong> times</td>
                         <td ng-bind="item.bloodGroup"></td>
+                        <td ng-if="vm.hasDeleteAbility"><span><i class="fa fa-trash text-danger" aria-hidden="true"></i></span></td>
                     </tr>
                     </tbody>
                 </table>
