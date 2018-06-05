@@ -1,11 +1,28 @@
 ﻿<div data-ng-controller="aboutController as vm">
-    <h3>Developer : </h3>
+    <div class="alert alert-info mb0" role="alert"><h3 class="text-center mt10">Help</h3></div>
     <div class="row">
         <div class="col-md-12">
+            <h3>Technical help:</h3>
+            <div>If you find any bug or you want to give your opinion feel free to contact with <b>Arifur Rahman</b>.
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <h3>Blood collection help:</h3>
+            <div>If you want to collect blood, create an account here and try to reach out the appropriate donor.
+                Feel free to contact with <b>Mafi Islam</b> and <b>Jahangir Hossain</b> if you can't reach appropriate donor.
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info mb0 mt10" role="alert"><h3 class="text-center mt10">About Us</h3></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Developer: </h3>
             <div class="well well-sm clearfix">
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2">
-                        <img ng-src="{{vm.data.arif.profileImage || 'https://i.imgur.com/4zcf9Yj.jpg'}}" class="img-responsive" />
+                        <img ng-src="{{vm.data.arif.profileImage || 'https://i.imgur.com/4zcf9Yj.jpg'}}" class="img-responsive"/>
                     </div>
                     <div class="col-md-10 col-lg-10 col-sm-10">
                         <h2 class="mt0" ng-bind="vm.data.arif.name||'Arifur Rahman (Sazal)'"></h2>
@@ -22,13 +39,14 @@
             <!--Body content-->
         </div>
     </div>
-    <h3>Adviser & coordinator : </h3>
+
     <div class="row">
         <div class="col-md-12">
+            <h3>Adviser & coordinator: </h3>
             <div class="well well-sm clearfix">
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2">
-                        <img ng-src="{{vm.data.mafi.profileImage || 'https://i.imgur.com/ipnC1yH.jpg'}}" class="img-responsive" />
+                        <img ng-src="{{vm.data.mafi.profileImage || 'https://i.imgur.com/ipnC1yH.jpg'}}" class="img-responsive"/>
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-4">
                         <h2 class="mt0" ng-bind="vm.data.mafi.name||'Mafi Islam'"></h2>
@@ -40,7 +58,7 @@
                         </ul>
                     </div>
                     <div class="col-md-2 col-lg-2 col-sm-2">
-                        <img ng-src="{{vm.data.jahangir.profileImage || 'https://i.imgur.com/qJzK8wT.jpg'}}" class="img-responsive" />
+                        <img ng-src="{{vm.data.jahangir.profileImage || 'https://i.imgur.com/qJzK8wT.jpg'}}" class="img-responsive"/>
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-4">
                         <h2 class="mt0" ng-bind="vm.data.jahangir.name||'Jahangir Hossain Duranto Durbar'"></h2>

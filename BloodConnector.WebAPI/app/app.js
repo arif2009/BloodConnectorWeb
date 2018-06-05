@@ -43,7 +43,7 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/users.html"
     });
 
-    $routeProvider.when("/about", {
+    $routeProvider.when("/help", {
         controller: "aboutController",
         templateUrl: "/app/views/about.html"
     });
