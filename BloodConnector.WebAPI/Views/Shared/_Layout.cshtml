@@ -36,6 +36,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li data-ng-hide="!vm.authentication.isAuth"><a data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{'selected-menu': vm.active.welcome}" ng-click="vm.changeSelectedClass('welcome')" href="#!profile">Welcome To <b ng-bind="vm.authentication.userName"></b></a></li>
+                        <li data-ng-hide="!vm.authentication.isAuth"><a data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{'selected-menu': vm.active.update}" ng-click="vm.changeSelectedClass('update')" href="#!update">Update My Info</a></li>
                         <li data-ng-hide="!vm.authentication.isAuth"><a data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{'selected-menu': vm.active.user}" ng-click="vm.changeSelectedClass('user')" href="#!users">Donor's</a></li>
                         <li data-ng-hide="!vm.authentication.isAuth"><a data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{'selected-menu': vm.active.logout}" ng-click="vm.changeSelectedClass('logout'); vm.logOut()" href="javascript:void(0);">LogOut</a></li>
                         <li data-ng-hide="vm.authentication.isAuth"><a data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{'selected-menu': vm.active.login}" ng-click="vm.changeSelectedClass('login')" href="#!login">LogIn</a></li>

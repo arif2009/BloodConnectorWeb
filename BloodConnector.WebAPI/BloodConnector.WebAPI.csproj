@@ -353,6 +353,7 @@
     <Content Include="app\views\forgot.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\login.html" />
+    <Content Include="app\views\profile-view.html" />
     <Content Include="app\views\profile.html" />
     <Content Include="app\views\sentmail.html" />
     <Content Include="app\views\users.html" />

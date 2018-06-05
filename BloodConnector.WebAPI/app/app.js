@@ -10,6 +10,11 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/profile", {
         controller: "profileController",
+        templateUrl: "/app/views/profile-view.html"
+    });
+
+    $routeProvider.when("/update", {
+        controller: "profileController",
         templateUrl: "/app/views/profile.html"
     });
 

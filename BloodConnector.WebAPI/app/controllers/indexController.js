@@ -7,6 +7,7 @@ app.controller('indexController', ['$location', 'authService', 'ngAuthSettings',
         vm.active = {
             "home": true,
             "welcome": false,
+            "update": false,
             "user": false,
             "logout": false,
             "login": false,
