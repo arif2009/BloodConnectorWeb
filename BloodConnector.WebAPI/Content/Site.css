@@ -91,17 +91,12 @@ footer {
 }
 
 footer a {
-    color:#dec9c9!important;
     font-size: 20px;
     padding: 10px;
     -ms-transition: all .5s ease;
     -o-transition: all .5s ease;
     -webkit-transition: all .5s ease;
     transition: all .5s ease;
-}
-
-footer a:hover {
-    color: #fff!important;
 }
 /*END : Footer*/
 
@@ -445,7 +440,10 @@ div.user-menu div.user-menu-content:not(.active){
     color: #00ff7f;
 }
 .blue {
-    color: blue;
+    color: #3b5998;
+}
+.text-android {
+    color: greenyellow;
 }
 
 /*Start : Profile image*/
