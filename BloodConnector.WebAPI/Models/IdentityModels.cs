@@ -33,6 +33,7 @@ namespace BloodConnector.WebAPI.Models
         public string City { get; set; }
         public int? CountryId { get; set; }
         public Country Country { get; set; }
+        public string LatLong { get; set; }
         [DisplayName("Gender")]
         public Enums.GenderType? Gender { get; set; }
         public Enums.Religion? Religion { get; set; }
@@ -81,6 +82,7 @@ namespace BloodConnector.WebAPI.Models
             userConfig.Property(p => p.AlternativeContactNo).HasMaxLength(128);
             userConfig.Property(p => p.PostCode).HasMaxLength(128);
             userConfig.Property(p => p.City).HasMaxLength(128);
+            userConfig.Property(p => p.LatLong).HasMaxLength(50);
             userConfig.Property(p => p.PersonalIdentityNum).HasMaxLength(128);
             userConfig.Property(p => p.Email).HasMaxLength(512);
             //userConfig.Property(p => p.Email).HasUniqueConstraint("UX_Email");

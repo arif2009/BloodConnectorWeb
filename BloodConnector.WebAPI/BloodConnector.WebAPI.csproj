@@ -263,6 +263,10 @@
     <Compile Include="Controllers\Api\ValuesController.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\We.cs" />
+    <Compile Include="Migrations\201806291905196_Added LatLong.cs" />
+    <Compile Include="Migrations\201806291905196_Added LatLong.Designer.cs">
+      <DependentUpon>201806291905196_Added LatLong.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\IpInfoClient.cs" />
     <Compile Include="VM\AttachmentVM.cs" />
     <Compile Include="VM\DeveloperVM.cs" />
@@ -518,6 +522,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711010351409_MakeTypeInt.resx">
       <DependentUpon>201711010351409_MakeTypeInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806291905196_Added LatLong.resx">
+      <DependentUpon>201806291905196_Added LatLong.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
