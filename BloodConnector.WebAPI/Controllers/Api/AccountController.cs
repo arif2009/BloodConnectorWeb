@@ -38,11 +38,13 @@ namespace BloodConnector.WebAPI.Controllers.Api
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
         private ApplicationSignInManager _signInManager;
+        private readonly IpInfoClient _ipInfoClient;
         public ApplicationDbContext Db { get; private set; }
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
         public AccountController()
         {
             Db = new ApplicationDbContext();
+            _ipInfoClient = new IpInfoClient();
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -195,7 +197,7 @@ namespace BloodConnector.WebAPI.Controllers.Api
                 }
 
                 /*if (!ModelState.IsValid){}*/
-
+                var userLocation = GetUserLocation();
                 var user = new User()
                 {
                     FirstName = model.FirstName,
@@ -279,6 +281,38 @@ namespace BloodConnector.WebAPI.Controllers.Api
                 ModelState.AddModelError("model.Network", "Network problem !");
                 return BadRequest(ModelState);
             }
+        }
+
+        private async Task<IpInfoViewModel> GetUserLocation()
+        {
+            IpInfoViewModel data = null;
+
+            var clientIp = HttpContext.Current.Request.UserHostAddress;
+
+            #if DEBUG
+            //If localhost or local IP, use Bangladeshi public IP 
+            if (clientIp == null || clientIp == "127.0.0.1" || clientIp == "::1" || clientIp.StartsWith("10."))
+            {
+                clientIp = "103.4.146.91";
+            }
+            #endif
+
+            // handle multiple ips
+            if (clientIp.Contains(","))
+                clientIp = clientIp.Split(',').First();
+
+            var response = await _ipInfoClient.GetAsync(clientIp);
+
+            if (response.IsSuccessStatusCode)
+            {
+                data = await response.Content.ReadAsAsync<IpInfoViewModel>();
+            }
+            else
+            {
+                Logger.Log($"Exception occured when getting ip. StatusCode={response.StatusCode}");
+            }
+
+            return data;
         }
 
         // GET api/Account/UserInfo

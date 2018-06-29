@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Practices.Unity;
+using BloodConnector.WebAPI.Utilities;
 
 namespace BloodConnector.WebAPI.App_Start
 {
