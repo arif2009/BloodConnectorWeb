@@ -210,13 +210,13 @@ namespace BloodConnector.WebAPI.Controllers.Api
                     UpdatedDate = DateTime.UtcNow
                 };
 
-                var userLocation = await We.GetUserLocation();
-                if (userLocation != null)
+                var loc = await We.GetUserLocation();
+                if (loc != null)
                 {
-                    var country = await Db.Country.AsNoTracking().FirstOrDefaultAsync(x => x.TowLetterCode == userLocation.Country);
+                    var country = await Db.Country.AsNoTracking().FirstOrDefaultAsync(x => x.TowLetterCode == loc.Country);
                     user.CountryId = country?.ID;
-                    user.City = userLocation.City;
-                    user.LatLong = userLocation.Loc;
+                    user.City = ProjectHelper.ConcatTwoString(loc.City, loc.Region);
+                    user.LatLong = loc.Loc;
                 }
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
@@ -271,13 +271,13 @@ namespace BloodConnector.WebAPI.Controllers.Api
                     UpdatedDate = DateTime.UtcNow
                 };
 
-                var userLocation = await We.GetUserLocation();
-                if (userLocation != null)
+                var loc = await We.GetUserLocation();
+                if (loc != null)
                 {
-                    var country = await Db.Country.AsNoTracking().FirstOrDefaultAsync(x => x.TowLetterCode == userLocation.Country);
+                    var country = await Db.Country.AsNoTracking().FirstOrDefaultAsync(x => x.TowLetterCode == loc.Country);
                     user.CountryId = country?.ID;
-                    user.City = userLocation.City;
-                    user.LatLong = userLocation.Loc;
+                    user.City = ProjectHelper.ConcatTwoString(loc.City, loc.Region);
+                    user.LatLong = loc.Loc;
                 }
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);

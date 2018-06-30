@@ -66,7 +66,7 @@ namespace BloodConnector.WebAPI.Services
             {
                 var country = await Db.Country.AsNoTracking().FirstOrDefaultAsync(x => x.TowLetterCode == location.Country);
                 user.CountryId = data.CountryId > 0 ? data.CountryId : country?.ID;
-                user.City = !string.IsNullOrEmpty(data.City)?data.City : location.City;
+                user.City = !string.IsNullOrEmpty(data.City)?data.City : ProjectHelper.ConcatTwoString(location.City, location.Region);
                 user.LatLong = location.Loc;
             }
 

@@ -23,6 +23,16 @@ namespace BloodConnector.WebAPI.Helper
             return string.IsNullOrEmpty(nName) ? fullName: $"{fullName} ({nName})";
         }
 
+        public static string ConcatTwoString(string fst, string sec)
+        {
+            var str = sec;
+            if (!string.IsNullOrEmpty(fst) && !string.IsNullOrEmpty(sec))
+            {
+                str = $"{fst}, {sec}";
+            }
+            return str;
+        }
+
         public static string GetName<TObject>(Expression<Func<TObject, object>> propertyRefExpr)
         {
             return GetPropertyNameCore(propertyRefExpr.Body);

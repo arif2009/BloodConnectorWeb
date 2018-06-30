@@ -50,6 +50,7 @@ app.controller('profileController', ['$scope', 'usersService', 'dataService', 'a
                 data: vm.attachment
             }).success(function(data) {
                 vm.profile.lastUpdatedDate = result.data.lastUpdatedDate;
+                vm.profile.city = result.data.city;
                 vm.disablEditeMode();
                 We.scroll(0);
                 toaster.pop({
