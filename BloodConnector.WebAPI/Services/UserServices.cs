@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using AutoMapper;
+using BloodConnector.Shared.Log;
 using BloodConnector.WebAPI.Helper;
 using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Utilities;
@@ -60,12 +61,20 @@ namespace BloodConnector.WebAPI.Services
             //Step-1 : Retrieve
             var id = Convert.ToInt64(data.UserId.Decrypt());
             var user = Db.Users.First(x => x.UserId == id);
+            var location = await We.GetUserLocation();
+            if (location != null)
+            {
+                var country = await Db.Country.AsNoTracking().FirstOrDefaultAsync(x => x.TowLetterCode == location.Country);
+                user.CountryId = data.CountryId > 0 ? data.CountryId : country?.ID;
+                user.City = !string.IsNullOrEmpty(data.City)?data.City : location.City;
+                user.LatLong = location.Loc;
+            }
 
-            if (data.Equal(user))
+            /*if (data.Equal(user))
             {
                 data.UpdatedDate = user.UpdatedDate;
                 return data;
-            }
+            }*/
 
             //Step-2 : Update
             user.FirstName = data.FirstName;
@@ -79,12 +88,14 @@ namespace BloodConnector.WebAPI.Services
             user.DateOfBirth = data.DateOfBirth;
             user.Address = data.Address;
             user.PostCode = data.PostCode;
-            user.City = data.City;
             user.Gender = data.Gender;
-            user.CountryId = data.CountryId;
             user.PersonalIdentityNum = data.PersonalIdentityNum;
             user.UpdatedDate = DateTime.UtcNow;
+
             data.UpdatedDate = DateTime.UtcNow;
+            data.CountryId = user.CountryId ?? default(int);
+            data.City = user.City;
+            data.LatLong = user.LatLong;
 
             //Step-3 : Save
             //Mark entity as modified

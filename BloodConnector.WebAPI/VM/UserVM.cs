@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
-using AutoMapper;
-using AutoMapper.Configuration;
 using BloodConnector.WebAPI.Helper;
-using BloodConnector.WebAPI.Interface;
-using BloodConnector.WebAPI.Models;
 using BloodConnector.WebAPI.Utilities;
 
 namespace BloodConnector.WebAPI.VM
@@ -99,6 +94,8 @@ namespace BloodConnector.WebAPI.VM
         }
 
         public IList<AttachmentVM> Attachments { get; set; }
+
+        public string LatLong { get; set; }
     }
 
     public class UserData
