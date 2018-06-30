@@ -35,13 +35,12 @@
                         <td ng-bind="item.email"></td>
                         <td ng-bind="item.contactNumber"></td>
                         <td style="width: 200px;">
-                            <spa ng-bind="item.address"></span>
-                            <span ng-if="item.city || item.address">
-                                <br />
-                                <span ng-bind="item.city"></span>
-                                <span ng-if="item.postCode">-</span>
-                                <span ng-bind="item.postCode"></span>
-                            </span>
+                            <div ng-bind="item.address"></div>
+                            <span ng-bind="item.city"></span>
+                            <span ng-if="item.postCode">-</span>
+                            <span ng-bind="item.postCode"></span>
+                            <span ng-if="item.country">,</span>
+                            <span ng-bind="item.country"></span>
                         </td>
                         <td class="h4 blue"><strong ng-bind="item.bloodGiven"></strong> times</td>
                         <td ng-bind="item.bloodGroup"></td>

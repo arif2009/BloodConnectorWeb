@@ -33,7 +33,7 @@ namespace BloodConnector.WebAPI.Services
 
         public UserData GetUsers(string userRole = "user")
         {
-            var users = _userManager.Users.Include(x => x.BloodGroup).OrderByDescending(y=>y.UserId);
+            var users = _userManager.Users.Include(x => x.BloodGroup).Include(x=>x.Country).OrderByDescending(y=>y.UserId);
             var userList = Mapper.Map<IEnumerable<UserVM>>(users).ToList();
 
             return new UserData
