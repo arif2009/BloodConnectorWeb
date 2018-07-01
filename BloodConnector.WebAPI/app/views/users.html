@@ -58,7 +58,6 @@
                     </li>
                     <li ng-repeat="n in vm.pages" ng-class="{active: n == vm.currentPage}" ng-click="vm.setPage(n)">
                         <a href="javascript:void(0);">{{n+1}}</a>
-
                     </li>
                     <li ng-class="vm.nextPageDisabled()">
                         <a href="javascript:void(0);" aria-label="Next" ng-click="vm.nextPage()">
