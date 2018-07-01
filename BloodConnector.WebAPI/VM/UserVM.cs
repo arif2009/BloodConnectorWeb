@@ -40,6 +40,33 @@ namespace BloodConnector.WebAPI.VM
         public string City { get; set; }
         public int CountryId { get; set; }
         public string Country { get; set; }
+
+        public string AddressM
+        {
+            get
+            {
+                char[] trim = { ',', ' '};
+                var address = Address;
+
+                if (!string.IsNullOrEmpty(City)) {address = $"{address}, {City}";}
+
+                if (!string.IsNullOrEmpty(PostCode))
+                {
+                    if (!string.IsNullOrEmpty(address)) { address = address.TrimStart(trim); }
+
+                    address = $"{address}- {PostCode}";
+                }
+
+                if (!string.IsNullOrEmpty(Country))
+                {
+                    if (!string.IsNullOrEmpty(address)) { address = address.TrimStart(trim); }
+
+                    address = $"{address}, {Country}";
+                }
+
+                return address;
+            }
+        }
         [Required]
         public Enums.GenderType? Gender { get; set; }
         public string GenderName
