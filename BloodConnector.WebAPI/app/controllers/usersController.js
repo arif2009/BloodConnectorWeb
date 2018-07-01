@@ -3,7 +3,7 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
 
     var vm = this;
 
-    vm.itemsPerPage = 10;
+    vm.itemsPerPage = 15;
     vm.currentPage = 0;
     vm.items = [];
     vm.hasDeleteAbility = false;
