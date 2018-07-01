@@ -100,7 +100,8 @@ namespace BloodConnector.WebAPI.Models
 
             var bloodGroupConfig = modelBuilder.Entity<BloodGroup>();
             bloodGroupConfig.Property(p => p.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            bloodGroupConfig.Property(p => p.Symbole).HasMaxLength(64);
+            bloodGroupConfig.Property(p => p.Symbole).HasMaxLength(16);
+            bloodGroupConfig.Property(p => p.GroupName).HasMaxLength(32);
 
             var bloodTransConfig = modelBuilder.Entity<BloodTransaction>();
             bloodTransConfig.HasOptional(p => p.Donor).WithMany();

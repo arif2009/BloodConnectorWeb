@@ -267,6 +267,10 @@
     <Compile Include="Migrations\201806291905196_Added LatLong.Designer.cs">
       <DependentUpon>201806291905196_Added LatLong.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807010634583_Added Blood GroupName.cs" />
+    <Compile Include="Migrations\201807010634583_Added Blood GroupName.Designer.cs">
+      <DependentUpon>201807010634583_Added Blood GroupName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\IpInfoClient.cs" />
     <Compile Include="VM\AttachmentVM.cs" />
     <Compile Include="VM\DeveloperVM.cs" />
@@ -525,6 +529,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806291905196_Added LatLong.resx">
       <DependentUpon>201806291905196_Added LatLong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807010634583_Added Blood GroupName.resx">
+      <DependentUpon>201807010634583_Added Blood GroupName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
