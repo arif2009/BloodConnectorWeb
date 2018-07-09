@@ -17,28 +17,28 @@
         <div class="col-xs-12">
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger">A+</button>
+                    <button type="button" ng-click="vm.getAllGroup('A+')" class="btn" ng-class="{'btn-info': vm.selectedGroup != 'A+', 'btn-primary': vm.selectedGroup == 'A+'}">A+</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger">A-</button>
+                    <button type="button" ng-click="vm.getAllGroup('A-')" class="btn" ng-class="{'btn-info': vm.selectedGroup != 'A-', 'btn-primary': vm.selectedGroup == 'A-'}">A-</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger">B+</button>
+                    <button type="button" ng-click="vm.getAllGroup('B+')" class="btn" ng-class="{'btn-info': vm.selectedGroup != 'B+', 'btn-primary': vm.selectedGroup == 'B+'}">B+</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger">B-</button>
+                    <button type="button" ng-click="vm.getAllGroup('B-')" class="btn" ng-class="{'btn-info': vm.selectedGroup != 'B-', 'btn-primary': vm.selectedGroup == 'B-'}">B-</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger">AB+</button>
+                    <button type="button" ng-click="vm.getAllGroup('AB+')" class="btn" ng-class="{'btn-info': vm.selectedGroup != 'AB+', 'btn-primary': vm.selectedGroup == 'AB+'}">AB+</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary">AB-</button>
+                    <button type="button" ng-click="vm.getAllGroup('AB-')" class="btn" ng-class="{'btn-info': vm.selectedGroup != 'AB-', 'btn-primary': vm.selectedGroup == 'AB-'}">AB-</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger">O+</button>
+                    <button type="button" ng-click="vm.getAllGroup('O+')" class="btn" ng-class="{'btn-info': vm.selectedGroup != 'O+', 'btn-primary': vm.selectedGroup == 'O+'}">O+</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger">O-</button>
+                    <button type="button" ng-click="vm.getAllGroup('O-')" class="btn" ng-class="{'btn-info': vm.selectedGroup != 'O-', 'btn-primary': vm.selectedGroup == 'O-'}">O-</button>
                 </div>
             </div>
         </div>
