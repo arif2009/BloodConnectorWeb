@@ -6,11 +6,13 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
     vm.itemsPerPage = 15;
     vm.currentPage = 0;
     vm.items = [];
+    vm.backupItems = [];
     vm.hasDeleteAbility = false;
+    vm.selectedGroup = '';
 
     vm.$onInit = function() {
         usersService.getUsers().then(function(results) {
-            vm.items = results.data.users;
+            vm.backupItems = vm.items = results.data.users;
             vm.hasDeleteAbility = results.data.role === 'superadmin';
             vm.pages = vm.range();
         });
@@ -63,6 +65,7 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
     vm.pages = vm.range();
 
     $scope.$watch('vm.searchText', function (v) {
+        vm.selectedGroup = '';
         vm.currentPage = 0;
         vm.pages = vm.range();
     });
@@ -70,6 +73,15 @@ app.controller('usersController', ['usersService', '$scope', '$filter', function
     $scope.$watch('vm.currentPage', function (v) {
         vm.pages = vm.range();
     });
+
+    vm.getAllGroup = function(gName) {
+        vm.selectedGroup = gName;
+        vm.items = vm.backupItems.filter(function (item) {
+            return item.bloodGroup === vm.selectedGroup;
+        });
+        vm.currentPage = 0;
+        vm.pages = vm.range();
+    };
 
     vm.prevPage = function () {
         if (vm.prevPageDisabled()) {
