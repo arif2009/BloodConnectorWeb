@@ -13,11 +13,6 @@ namespace BloodConnector.WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
-            var container = new UnityContainer();
-            UnityConfig.RegisterTypes(container);
-            //Set the unity container as the default dependency resolver
-            config.DependencyResolver = new UnityHierarchicalDependencyResolver(container);
-
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
