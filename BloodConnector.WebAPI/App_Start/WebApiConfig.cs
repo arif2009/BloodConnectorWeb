@@ -3,8 +3,6 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using BloodConnector.WebAPI.App_Start;
 using Microsoft.Owin.Security.OAuth;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.WebApi;
 using Newtonsoft.Json.Serialization;
 
 namespace BloodConnector.WebAPI

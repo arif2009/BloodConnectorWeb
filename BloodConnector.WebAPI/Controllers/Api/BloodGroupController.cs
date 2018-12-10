@@ -18,14 +18,15 @@ namespace BloodConnector.WebAPI.Controllers.Api
         private readonly IBloodGroupRepository _bloodGroupRepository;
         private ApplicationUserManager _userManager;
         public ApplicationDbContext Db { get; private set; }
-        public BloodGroupController(IBloodGroupRepository bloodGroupRepository, ApplicationDbContext db)
+        public BloodGroupController(IBloodGroupRepository bloodGroupRepository, ApplicationUserManager userManager, ApplicationDbContext db)
         {
-            //_bloodGroupRepository = new BaseRepository<BloodGroup>();
             _bloodGroupRepository = bloodGroupRepository;
+            _userManager = userManager;
             Db = db;
         }
 
-        public ApplicationUserManager UserManager
+        #region commended code
+        /*public ApplicationUserManager UserManager
         {
             get
             {
@@ -35,7 +36,8 @@ namespace BloodConnector.WebAPI.Controllers.Api
             {
                 _userManager = value;
             }
-        }
+        }*/
+        #endregion
 
         [AllowAnonymous]
         [HttpGet]
@@ -71,8 +73,8 @@ namespace BloodConnector.WebAPI.Controllers.Api
         {
             var subject = "Your subject";
             var body = "Your email body it can be html also";
-            var user = await UserManager.FindByEmailAsync("arif.rahman2009@gmail.com");
-            await UserManager.SendEmailAsync(user.Id, subject, body);
+            var user = await _userManager.FindByEmailAsync("arif.rahman2009@gmail.com");
+            await _userManager.SendEmailAsync(user.Id, subject, body);
             return Ok();
         }
     }
