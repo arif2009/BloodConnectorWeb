@@ -3,13 +3,15 @@
     <div class="row">
         <div class="col-md-12">
             <h3>Technical help:</h3>
-            <div>If you find any bug or you want to give your opinion feel free to contact with <b>Arifur Rahman</b>.
+            <div>
+                If you find any bug or you want to give your opinion feel free to contact with <b>Arifur Rahman</b>.
             </div>
         </div>
 
         <div class="col-md-12">
             <h3>Blood collection help:</h3>
-            <div>If you want to collect blood, create an account here and try to reach out the appropriate donor.
+            <div>
+                If you want to collect blood, create an account here and try to reach out the appropriate donor.
                 If you can't reach appropriate donor, feel free to contact with <b>Mafi Islam</b> and <b>Jahangir Hossain</b>.
             </div>
         </div>
@@ -22,7 +24,7 @@
             <div class="well well-sm clearfix">
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2">
-                        <img ng-src="{{vm.data.arif.profileImage || 'https://i.imgur.com/4zcf9Yj.jpg'}}" class="img-responsive"/>
+                        <img ng-src="{{vm.data.arif.profileImage || 'https://i.imgur.com/4zcf9Yj.jpg'}}" class="img-responsive" />
                     </div>
                     <div class="col-md-10 col-lg-10 col-sm-10">
                         <h2 class="mt0" ng-bind="vm.data.arif.name||'Arifur Rahman (Sazal)'"></h2>
@@ -46,7 +48,7 @@
             <div class="well well-sm clearfix">
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2">
-                        <img ng-src="{{vm.data.mafi.profileImage || 'https://i.imgur.com/ipnC1yH.jpg'}}" class="img-responsive"/>
+                        <img ng-src="{{vm.data.mafi.profileImage || 'https://i.imgur.com/ipnC1yH.jpg'}}" class="img-responsive" />
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-4">
                         <h2 class="mt0" ng-bind="vm.data.mafi.name||'Mafi Islam'"></h2>
@@ -58,7 +60,7 @@
                         </ul>
                     </div>
                     <div class="col-md-2 col-lg-2 col-sm-2">
-                        <img ng-src="{{vm.data.jahangir.profileImage || 'https://i.imgur.com/qJzK8wT.jpg'}}" class="img-responsive"/>
+                        <img ng-src="{{vm.data.jahangir.profileImage || 'https://i.imgur.com/qJzK8wT.jpg'}}" class="img-responsive" />
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-4">
                         <h2 class="mt0" ng-bind="vm.data.jahangir.name||'Jahangir Hossain Duranto Durbar'"></h2>
@@ -67,6 +69,29 @@
                             <li><i class="fa fa-phone"></i> <span ng-bind="vm.data.jahangir.mobileNo || '+8801719861001'"></span></li>
                             <li><i class="fa fa-envelope"></i> <span ng-bind="vm.data.jahangir.email || 'jahangirantar@gmail.com'"></span></li>
                             <li><i class="fa fa-facebook"></i> <a href="https://www.facebook.com/jahangir.durantodurbarsainik" target="_blank">Facebook</a></li>
+                        </ul>
+                    </div>
+                </div><!--/row-->
+            </div>
+            <!--Body content-->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Moderator: </h3>
+            <div class="well well-sm clearfix">
+                <div class="row">
+                    <div class="col-md-2 col-lg-2 col-sm-2">
+                        <img src="" alt="No profile picture" class="img-responsive" />
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4">
+                        <h2 class="mt0" ng-bind="vm.data.syeda.name||'Syeda Tanzida Haque'"></h2>
+                        
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-phone"></i> <span ng-bind="vm.data.syeda.mobileNo || ''"></span></li>
+                            <li><i class="fa fa-envelope"></i> <span ng-bind="vm.data.syeda.email || ''"></span></li>
+                            <li><i class="fa fa-facebook"></i> <a href="https://www.facebook.com/syeedatanzida.haque" target="_blank">Facebook</a></li>
                         </ul>
                     </div>
                 </div><!--/row-->
