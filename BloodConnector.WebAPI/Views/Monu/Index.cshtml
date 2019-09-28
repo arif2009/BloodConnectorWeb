@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model BloodConnector.WebAPI.Controllers.MonuController.Edge
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div style="text-align:center; margin:1rem;">
+        <h2>First day of last menstrual period <span style="color:red">@Model.FirstDayOfLastMenstrualPeriod.ToLongDateString()</span></h2>
+        <hr/>
+        <h2>Age in day: <span style="color:green;">@Model.Days days @Model.Hours hours</span></h2>
+        <hr/>
+        <h2>Age in week: <span style="color:blue;">@Model.WeeksDays</span></h2>
+        <hr/>
+        <h2>Age in month: <span style="color:brown;">@Model.MonthsWeeksDays</span></h2>
+    </div>
+</body>
+</html>

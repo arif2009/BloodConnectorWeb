@@ -249,6 +249,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />
+    <Compile Include="Controllers\MonuController.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\We.cs" />
     <Compile Include="Migrations\201806291905196_Added LatLong.cs" />
@@ -483,6 +484,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Scripts\we.utility.js" />
+    <Content Include="Views\Monu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
